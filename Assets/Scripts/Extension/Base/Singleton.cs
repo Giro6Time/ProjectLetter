@@ -11,7 +11,8 @@ abstract public class Singleton<T> :MonoBehaviour where T: class
     public static T Instance;
     protected virtual void Init()
     {
-        Instance = this as T;
+        if(Instance == null)
+            Instance = this as T; 
     }
     protected virtual void Awake()
     {

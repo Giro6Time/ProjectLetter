@@ -23,7 +23,7 @@ public class Hero : Singleton<Hero>//是个单例
                 hp = maxHP;
             else
                 hp = value;
-            // UI_Health.Instance.UpdateHP();  //更新UI中的血量显示
+            UI_Health.Instance.UpdateHPValue();  //更新UI中的血量显示
         }
     }
     /// <summary>
@@ -44,10 +44,12 @@ public class Hero : Singleton<Hero>//是个单例
     private void Start()
     {
         Trust = trust;
+        HP = HP;
     }
     private void Update()
     {
         //暂用于测试，当运行时修改value的text也能让bar变化
         Trust = Trust;
+        HP = HP;
     }
 }
