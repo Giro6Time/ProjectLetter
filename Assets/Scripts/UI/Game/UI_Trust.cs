@@ -8,7 +8,7 @@ public class UI_Trust : UI_Property<UI_Trust>//ÊÇ¸öµ¥Àý
     Hero hero;
     
     public void UpdateTrustValue()
-    { 
+    {
         Value.text = hero.Trust.ToString();
         UpdateBar(); 
     }

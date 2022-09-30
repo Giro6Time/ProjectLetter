@@ -93,8 +93,6 @@ public class Hero : Singleton<Hero>
     protected override void Init()//把Unity界面中预先配置的数值更新到游戏内
     {
         base.Init();
-        Trust = trust;
-        HP = hp;
     }
     private void Update()
     {
