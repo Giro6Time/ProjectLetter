@@ -33,7 +33,7 @@ public class MainScript : MonoBehaviour
         InitRoom();
 
 
-
+        
     }
 
     public void InitRoom()  //Çå³ý¾É·¿¼ä
