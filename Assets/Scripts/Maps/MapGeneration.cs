@@ -18,7 +18,6 @@ public class MapGeneration : MonoBehaviour
         AssetPath = AssetDatabase.GUIDToAssetPath(path[0]).Replace((@"/"+ "MapGeneration"+".cs"),"");
         MapData.loadFile(AssetPath , "LevelLayer.csv");
 
-
     }
 
     // Update is called once per frame
