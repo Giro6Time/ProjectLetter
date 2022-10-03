@@ -6,7 +6,7 @@ public class Door : MonoBehaviour
 {
     [Header("The room to go to:")]
     public int ToFloor;
-    public int ToRoomNo;
+    public int ToRoom;
 
     // Start is called before the first frame update
     void Start()
