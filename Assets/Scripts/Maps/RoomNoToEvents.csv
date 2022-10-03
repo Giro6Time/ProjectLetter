@@ -1,5 +1,4 @@
-RoomNo,Events,action1,location,action2,location,action3,location,action4,location
-4,npc受困,对话（求救）,对话库相应编号,选择（等待玩家点击怪物）,对话位置,战斗,相应敌人数据位置,对话,对话库位置
-5,战斗,战斗,敌人数据位置,对话（可能有）,对话位置,,,,
-6,恢复,选择,对话库 ,,,,,,
-7,npc沟通,对话,,,,,,,
+RoomNo,Events,action1,location,action2,location,action3,location,action4,location,,
+4,npc受困,dialogue（求救）,对话库中的名称,choose（等待玩家点击怪物）,对话库（点击怪物后）,move,x坐标|y坐标,fight,血量|伤害,dialogue,对话库
+5,环境叙事如一台电脑,dialogue（角色反应）,对话库中的名称,choose（等待玩家点击物品）,对话库（点击物品后）,move,x坐标|y坐标,dialogue,对话库中的名称,,
+6,npc正常交流,dialogue（npc向角色打招呼）,对话库中的名称,choose（等待玩家点击npc）,对话库（点击后）,move,x坐标|y坐标,dialogue,对话库中的名称,,
