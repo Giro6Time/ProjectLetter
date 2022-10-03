@@ -7,6 +7,7 @@ public class Door : MonoBehaviour
     [Header("The room to go to:")]
     public int ToFloor;
     public int ToRoom;
+    public int ToRoomNo;
 
     // Start is called before the first frame update
     void Start()
@@ -23,5 +24,6 @@ public class Door : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log("Clicked!");
+        MainScript.S.Layout(ToRoomNo);
     }
 }

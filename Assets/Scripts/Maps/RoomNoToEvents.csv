@@ -1,1 +1,5 @@
-RoomNo,Events
+RoomNo,Events,action1,location,action2,location,action3,location,action4,location
+4,npc受困,对话（求救）,对话库相应编号,选择（等待玩家点击怪物）,对话位置,战斗,相应敌人数据位置,对话,对话库位置
+5,战斗,战斗,敌人数据位置,对话（可能有）,对话位置,,,,
+6,恢复,选择,对话库 ,,,,,,
+7,npc沟通,对话,,,,,,,
