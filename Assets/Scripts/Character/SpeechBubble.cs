@@ -30,7 +30,7 @@ public class SpeechBubble : MonoBehaviour
     {
         this.parent = parent;
         bubbleLayoutEle = bubble.GetComponent<LayoutElement>();
-        parent.Register();
+        parent.RegisterDialogue();
     }
     /// <summary>
     /// 设置文本内容，更新气泡大小

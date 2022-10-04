@@ -7,7 +7,7 @@ using UnityEngine;
 public class MainScript : MonoBehaviour
 {
     public static MainScript S;
-    public Hero hero;
+    public Protangonist hero;
     public bool couldChooseDoor;  //这个变量决定此时鼠标点击出口是否有效
     public bool couldChooseEvent;  //这个变量决定此时鼠标点击事件房内的事件是否有效
     public bool whetherViolate;  //选择路线时角色是否违背,-1是违背，0是没得选，1是遵循
@@ -25,7 +25,7 @@ public class MainScript : MonoBehaviour
         floor = 1;
         room = 1;
         roomNo = 1;
-        hero = GameObject.Find("Wizard").GetComponent<Hero>();
+        hero = GameObject.Find("Wizard").GetComponent<Protangonist>();
         GetComponent<MapGeneration>().GenerateRoom(1, 1);  //生成初始房间
         
     }

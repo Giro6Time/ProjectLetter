@@ -15,7 +15,7 @@ public static class CSVReader
     {
         string path = AssetPath + localPath;
         string tmp = File.ReadAllText(path, Encoding.UTF8);
-        tmp.Replace("\r", "");
+        tmp.Replace('\r', '\0');
         string[] Lines = tmp.Split('\n');
         string[][] ret = new string[Lines.Length][];
         for(int i = 0; i < Lines.Length; i++)

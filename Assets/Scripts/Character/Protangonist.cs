@@ -6,7 +6,7 @@ public enum ConfidenceType
     timid = 0,
     confident = 1
 }
-public class Hero : Singleton<Hero>,ISpeecher
+public class Protangonist : Singleton<Protangonist>,ISpeecher
 {
     
     /// <summary>
@@ -27,10 +27,12 @@ public class Hero : Singleton<Hero>,ISpeecher
     float Experience;
 
     [SerializeField]    string halvingLine = "------携带组件↓------";
+    #region 对话气泡接口使用示范
     // 对话框气泡
     [SerializeField]    SpeechBubble speechBubble;
     public SpeechBubble Bubble { get => speechBubble; }
     public string SpeecherName { get => "protagonist"; }
+    #endregion
 
     #region 外部访问的属性
     /// <summary>
