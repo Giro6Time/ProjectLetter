@@ -1,6 +1,6 @@
 RoomNo,Events,action1,location,action2,location,action3,location,action4,location,,
 1,start,dialogue,start,,,,,,,,
 2,event,reactEventRoom,0,dialogue,event1_1,choose,0,move,3|-22,dialogue,event1_2
-3,combat,reactCombatRoom,0,move,-2|-22,fight,10|100,,,,
+3,combat,reactCombatRoom,0,move,-2|-22,fight,enemy1|10|100,,,,
 4,escape,dialogue,escape,animaiton,escape,,,,,,
 5,recover,reactRecoverRoom,0,move,-3|-18,animaiton,recover,,,,
