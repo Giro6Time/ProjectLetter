@@ -23,7 +23,26 @@ public class Door : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("Clicked!");
-        MainScript.S.Layout(ToRoomNo);
+        Debug.Log("ToFloor" + ToFloor + "ToRoom:" + ToRoom + "ToRoomNo:" + ToRoomNo);
+        MapGeneration mapGeneration = MapGeneration.Instance;
+        if(mapGeneration.GenerateRoom(ToFloor, ToRoomNo) == false)
+        {
+            Debug.Log("Generation Failed!");
+        }
+        //MainScript.S.Layout(ToRoomNo);
     }
+
+    public void SetDoorPatameter(int Floor,int Room)
+    {
+        this.ToFloor = Floor;
+        this.ToRoom = Room;
+    }
+
+    public void SetDoorPatameter(int Floor, int Room,int RoomNo)
+    {
+        this.ToFloor = Floor;
+        this.ToRoom = Room;
+        this.ToRoomNo = RoomNo;
+    }
+
 }

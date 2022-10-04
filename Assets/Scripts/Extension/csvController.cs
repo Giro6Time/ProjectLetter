@@ -29,13 +29,13 @@ public class csvController
         StreamReader sr = null;
         try
         {
-            string file_url = path + "//" + fileName;  //根据路径打开文件
+            string file_url = path + "/" + fileName;  //根据路径打开文件
             sr = File.OpenText(file_url);
             Debug.Log("File Find in " + file_url);
         }
         catch
         {
-            Debug.Log("File cannot find ! ");
+            Debug.Log("File cannot find ! Input url:" + path + "/" + fileName);
             return;
         }
 
@@ -50,10 +50,31 @@ public class csvController
 
     public string getString(int row, int col)
     {
-        return arrayData[row][col];
+
+        string ret;
+        try
+        {
+            ret = arrayData[row][col];
+        }
+        catch
+        {
+            Debug.Log("OutOfIndex! Index:"+row+","+col);
+            throw;
+        }
+        return ret;
     }
     public int getInt(int row, int col)
     {
-        return int.Parse(arrayData[row][col]);
+        int ret;
+        try
+        {
+            ret = int.Parse(arrayData[row][col]);
+        }
+        catch 
+        {
+            Debug.Log("OutOfIndex!Index:" + row + "," + col);
+            throw;
+        }
+        return ret;
     }
 }

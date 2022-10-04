@@ -5,19 +5,35 @@ using UnityEngine;
 
 public class MapGeneration : MonoBehaviour
 {
-    csvController MapData;//该脚本要和要读取的地图数据放在一个文件夹内
-    public GameObject DoorPrefab;
+    csvController ToRoomNo;//该脚本负责转换(Floor,Room)到RoomNo
+    csvController ToDoors;//该脚本负责记录门通往的房间
+    List<GameObject> SceneDoorsObjects;
+
+    private static volatile MapGeneration instance = new MapGeneration();
+    private MapGeneration() { }
+    public static MapGeneration Instance { get { return instance; } }
 
     // Start is called before the first frame update
     void Start()
     {
-        MapData = csvController.GetInstance();
+        ToRoomNo = csvController.GetInstance();
         string AssetPath;
         string[] path = AssetDatabase.FindAssets("MapGeneration");
         if (path.Length > 1) return;
         AssetPath = AssetDatabase.GUIDToAssetPath(path[0]).Replace((@"/"+ "MapGeneration"+".cs"),"");
-        MapData.loadFile(AssetPath , "LevelLayer.csv");
+        ToRoomNo.loadFile(AssetPath , "ToRoomNo.csv");
 
+        ToDoors = csvController.GetInstance();
+        ToDoors.loadFile(AssetPath, "RoomNoToDoors.csv");
+
+        SceneDoorsObjects = new List<GameObject>();
+        SceneDoorsObjects.Add(GameObject.Find("DoorToSameFloor1"));
+        SceneDoorsObjects.Add(GameObject.Find("DoorToSameFloor2"));
+        SceneDoorsObjects.Add(GameObject.Find("DoorToNextFloor1"));
+        SceneDoorsObjects.Add(GameObject.Find("DoorToNextFloor2"));
+        SceneDoorsObjects.Add(GameObject.Find("DoorToNextFloor3"));
+
+        GenerateRoom(1, 0);
     }
 
     // Update is called once per frame
@@ -27,27 +43,53 @@ public class MapGeneration : MonoBehaviour
     }
 
     /// <summary>
-    /// 调用函数会生成房间内的怪物，事件以及对应的门
+    /// 调用函数会生成房间内的门
     /// </summary>
     /// <param name="Floor">房间的层数</param>
-    /// <param name="RoomNo">房间的号码数</param>
+    /// <param name="Room">房间的号码数</param>
     /// <returns>是否生成成功</returns>
-    bool GenerateRoom(int Floor, int RoomNo)
+    public bool GenerateRoom(int Floor, int Room)
     {
 
-        return false;
+        int thisRoomNo = FromFloorToRoomNo(Floor, Room);
+        if(GenerateDoors(thisRoomNo) == false)
+            return false;
+
+        return true;
     }
 
     /// <summary>
-    /// 生成门对应的物体
+    /// 生成房间内的门
     /// </summary>
-    /// <param name="ToFloor">进入房间的层数</param>
-    /// <param name="ToRoomNo">进入房间的号码数</param>
-    /// <param name="PositionIndex">门的位置，左为1，中为2，右为3</param>
+    /// <param name="RoomNo">房间的编号</param>
     /// <returns>是否生成成功</returns>
-    bool GenerateDoor(int ToFloor, int ToRoomNo, int PositionIndex)
+    bool GenerateDoors(int RoomNo)
     {
-        
-        return true;    
+        if(RoomNo <= 0) return false;
+
+        for(int i = 0; i < 5; i++)
+        {
+            int tempToFloor = ToDoors.getInt(RoomNo, 2*i+1);
+            int tempToRoom = ToDoors.getInt(RoomNo, 2*i+2);
+            //int tempToRoomNo = FromFloorToRoomNo(tempToFloor, tempToRoom);
+
+            if(tempToRoom <=0 || tempToFloor <= 0)
+            {
+                SceneDoorsObjects[i].SetActive(false);
+            }
+            else
+            {
+                SceneDoorsObjects[i].SetActive(true);
+                Door thisDoorScript = SceneDoorsObjects[i].GetComponent<Door>();
+                thisDoorScript.SetDoorPatameter(tempToFloor, tempToRoom);
+            }
+        }
+
+        return true;
+    }
+
+    int FromFloorToRoomNo(int Floor, int Room)
+    {
+        return ToRoomNo.getInt(Floor, Room);
     }
 }

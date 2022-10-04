@@ -182,6 +182,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorToNextFloor3
       objectReference: {fileID: 0}
+    - target: {fileID: 1320217881595497164, guid: aecb1feb648c4a24daf4b3ca970c58c0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aecb1feb648c4a24daf4b3ca970c58c0, type: 3}
 --- !u!1 &519420028
@@ -238,7 +242,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.0997596
+  orthographic size: 9.189038
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -262,7 +266,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 2.79, y: -17.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -296,6 +300,7 @@ GameObject:
   - component: {fileID: 971250540}
   - component: {fileID: 971250542}
   - component: {fileID: 971250541}
+  - component: {fileID: 971250543}
   m_Layer: 0
   m_Name: RoomGround
   m_TagString: Untagged
@@ -7393,6 +7398,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &971250543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971250539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c6b4ee68e90d049914f7eb2c8b2b44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1191877388
 PrefabInstance:
   m_ObjectHideFlags: 0
