@@ -6,7 +6,7 @@ public enum ConfidenceType
     timid = 0,
     confident = 1
 }
-public class Hero : Singleton<Hero>,Speecher
+public class Hero : Singleton<Hero>,ISpeecher
 {
     
     /// <summary>
@@ -29,6 +29,8 @@ public class Hero : Singleton<Hero>,Speecher
     [SerializeField]    string halvingLine = "------携带组件↓------";
     // 对话框气泡
     [SerializeField]    SpeechBubble speechBubble;
+    public SpeechBubble Bubble { get => speechBubble; }
+    public string SpeecherName { get => "protagonist"; }
 
     #region 外部访问的属性
     /// <summary>
@@ -89,36 +91,6 @@ public class Hero : Singleton<Hero>,Speecher
     }
     #endregion
 
-    #region 角色行为
-    /// <summary>
-    /// 让主角使用一个对话气泡说多次话（点击鼠标下一段）
-    /// </summary>
-    /// <param name="contents"></param>
-    public void Speak(string[] contents)
-    {
-        contents[0] = "哼啊啊啊啊啊啊啊";
-        //TODO: 好复杂，不想写
-        //高情商：考虑到如果有多个角色交叉对话的话，用这个speak就会很鸡肋，所以我决定晚点写
-    }
-    /// <summary>
-    /// 使用对话气泡让主角说一次话
-    /// </summary>
-    /// <param name="content"></param>
-    public void Speak(string content)
-    {
-        if(!speechBubble.isActiveAndEnabled) speechBubble.gameObject.SetActive(true);
-        speechBubble.SetContent(content);
-    }
-    /// <summary>
-    /// 结束发言
-    /// </summary>
-    public void ShutUp()//函数名有待商榷（
-    {
-        if(speechBubble.isActiveAndEnabled)
-        speechBubble.gameObject.SetActive(false);
-    }
-#endregion
-
     protected override void Init()//把Unity界面中预先配置的数值更新到游戏内
     {
         base.Init();
@@ -129,9 +101,6 @@ public class Hero : Singleton<Hero>,Speecher
         //暂用于测试，当运行时修改value的text也能让bar变化
         Trust = Trust;
         HP = HP;
-        if (Input.GetKeyDown(KeyCode.A)) Speak("我是个傻逼");
-        if (Input.GetKeyDown(KeyCode.B)) Speak("长度测试啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊");
-        if (Input.GetKeyDown(KeyCode.C)) ShutUp();
     }
 
 }
