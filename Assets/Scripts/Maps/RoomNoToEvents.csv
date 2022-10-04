@@ -1,4 +1,6 @@
 RoomNo,Events,action1,location,action2,location,action3,location,action4,location,,
-4,npc受困,dialogue（求救）,对话库中的名称,choose（等待玩家点击怪物）,对话库（点击怪物后）,move,x坐标|y坐标,fight,血量|伤害,dialogue,对话库
-5,环境叙事如一台电脑,dialogue（角色反应）,对话库中的名称,choose（等待玩家点击物品）,对话库（点击物品后）,move,x坐标|y坐标,dialogue,对话库中的名称,,
-6,npc正常交流,dialogue（npc向角色打招呼）,对话库中的名称,choose（等待玩家点击npc）,对话库（点击后）,move,x坐标|y坐标,dialogue,对话库中的名称,,
+1,start,dialogue,start,,,,,,,,
+2,event,reactEventRoom,0,dialogue,event1_1,choose,0,move,3|-22,dialogue,event1_2
+3,combat,reactCombatRoom,0,move,-2|-22,fight,10|100,,,,
+4,escape,dialogue,escape,animaiton,escape,,,,,,
+5,recover,reactRecoverRoom,0,move,-3|-18,animaiton,recover,,,,

@@ -10,7 +10,7 @@ public class MainScript : MonoBehaviour
     public Hero hero;
     public bool couldChooseDoor;  //这个变量决定此时鼠标点击出口是否有效
     public bool couldChooseEvent;  //这个变量决定此时鼠标点击事件房内的事件是否有效
-    public bool whetherViolate;  //选择路线时角色是否违背
+    public bool whetherViolate;  //选择路线时角色是否违背,-1是违背，0是没得选，1是遵循
     public bool sameFloorMove;  //是否是同层移动
 
     public int floor;
@@ -46,11 +46,7 @@ public class MainScript : MonoBehaviour
         return judge;
     }
 
-    ///对话脚本，传入对话库编号
-    public void Dialogue(int talkLibNo) 
-    {
-
-    }
+    
 
 }
 
