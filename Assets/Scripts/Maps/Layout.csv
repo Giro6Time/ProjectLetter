@@ -1,1 +1,2 @@
-RoomNo,roomType,object1,x,y,object2,x,y,object3,x,y
+RoomNo,roomType,x,y,object1,x,y,object2,x,y,object3,x,y
+1,startRoom,,,,,,,,,,,
