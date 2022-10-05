@@ -77,4 +77,26 @@ public class csvController
         }
         return ret;
     }
+    public float getFloat(int row, int col)
+    {
+        float ret;
+        try
+        {
+            ret = float.Parse(arrayData[row][col]);
+        }
+        catch
+        {
+            Debug.Log("OutOfIndex!Index:" + row + "," + col);
+            throw;
+        }
+        return ret;
+    }
+
+    public int getRowLength(int row)
+    {
+        for(int i=0;i< arrayData[row].Length; i++)
+            if (arrayData[row][i] == "") 
+                return i;
+        return arrayData[row].Length;
+    }
 }
