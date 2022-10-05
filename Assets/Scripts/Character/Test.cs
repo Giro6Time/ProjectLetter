@@ -6,13 +6,16 @@ public class Test : MonoBehaviour ,ISpeecher
 {
     // 实现接口中需要的几个属性
     [SerializeField]SpeechBubble bubble;
+    [SerializeField] string speecherName;
     public SpeechBubble Bubble//所有speecher都需要一个对话气泡
     {
         get => bubble;
+        set => bubble = value;
     }
     public string SpeecherName//所有speecher都需要一个SpeecherName来提供文本搜索
     {
         get => "Jack";
+        set => speecherName = value;
     }
     // Start is called before the first frame update
     //简单来说，在一个speecher生成的时候，需要调用他的bubble.init

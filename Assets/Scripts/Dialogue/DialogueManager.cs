@@ -13,11 +13,11 @@ public interface ISpeecher
     /// </summary>
     SpeechBubble Bubble
     {
-        get;
+        get;set;
     }
     String SpeecherName
     {
-        get;
+        get;set;
     }
     public void RegisterDialogue()
     {
@@ -51,26 +51,34 @@ public class DialogueManager : Singleton<DialogueManager>
     }
 
 
-    //dialog库的地址
-    string dialogueLibPath = "/Scripts/Dialogue";
     //保存整个对话文本库
     List<string[]> textTable;
     //当前行
     string[] line;
-
+    //所有事件名称集
+    List<string> eventsName;
     Action DialogueEnd;
     
 
     /// <summary>
     /// 设置当前正在读的对话
-    /// 在触发对话前的一瞬间调用，确保读行不会读歪
+    /// 在触发对话前调用，确保读行不会读歪
     /// </summary>
     /// <param name="contentIndex">这段对话在表格中的行数（excel上写多少就是多少）</param>
     public void SetLine(int contentIndex)
     {
         line = textTable[contentIndex-1];
     }
-
+    /// <summary>
+    /// 设置当前正在读的对话
+    /// 在触发对话前调用，确保读行不会读歪
+    /// </summary>
+    /// <param name="eventName"></param>
+    public void SetLine(string eventName)
+    {
+        int index = eventsName.IndexOf(eventName);
+        SetLine(index+1);//index比行号少1
+    }
     /// <summary>
     /// 播放对话
     /// </summary>
@@ -132,8 +140,9 @@ public class DialogueManager : Singleton<DialogueManager>
     protected override void Init()
     {
         base.Init();
-        csvController.GetInstance().loadFile(Application.dataPath + dialogueLibPath, "Dialogue_Lib.txt");
+        csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Dialogue", "Dialogue_Lib.txt");
         textTable = csvController.GetInstance().arrayData;
+        GetEventsName();
 
         SpeecherDic = new Dictionary<string, ISpeecher>();
         dialogueMask.transform.SetParent(GameObject.Find("UI").transform);
@@ -142,7 +151,13 @@ public class DialogueManager : Singleton<DialogueManager>
         isSpeeching = false;
         currSpeechIndex = 1;
     }
-    
+    void GetEventsName()
+    {
+        for(int i = 0; i <= textTable.Count; ++i)
+        {
+            eventsName.Add(textTable[i][1]);
+        }
+    }
 }
 /// <summary>
 /// 演讲者的行为

@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 abstract public class Singleton<T> :MonoBehaviour where T: class 
 {
-    public static T Instance;
+    public static T Instance ;
     protected virtual void Init()
     {
         if(Instance == null)
