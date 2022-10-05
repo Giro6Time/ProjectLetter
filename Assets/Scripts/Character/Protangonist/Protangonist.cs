@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Mathematics;
 public enum ConfidenceType
 {
     timid = 0,
@@ -40,7 +41,7 @@ public class Protangonist : Singleton<Protangonist>,ISpeecher
     }
     #endregion
 
-    #region 角色动作
+    #region 角色行为
     /// <summary>
     /// 角色攻击目标
     /// </summary>
@@ -48,7 +49,7 @@ public class Protangonist : Singleton<Protangonist>,ISpeecher
     public float Attack()//TODO:等待Enemy脚本写完了就吧Enemy作为参数传进去，进行血量计算
     {
         ResetAnim();
-        anim.SetTrigger("Attack");
+        anim.SetTrigger("attack");
         return atk;
     }
     /// <summary>
@@ -57,11 +58,17 @@ public class Protangonist : Singleton<Protangonist>,ISpeecher
     public void Die()//TODO:触发死亡事件，或者由死亡事件来触发Die函数播放动画，总之需要一个事件
     {
         ResetAnim();
-        anim.SetTrigger("Die");
+        anim.SetTrigger("die");
+    }
+    public void Recover(float recoverNum)
+    {
+        HP += recoverNum;
+        ResetAnim();
+        anim.SetTrigger("recover");
     }
     void ResetAnim()//重置主角状态为初始状态（站立）
     {
-        anim.SetBool("Moving", false);
+        anim.SetBool("moving", false);
         //anim.SetBool("Talking", false);
     }
     #endregion
@@ -73,11 +80,10 @@ public class Protangonist : Singleton<Protangonist>,ISpeecher
     public float HP
     {
         get => hp;
-        set {
-            if(value>maxHP)
-                hp = maxHP;
-            else
-                hp = value;
+        set 
+        {
+            hp = value;
+            Mathf.Clamp(hp, 0, maxHP);
             UI_Health.Instance.UpdateHPValue();  //更新UI中的血量显示
         }
     }
@@ -89,10 +95,8 @@ public class Protangonist : Singleton<Protangonist>,ISpeecher
         get => trust;
         set
         {
-            if (value > maxTrust)
-                trust = maxTrust;
-            else
-                trust = value;
+            trust = value;
+            Mathf.Clamp(trust, 0, maxTrust);
             UI_Trust.Instance.UpdateTrustValue();
         }
     }
@@ -102,6 +106,11 @@ public class Protangonist : Singleton<Protangonist>,ISpeecher
     public ConfidenceType Confident
     {
         get => confident;
+        set 
+        { 
+            confident = value;
+            UpdateProperty();
+        }
     }
     /// <summary>
     /// 角色的自信等级经验值
@@ -115,13 +124,13 @@ public class Protangonist : Singleton<Protangonist>,ISpeecher
             {
                 Experience -= ExpInNeed;
                 confident++;
-                UpdateConfident();
+                UpdateProperty();
             }
         }
     }
-    void UpdateConfident()
+    void UpdateProperty()
     {
-        //TODO: 根据配置文件给对应confident等级设置升级所需经验和攻击力等数值
+        //TODO: 计算属性然后更新（比如根据信任度修改攻击力什么的）
     }
     #endregion
 
