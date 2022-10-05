@@ -108,7 +108,7 @@ public class DialogueManager : Singleton<DialogueManager>
                 dialogueMask.gameObject.SetActive(false);//取消mask
                 currSpeechIndex = 1;//准备下一次对话   
                 TriggerEndEvent();
-
+                isSpeeching = false;
             }
         }
     }
