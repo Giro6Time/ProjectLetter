@@ -23,9 +23,15 @@ public class Door : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("ToFloor" + ToFloor + "ToRoom:" + ToRoom + "ToRoomNo:" + ToRoomNo);
+        Protangonist.Instance.moveTriggerer.ClearArriveListener();
+        Debug.Log("ToFloor" + ToFloor + " ToRoom:" + ToRoom + " ToRoomNo:" + ToRoomNo);
+        Protangonist.Instance.moveTriggerer.AddArriveListener(GenerateNewRoom);
+        Protangonist.Instance.moveTriggerer.MoveTo(this.transform.position);
+    }
+    private void GenerateNewRoom()
+    {
         MapGeneration mapGeneration = MapGeneration.Instance;
-        if(mapGeneration.GenerateRoom(ToFloor, ToRoomNo) == false)
+        if(mapGeneration.GenerateRoom(ToFloor, ToRoom) == false)
         {
             Debug.Log("Generation Failed!");
         }
@@ -44,5 +50,8 @@ public class Door : MonoBehaviour
         this.ToRoom = Room;
         this.ToRoomNo = RoomNo;
     }
-
+    public void SetCollider(bool isTrue)
+    {
+        GetComponent<Collider2D>().enabled = isTrue;
+    }
 }

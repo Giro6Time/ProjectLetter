@@ -29,7 +29,17 @@ public class MainScript : MonoBehaviour
     }
     private void Start()
     {
-        MapGeneration.Instance.GenerateRoom(1, 1);  //生成初始房间   
+        ActionInRoom.ClearAllEventListener();
+        MapGeneration.Instance.GenerateRoom(1, 1);  //生成初始房间
+        DialogueManager.Instance.AddEndListener(EnableDoorClick);
+        ActionInRoom.SetDoorClickable(false);
+        DialogueManager.Instance.SetLine("start");
+        DialogueManager.Instance.PlayDialogue();
+        
+    }
+    void EnableDoorClick()
+    {
+        ActionInRoom.SetDoorClickable(true);
     }
     void Update()
     {
@@ -64,15 +74,15 @@ public enum BetrayType
 
 }
 
-public class ActionInRoom
+public static class ActionInRoom
 {
-    public void Dialogue(string contentType)
+    public static void Dialogue(string contentType)
     {
         DialogueManager.Instance.ClearEndListener();
         DialogueManager.Instance.SetLine("contentType");
         DialogueManager.Instance.PlayDialogue();
     }
-    public string React(BetrayType whetherViolate, int RoomNo)
+    public static string React(BetrayType whetherViolate, int RoomNo)
     {
         switch (whetherViolate)
         {
@@ -86,16 +96,16 @@ public class ActionInRoom
                 return null;
         }
     }
-    public string RoomNoToRoomType(int RoomNo)
+    public static string RoomNoToRoomType(int RoomNo)
     {
         csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Maps", "Layout.csv");
         return csvController.GetInstance().getString(RoomNo + 1, 1);
     }
-    public void Move(float x, float y)
+    public static void Move(float x, float y)
     {
         Protangonist.Instance.moveTriggerer.MoveTo(new Vector3(x, y, 0));
     }
-    public void Animation(string animName)
+    public static void Animation(string animName)
     {
         switch (animName)
         {
@@ -107,5 +117,18 @@ public class ActionInRoom
                 Debug.Log("Fail to find this animation!");
                 break;
         }
+    }
+    public static void SetDoorClickable(bool clickable)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            MapGeneration.Instance.SceneDoorsObjects[i].GetComponent<Door>().SetCollider(clickable);
+        } 
+    }
+    public static void ClearAllEventListener()
+    {
+        //在此把所有事件清空。目前只有这两个事件，后续还需要添加战斗结束，事件结束，治疗播放结束等等事件
+        DialogueManager.Instance.ClearEndListener();
+        Protangonist.Instance.moveTriggerer.ClearArriveListener();
     }
 }

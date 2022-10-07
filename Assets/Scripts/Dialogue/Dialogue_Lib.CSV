@@ -14,3 +14,4 @@ name,speaker,word,speaker,word,speaker,word
 "dead			",,,,,,
 event1,Jack,朋友请你帮助我！,protagonist,我要帮助他吗？,,
 "event1			",protagonist,我来救你！,,,,
+start,protagonist,let me check start dialogue,protagonist,My God， it really work!!!,protagonist,Now stop the dialogue

@@ -91,6 +91,7 @@ public class DialogueManager : Singleton<DialogueManager>
                 SpeecherDic[line[currSpeechIndex]].Speak(line[currSpeechIndex + 1]);
                 dialogueMask.gameObject.SetActive(true);
                 isSpeeching = true;
+                ActionInRoom.SetDoorClickable(false);
             }
         }
         else
@@ -140,7 +141,7 @@ public class DialogueManager : Singleton<DialogueManager>
     protected override void Init()
     {
         base.Init();
-        csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Dialogue", "Dialogue_Lib.txt");
+        csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Dialogue", "Dialogue_Lib.csv");
         textTable = new List<string[]>(csvController.GetInstance().arrayData);
         GetEventsName();
 
@@ -155,7 +156,7 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         for(int i = 0; i < textTable.Count; ++i)
         {
-            eventsName.Add(textTable[i][1]);
+            eventsName.Add(textTable[i][0]);
         }
     }
 }
