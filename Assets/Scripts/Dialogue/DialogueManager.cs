@@ -56,7 +56,7 @@ public class DialogueManager : Singleton<DialogueManager>
     //当前行
     string[] line;
     //所有事件名称集
-    List<string> eventsName;
+    List<string> eventsName = new List<string>();
     Action DialogueEnd;
     
 
@@ -141,7 +141,7 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         base.Init();
         csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Dialogue", "Dialogue_Lib.txt");
-        textTable = csvController.GetInstance().arrayData;
+        textTable = new List<string[]>(csvController.GetInstance().arrayData);
         GetEventsName();
 
         SpeecherDic = new Dictionary<string, ISpeecher>();
@@ -153,7 +153,7 @@ public class DialogueManager : Singleton<DialogueManager>
     }
     void GetEventsName()
     {
-        for(int i = 0; i <= textTable.Count; ++i)
+        for(int i = 0; i < textTable.Count; ++i)
         {
             eventsName.Add(textTable[i][1]);
         }

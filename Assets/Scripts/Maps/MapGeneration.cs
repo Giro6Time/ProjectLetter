@@ -6,30 +6,31 @@ using UnityEngine;
 
 public class MapGeneration : MonoBehaviour
 {
-    csvController ToRoomNo;//该脚本负责转换(Floor,Room)到RoomNo
-    csvController ToDoors;//该脚本负责记录门通往的房间
-    csvController Layout;//该脚本负责记录每个房间内部的物体
+    List<string[]> ToRoomNo;//该脚本负责转换(Floor,Room)到RoomNo
+    List<string[]> ToDoors;//该脚本负责记录门通往的房间
+    List<string[]> Layout;//该脚本负责记录每个房间内部的物体
     List<GameObject> SceneDoorsObjects;
 
-    private static volatile MapGeneration instance = new MapGeneration();
+    private static volatile MapGeneration instance;
     private MapGeneration() { }
     public static MapGeneration Instance { get { return instance; } }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        ToRoomNo = csvController.GetInstance();
+        instance = GetComponent<MapGeneration>();
         string AssetPath;
         string[] path = AssetDatabase.FindAssets("MapGeneration");
         if (path.Length > 1) return;
         AssetPath = AssetDatabase.GUIDToAssetPath(path[0]).Replace((@"/"+ "MapGeneration"+".cs"),"");
-        ToRoomNo.loadFile(AssetPath , "ToRoomNo.csv");
+        csvController.GetInstance().loadFile(AssetPath , "ToRoomNo.csv");
+        ToRoomNo = new List<string[]>(csvController.GetInstance().arrayData);
+        
+        csvController.GetInstance().loadFile(AssetPath, "RoomNoToDoors.csv");
+        ToDoors = new List<string[]>(csvController.GetInstance().arrayData);
 
-        ToDoors = csvController.GetInstance();
-        ToDoors.loadFile(AssetPath, "RoomNoToDoors.csv");
-
-        Layout = csvController.GetInstance();
-        Layout.loadFile(AssetPath, "Layout.csv");
+        csvController.GetInstance().loadFile(AssetPath, "Layout.csv");
+        Layout = new List<string[]>(csvController.GetInstance().arrayData);
 
         SceneDoorsObjects = new List<GameObject>();
         SceneDoorsObjects.Add(GameObject.Find("DoorToSameFloor1"));
@@ -37,7 +38,10 @@ public class MapGeneration : MonoBehaviour
         SceneDoorsObjects.Add(GameObject.Find("DoorToNextFloor1"));
         SceneDoorsObjects.Add(GameObject.Find("DoorToNextFloor2"));
         SceneDoorsObjects.Add(GameObject.Find("DoorToNextFloor3"));
-
+        for(int i = 0; i < 5; i++)
+        {
+            SceneDoorsObjects[i].SetActive(false);
+        }
         GenerateLayoutObjects(1);
     }
 
@@ -55,7 +59,7 @@ public class MapGeneration : MonoBehaviour
     /// <returns>是否生成成功</returns>
     public bool GenerateRoom(int Floor, int Room)
     {
-
+        if (ToRoomNo[Floor][Room - 1] == "") return false;
         int thisRoomNo = FromFloorToRoomNo(Floor, Room);
         if(GenerateDoors(thisRoomNo) == false)
             return false;
@@ -77,8 +81,8 @@ public class MapGeneration : MonoBehaviour
 
         for(int i = 0; i < 5; i++)
         {
-            int tempToFloor = ToDoors.getInt(RoomNo, 2*i+1);
-            int tempToRoom = ToDoors.getInt(RoomNo, 2*i+2);
+            int tempToFloor = int.Parse(ToDoors[RoomNo][2 * i + 1]);
+            int tempToRoom = int.Parse(ToDoors[RoomNo][2 * i + 2]);
             //int tempToRoomNo = FromFloorToRoomNo(tempToFloor, tempToRoom);
 
             if(tempToRoom <=0 || tempToFloor <= 0)
@@ -98,14 +102,15 @@ public class MapGeneration : MonoBehaviour
 
     bool GenerateLayoutObjects(int RoomNo)
     {
-        int RowCount = Layout.getRowLength(RoomNo);
+        int RowCount = Layout[RoomNo].Length;
         int ObjCount = (RowCount - 2) / 3;
 
         for (int i = 0; i < ObjCount; i++)
         {
-            string objName = Layout.getString(RoomNo, 3 * i + 2);
-            float xPos = Layout.getFloat(RoomNo, 3 * i + 3);
-            float yPos = Layout.getFloat(RoomNo, 3 * i + 4);
+            string objName = Layout[RoomNo][3 * i + 2];
+            if (objName == "") continue;
+            float xPos = float.Parse(Layout[RoomNo][3 * i + 3]);
+            float yPos = float.Parse(Layout[RoomNo][3 * i + 4]);
 
             GameObject tempObj = GameObject.Find(objName);
             tempObj.SetActive(true);
@@ -116,7 +121,7 @@ public class MapGeneration : MonoBehaviour
         }
 
         Vector3 camPos = Camera.main.transform.position;
-        string roomType = Layout.getString(RoomNo, 1);
+        string roomType = Layout[RoomNo][1];
         GameObject floorObj = GameObject.Find(roomType);
         floorObj.SetActive(true);
         floorObj.transform.position = camPos;
@@ -132,7 +137,7 @@ public class MapGeneration : MonoBehaviour
     /// <returns>是否摧毁成功</returns>
     public bool DestoryRoom(int Floor, int Room)
     {
-
+        if (ToRoomNo[Floor][Room] == "") return false;
         int thisRoomNo = FromFloorToRoomNo(Floor, Room);
         if (DestroyDoors() == false)
             return false;
@@ -152,26 +157,26 @@ public class MapGeneration : MonoBehaviour
 
     bool DestroyLayoutObjects(int RoomNo)
     {
-        int RowCount = Layout.getRowLength(RoomNo);
+        int RowCount = Layout[RoomNo].Length;
         int ObjCount = (RowCount - 2) / 3;
 
         for (int i = 0; i < ObjCount; i++)
         {
-            string objName = Layout.getString(RoomNo, 3 * i + 2);
+            string objName = Layout[RoomNo][3 * i + 2];
             GameObject tempObj = GameObject.Find(objName);
             tempObj.SetActive(false);
             Debug.Log(objName +"Disabled");
         }
 
-        string roomType = Layout.getString(RoomNo, 1);
+        string roomType = Layout[RoomNo][1];
         GameObject floorObj = GameObject.Find(roomType);
         floorObj.SetActive(false);
 
         return true;
     }
 
-    int FromFloorToRoomNo(int Floor, int Room)
+    public int FromFloorToRoomNo(int Floor, int Room)
     {
-        return ToRoomNo.getInt(Floor, Room);
+        return int.Parse(ToRoomNo[Floor][Room-1]);
     }
 }

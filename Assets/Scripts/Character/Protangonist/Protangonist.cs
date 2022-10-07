@@ -29,7 +29,7 @@ public class Protangonist : Singleton<Protangonist>,ISpeecher
     /// 角色移动速度
 
     Animator anim;
-    [SerializeField]    MoveTriggerer moveTriggerer;
+    public              MoveTriggerer moveTriggerer;
     #region 对话气泡接口使用
     // 对话框气泡
     [SerializeField]    SpeechBubble speechBubble;
@@ -142,7 +142,6 @@ public class Protangonist : Singleton<Protangonist>,ISpeecher
     private void Start()
     {
         speechBubble.Init(this);
-        moveTriggerer.MoveTo(new Vector3(1, 1, 1));
     }
     private void Update()
     {
