@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: floor
+    uniqueID: 1067997653
+    locked: 0
+  - name: npc_And_ememy
+    uniqueID: 2099756929
+    locked: 0
+  - name: door
+    uniqueID: 1497630469
+    locked: 0
+  - name: protagonist
+    uniqueID: 900827201
+    locked: 0
+  - name: bigMap
+    uniqueID: 4103511435
+    locked: 0

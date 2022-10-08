@@ -162,5 +162,7 @@ public static class ActionInRoom//所有事情都只能有一个string参数，这个参数总是Ro
             MapGeneration.Instance.SceneDoorsObjects[i].GetComponent<Door>().SetCollider(clickable);
         } 
     }
+
+
     
 }
