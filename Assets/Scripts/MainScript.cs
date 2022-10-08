@@ -76,7 +76,7 @@ public class MainScript : MonoBehaviour
     {
         switch (actionName)
         {
-            case "dialogue": return ActionInRoom.Dialogue;
+            case "Dialogue": return ActionInRoom.Dialogue;
             default:Debug.Log("Fail to get action"); return null;
         }
     }
