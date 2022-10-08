@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 /// <summary>
 /// 控制整个游戏进程
 /// </summary>
@@ -16,7 +17,10 @@ public class MainScript : MonoBehaviour
     public int floor;
     public int room;
     public int roomNo;
-
+    //事件管理
+    List<string[]> ToEvents;
+    int eventIndex;//现在正在进行的事件是这个房间的第几个事件
+    string[] eventsNow;
 
     void Awake()
     {
@@ -25,45 +29,77 @@ public class MainScript : MonoBehaviour
         floor = 1;
         room = 1;
         roomNo = 1;
-        
+
+        //载入事件
+        csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Maps", "RoomNoToEvents.csv");
+        ToEvents = new List<string[]>(csvController.GetInstance().arrayData);
     }
     private void Start()
     {
-        ActionInRoom.ClearAllEventListener();
         MapGeneration.Instance.GenerateRoom(1, 1);  //生成初始房间
-        DialogueManager.Instance.AddEndListener(EnableDoorClick);
         ActionInRoom.SetDoorClickable(false);
-        DialogueManager.Instance.SetLine("start");
-        DialogueManager.Instance.PlayDialogue();
-        
+        StartPlayAction();
     }
-    void EnableDoorClick()
-    {
-        ActionInRoom.SetDoorClickable(true);
-    }
+    
+    
     void Update()
     {
         
 
     }
-
-
+    public void StartPlayAction()
+    {
+        EventManager.Clear();
+        eventIndex = 2;
+        eventsNow = GetRoomEvent(roomNo);
+        PlayActionOnce();
+    }
+    void PlayActionOnce()
+    {
+        EventManager.Clear();
+        EventManager.AddEventListener(eventsNow[eventIndex] + "End", PlayNext);
+        GetAction(eventsNow[eventIndex])?.Invoke(eventsNow[eventIndex+1]);
+    }
+    void PlayNext()
+    {
+        eventIndex += 2;
+        if(eventIndex<eventsNow.Length && eventsNow[eventIndex]!="")
+        {
+            PlayActionOnce();
+        }
+        else
+        {
+            ActionInRoom.SetDoorClickable(true);
+        }
+    }
+    Action<string> GetAction(string actionName)
+    {
+        switch (actionName)
+        {
+            case "dialogue": return ActionInRoom.Dialogue;
+            default:Debug.Log("Fail to get action"); return null;
+        }
+    }
+    
+    string[] GetRoomEvent(int roomNo)
+    {
+        return ToEvents[roomNo];
+    }
     ///信任度判定
     public bool TrustJudge()
     {
         bool judge = true;
         ///根据策划案设置判定
-        
+
         return judge;
     }
-
-    
     void SetRoom(int floor,int room)
     {
         this.floor = floor;
         this.room = room;
         roomNo = MapGeneration.Instance.FromFloorToRoomNo(floor, room);
     }
+
 }
 
 public enum BetrayType
@@ -74,24 +110,24 @@ public enum BetrayType
 
 }
 
-public static class ActionInRoom
+public static class ActionInRoom//所有事情都只能有一个string参数，这个参数总是RoomNoToEvent里面对应事件的下一个格里的字符串
 {
     public static void Dialogue(string contentType)
     {
-        DialogueManager.Instance.ClearEndListener();
-        DialogueManager.Instance.SetLine("contentType");
+        //DialogueManager.Instance.ClearEndListener();
+        DialogueManager.Instance.SetLine(contentType);
         DialogueManager.Instance.PlayDialogue();
     }
-    public static string React(BetrayType whetherViolate, int RoomNo)
+    public static string React(string content)
     {
-        switch (whetherViolate)
+        switch (MainScript.S.whetherBetray)
         {
             case BetrayType.betray:
-                return RoomNoToRoomType(RoomNo) + "_betray";
+                return RoomNoToRoomType(MainScript.S.roomNo) + "_betray";
             case BetrayType.oneway:
-                return RoomNoToRoomType(RoomNo) + "_oneway";
+                return RoomNoToRoomType(MainScript.S.roomNo) + "_oneway";
             case BetrayType.follow:
-                return RoomNoToRoomType(RoomNo) + "_follow";
+                return RoomNoToRoomType(MainScript.S.roomNo) + "_follow";
             default:
                 return null;
         }
@@ -101,9 +137,10 @@ public static class ActionInRoom
         csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Maps", "Layout.csv");
         return csvController.GetInstance().getString(RoomNo + 1, 1);
     }
-    public static void Move(float x, float y)
+    public static void Move(string xy)
     {
-        Protangonist.Instance.moveTriggerer.MoveTo(new Vector3(x, y, 0));
+        string[] tmp = xy.Split("|");
+        Protangonist.Instance.moveTriggerer.MoveTo(new Vector3(float.Parse(tmp[0]), float.Parse(tmp[1]), 0));
     }
     public static void Animation(string animName)
     {
@@ -125,10 +162,5 @@ public static class ActionInRoom
             MapGeneration.Instance.SceneDoorsObjects[i].GetComponent<Door>().SetCollider(clickable);
         } 
     }
-    public static void ClearAllEventListener()
-    {
-        //在此把所有事件清空。目前只有这两个事件，后续还需要添加战斗结束，事件结束，治疗播放结束等等事件
-        DialogueManager.Instance.ClearEndListener();
-        Protangonist.Instance.moveTriggerer.ClearArriveListener();
-    }
+    
 }

@@ -23,6 +23,7 @@ public class Door : MonoBehaviour
 
     private void OnMouseDown()
     {
+        ActionInRoom.SetDoorClickable(false);
         Protangonist.Instance.moveTriggerer.ClearArriveListener();
         Debug.Log("ToFloor" + ToFloor + " ToRoom:" + ToRoom + " ToRoomNo:" + ToRoomNo);
         Protangonist.Instance.moveTriggerer.AddArriveListener(GenerateNewRoom);
@@ -35,6 +36,10 @@ public class Door : MonoBehaviour
         {
             Debug.Log("Generation Failed!");
         }
+        MainScript.S.room = ToRoom;
+        MainScript.S.floor = ToFloor;
+        MainScript.S.roomNo = ToRoomNo;
+        MainScript.S.StartPlayAction();
         //MainScript.S.Layout(ToRoomNo);
     }
 

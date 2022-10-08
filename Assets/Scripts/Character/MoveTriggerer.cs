@@ -23,6 +23,7 @@ public class MoveTriggerer : MonoBehaviour
     }
     IEnumerator DoMove(Vector3 target)
     {
+        if (target.x < gameObject.transform.position.x) Flip(true);
         anim.SetBool(movingParameter, true);
         while (true)
         {
@@ -30,6 +31,7 @@ public class MoveTriggerer : MonoBehaviour
             if (dir.magnitude <= 0.1f)
             {
                 anim.SetBool(movingParameter, false);
+                Flip(false);
                 StopCoroutine(DoMove(target));
                 ArriveTarget?.Invoke();
                 yield return null;
@@ -40,6 +42,16 @@ public class MoveTriggerer : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
+    void Flip(bool isFlip)
+    {
+        Vector3 sc = transform.localScale;
+        if (isFlip)
+            transform.localScale = new Vector3(-Math.Abs( sc.x), sc.y, sc.z);
+        else
+            transform.localScale = new Vector3(Math.Abs(sc.x), sc.y, sc.z);
+        
+    }
+    
     /// <summary>
     /// 添加移动结束时触发的事件
     /// </summary>

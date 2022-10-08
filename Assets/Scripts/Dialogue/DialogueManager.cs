@@ -57,7 +57,6 @@ public class DialogueManager : Singleton<DialogueManager>
     string[] line;
     //所有事件名称集
     List<string> eventsName = new List<string>();
-    Action DialogueEnd;
     
 
     /// <summary>
@@ -108,46 +107,28 @@ public class DialogueManager : Singleton<DialogueManager>
                 SpeecherDic[line[currSpeechIndex - 2]].ShutUp();//让最后一个人闭嘴
                 dialogueMask.gameObject.SetActive(false);//取消mask
                 currSpeechIndex = 1;//准备下一次对话   
-                TriggerEndEvent();
                 isSpeeching = false;
+                EventManager.EventTrigger("dialogueEnd");
             }
         }
     }
-    #region 结束对话时的事件控制
-    public void AddEndListener(Action action)
-    {
-        DialogueEnd += action;
-    }
-    public void TriggerEndEvent()
-    {
-        DialogueEnd?.Invoke();
-    }
-    public void RemoveEndListener(Action action)
-    {
-        DialogueEnd -= action;
-    }
-    public void ClearEndListener()
-    {
-        DialogueEnd = null;
-    }
-    #endregion
+    
 
     bool checkSpeechIndex()
     {
         //if (line[currSpeechIndex] == "\r") return false;
         return currSpeechIndex < line.Length && line[currSpeechIndex] != "";
     }
-
-    protected override void Init()
+    protected override void Awake()
     {
-        base.Init();
+        base.Awake();
         csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Dialogue", "Dialogue_Lib.csv");
         textTable = new List<string[]>(csvController.GetInstance().arrayData);
         GetEventsName();
 
         SpeecherDic = new Dictionary<string, ISpeecher>();
         dialogueMask.transform.SetParent(GameObject.Find("UI").transform);
-        dialogueMask.transform.SetSiblingIndex(GameObject.Find("Data").transform.GetSiblingIndex()-1);//在显示属性的框下一层遮挡，这句可能在后期做UI的时候需要更改
+        dialogueMask.transform.SetSiblingIndex(GameObject.Find("Data").transform.GetSiblingIndex() - 1);//在显示属性的框下一层遮挡，这句可能在后期做UI的时候需要更改
         dialogueMask.gameObject.SetActive(false);
         isSpeeching = false;
         currSpeechIndex = 1;

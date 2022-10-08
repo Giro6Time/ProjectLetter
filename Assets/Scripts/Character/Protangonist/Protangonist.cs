@@ -133,15 +133,15 @@ public class Protangonist : Singleton<Protangonist>,ISpeecher
         //TODO: 计算属性然后更新（比如根据信任度修改攻击力什么的）
     }
     #endregion
-
-    protected override void Init()//把Unity界面中预先配置的数值更新到游戏内
+    protected override void Awake()//把Unity界面中预先配置的数值更新到游戏内
     {
-        base.Init();
+        base.Awake();
         anim = GetComponent<Animator>();
+        speechBubble.Init(this);
     }
+    
     private void Start()
     {
-        speechBubble.Init(this);
     }
     private void Update()
     {
