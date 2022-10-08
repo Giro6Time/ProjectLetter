@@ -1,6 +1,6 @@
-RoomNo,Events,action1,location,action2,location,action3,location,action4,location,,
-1,start,dialogue,start,,,,,,,,
-2,event,reactEventRoom,0,dialogue,event1_1,choose,0,move,3|-22,dialogue,event1_2
-3,combat,reactCombatRoom,0,move,-2|-22,fight,enemy1|10|100,,,,
-4,escape,dialogue,escape,animaiton,escape,,,,,,
-5,recover,reactRecoverRoom,0,move,-3|-18,animaiton,recover,,,,
+RoomNo,Events,Action1,Location,action2,Location,Action3,Location,Action4,Location,,
+1,Start,Dialogue,Start,,,,,,,,
+2,Event,ReactEventRoom,0,Dialogue,Event1_1,Choose,0,Move,3|-22,Dialogue,Event1_2
+3,Combat,ReactCombatRoom,0,Move,-2|-22,Fight,Enemy1|10|100,,,,
+4,Escape,Dialogue,Escape,Animaiton,Escape,,,,,,
+5,Recover,ReactRecoverRoom,0,Move,-3|-18,Animaiton,Recover,,,,

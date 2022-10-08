@@ -163,6 +163,7 @@ public class MapGeneration : MonoBehaviour
         for (int i = 0; i < ObjCount; i++)
         {
             string objName = Layout[RoomNo][3 * i + 2];
+            if (objName == "") continue;
             GameObject tempObj = GameObject.Find(objName);
             tempObj.SetActive(false);
             Debug.Log(objName +"Disabled");
