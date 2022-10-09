@@ -34,7 +34,7 @@ public class MoveTriggerer : MonoBehaviour
                 Flip(false);
                 StopCoroutine(DoMove(target));
                 ArriveTarget?.Invoke();
-                yield return null;
+                //yield return null;
                 break;
             }
             dir = dir.normalized;

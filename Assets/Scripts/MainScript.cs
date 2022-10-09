@@ -118,7 +118,7 @@ public static class ActionInRoom//所有事情都只能有一个string参数，这个参数总是Ro
         DialogueManager.Instance.SetLine(contentType);
         DialogueManager.Instance.PlayDialogue();
     }
-    public static string React(string content)
+    public static string React(string content)//这个是否要直接开启对应的对话？
     {
         switch (MainScript.S.whetherBetray)
         {
