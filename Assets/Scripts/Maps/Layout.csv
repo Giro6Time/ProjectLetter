@@ -1,6 +1,6 @@
 RoomNo,RoomType,Object1,x,y,Object2,x,y,Object3,x,y
 1,StartRoom,StartRoom,0,0,Protagonist,-7,-1.5,,,
-2,EventRoom,Jack,6,-22,,,,,,
+2,EventRoom,Jack,0,5,Protagonist,-7,-1.5,,,
 3,CombatRoom,Enemy1,-2,-18,,,,,,
 4,EscapeRoom,,,,,,,,,
 5,RecoverRoom,Recover,-2,-18,,,,,,

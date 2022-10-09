@@ -8,7 +8,7 @@ public class MapGeneration : MonoBehaviour
 {
     List<string[]> ToRoomNo;//该脚本负责转换(Floor,Room)到RoomNo
     List<string[]> ToDoors;//该脚本负责记录门通往的房间
-    List<string[]> Layout;//该脚本负责记录每个房间内部的物体
+    public List<string[]> Layout;//该脚本负责记录每个房间内部的物体
     public List<GameObject> SceneDoorsObjects;
 
     private static volatile MapGeneration instance;

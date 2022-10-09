@@ -77,6 +77,7 @@ public class MainScript : MonoBehaviour
         switch (actionName)
         {
             case "Dialogue": return ActionInRoom.Dialogue;
+            case "React": return ActionInRoom.React;
             default:Debug.Log("Fail to get action"); return null;
         }
     }
@@ -118,24 +119,30 @@ public static class ActionInRoom//所有事情都只能有一个string参数，这个参数总是Ro
         DialogueManager.Instance.SetLine(contentType);
         DialogueManager.Instance.PlayDialogue();
     }
-    public static string React(string content)//这个是否要直接开启对应的对话？
+    public static void React(string content)//这个是否要直接开启对应的对话？
     {
+        EventManager.AddEventListener("DialogueEnd", UpdateTrust);
         switch (MainScript.S.whetherBetray)
         {
             case BetrayType.betray:
-                return RoomNoToRoomType(MainScript.S.roomNo) + "_betray";
+                DialogueManager.Instance.SetLine(RoomNoToRoomType(MainScript.S.roomNo) + "_betray");
+                break;
             case BetrayType.oneway:
-                return RoomNoToRoomType(MainScript.S.roomNo) + "_oneway";
+                DialogueManager.Instance.SetLine(RoomNoToRoomType(MainScript.S.roomNo) + "_oneway");
+                break;
             case BetrayType.follow:
-                return RoomNoToRoomType(MainScript.S.roomNo) + "_follow";
+                DialogueManager.Instance.SetLine(RoomNoToRoomType(MainScript.S.roomNo) + "_follow");
+                break;
             default:
-                return null;
+                return;
         }
+        DialogueManager.Instance.PlayDialogue();
+        
     }
     public static string RoomNoToRoomType(int RoomNo)
     {
         csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Maps", "Layout.csv");
-        return csvController.GetInstance().getString(RoomNo + 1, 1);
+        return csvController.GetInstance().getString(RoomNo , 1);
     }
     public static void Move(string xy)
     {
@@ -162,7 +169,10 @@ public static class ActionInRoom//所有事情都只能有一个string参数，这个参数总是Ro
             MapGeneration.Instance.SceneDoorsObjects[i].GetComponent<Door>().SetCollider(clickable);
         } 
     }
-
+    static void UpdateTrust()
+    {
+        EventManager.EventTrigger("ReactEnd");
+    }
 
     
 }

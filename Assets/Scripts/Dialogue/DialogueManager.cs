@@ -82,7 +82,7 @@ public class DialogueManager : Singleton<DialogueManager>
     /// 播放对话
     /// </summary>
     public void PlayDialogue()
-    {
+        {
         if (!isSpeeching)//如果当前还没有开始对话，则进入对话，开启mask禁止其他动作
         {
             if (checkSpeechIndex())//礼貌性的检查一下越界
@@ -152,7 +152,7 @@ public static class SpeecherBehavior
     /// <param name="content"></param>
     public static void Speak(this ISpeecher speecher, string content)
     {
-        if (!speecher.Bubble.isActiveAndEnabled) speecher.Bubble.gameObject.SetActive(true);
+        speecher.Bubble.gameObject.SetActive(true);
         speecher.Bubble.SetContent(content);
     }
     /// <summary>

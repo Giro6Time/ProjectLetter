@@ -38,7 +38,7 @@ public class Door : MonoBehaviour
         }
         MainScript.S.room = ToRoom;
         MainScript.S.floor = ToFloor;
-        MainScript.S.roomNo = ToRoomNo;
+        MainScript.S.roomNo = mapGeneration.FromFloorToRoomNo(ToFloor,ToRoom);
         MainScript.S.StartPlayAction();
         //MainScript.S.Layout(ToRoomNo);
     }
