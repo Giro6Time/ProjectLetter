@@ -78,6 +78,8 @@ public class MainScript : MonoBehaviour
         {
             case "Dialogue": return ActionInRoom.Dialogue;
             case "React": return ActionInRoom.React;
+            case "Move": return ActionInRoom.Move;
+            case "Combat": return ActionInRoom.Combat;
             default:Debug.Log("Fail to get action"); return null;
         }
     }
@@ -139,6 +141,14 @@ public static class ActionInRoom//所有事情都只能有一个string参数，这个参数总是Ro
         DialogueManager.Instance.PlayDialogue();
         
     }
+    public static void Combat(string enemy)
+    {
+        string[] tmp = enemy.Split("|");
+        CombatSystem.Instance.SetEnemyByName(tmp[0]);
+        CombatSystem.Instance.enemy.Attack = float.Parse(tmp[1]);
+        CombatSystem.Instance.enemy.Health = float.Parse(tmp[2]);
+        CombatSystem.Instance.StartCombat();
+    }
     public static string RoomNoToRoomType(int RoomNo)
     {
         csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Maps", "Layout.csv");
@@ -149,18 +159,12 @@ public static class ActionInRoom//所有事情都只能有一个string参数，这个参数总是Ro
         string[] tmp = xy.Split("|");
         Protangonist.Instance.moveTriggerer.MoveTo(new Vector3(float.Parse(tmp[0]), float.Parse(tmp[1]), 0));
     }
-    public static void Animation(string animName)
+    public static void Animation(string inputStr)
     {
-        switch (animName)
-        {
-            case "recover":
-                Protangonist.Instance.Recover(100);
-                //其他动画
-                break;
-            default:
-                Debug.Log("Fail to find this animation!");
-                break;
-        }
+        string[] tmp = inputStr.Split("|");
+        Animator anim = GameObject.Find(tmp[0]).GetComponent<Animator>();
+        anim.SetTrigger(tmp[1]);
+        
     }
     public static void SetDoorClickable(bool clickable)
     {

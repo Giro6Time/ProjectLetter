@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using UnityEditor.U2D.Common;
 using UnityEngine;
 
-public class CombatSystem : MonoBehaviour
+public class CombatSystem : Singleton<CombatSystem>
 {
+
     public GameObject EnemyObject;
     public GameObject ProtangonistObject;
     public Protangonist protangonist;
     public Enemy enemy;
 
+    AnimationClip q;
     private void Start()
     {
         ProtangonistObject = GameObject.FindGameObjectWithTag("Player");
@@ -25,8 +27,10 @@ public class CombatSystem : MonoBehaviour
 
     public void StartCombat()
     {
-        
-        while(enemy.Health > 0 && protangonist.Health > 0)
+        EventManager.AddEventListener("OnProtangonistDefeated",ProtangonistDefeated);
+        EventManager.AddEventListener("OnEnemyDefeated",EnemyDefeated);
+        StartCoroutine(DoProtangonistCombat());
+       /*while(enemy.Health > 0 && protangonist.Health > 0)
         {
             //进行血量扣减的结算
             protangonist.AttackAnimation();
@@ -34,13 +38,45 @@ public class CombatSystem : MonoBehaviour
             if (enemy.Health <= 0) break;
             enemy.PlayAttackAnimation();
             protangonist.Health -= enemy.Attack;
+        }*/
+    }
+
+    IEnumerator DoProtangonistCombat()
+    {
+        protangonist.AttackAnimation();
+        enemy.Health -= protangonist.Attack;
+        yield return new WaitForSeconds(q.length);
+        if (protangonist.Health <= 0)
+        {
+            EventManager.EventTrigger("OnEnemyDefeated");
+        }
+        else
+        {
+            StartCoroutine(DoEnemyCombat());
         }
     }
-
-    IEnumerator DoCombat()
+    IEnumerator DoEnemyCombat()
     {
-
-        yield return null;
+        enemy.PlayAttackAnimation();
+        protangonist.Health -= enemy.Attack;
+        yield return new WaitForSeconds(q.length);
+        if (protangonist.Health <= 0)
+        {
+            EventManager.EventTrigger("OnProtangonistDefeated");
+        }
+        else
+        {
+            StartCoroutine(DoEnemyCombat());
+        }
     }
-
+    void ProtangonistDefeated()
+    {
+        protangonist.ProtangonistDefeated();
+        protangonist.OnProtangonistDie?.Invoke();
+    }
+    void EnemyDefeated()
+    {
+        enemy.PlayDieAnimation();
+        EventManager.EventTrigger("CombatEnd");
+    }
 }

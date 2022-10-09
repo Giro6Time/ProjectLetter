@@ -30,7 +30,10 @@ public class Enemy : MonoBehaviour, ISpeecher
     {
 
     }
+    public void PlayDieAnimation()
+    {
 
+    }
     // Update is called once per frame
     void Update()
     {

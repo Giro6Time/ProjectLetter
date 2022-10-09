@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
+using System;
 public enum ConfidenceType
 {
     timid = 0,
@@ -30,6 +31,7 @@ public class Protangonist : Singleton<Protangonist>,ISpeecher
 
     Animator anim;
     public  MoveTriggerer moveTriggerer;
+    public Action OnProtangonistDie;
     #region 对话气泡接口使用
     // 对话框气泡
     [SerializeField]    SpeechBubble speechBubble;
@@ -56,7 +58,7 @@ public class Protangonist : Singleton<Protangonist>,ISpeecher
     /// <summary>
     /// 角色死亡
     /// </summary>
-    public void Die()//TODO:触发死亡事件，或者由死亡事件来触发Die函数播放动画，总之需要一个事件
+    public void ProtangonistDefeated()//TODO:触发死亡事件，或者由死亡事件来触发Die函数播放动画，总之需要一个事件
     {
         ResetAnim();
         anim.SetTrigger("die");
