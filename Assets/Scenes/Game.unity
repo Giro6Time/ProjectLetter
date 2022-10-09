@@ -413,6 +413,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Protagonist
       objectReference: {fileID: 0}
+    - target: {fileID: 4105362945620786469, guid: dba762f8b7ef17948accd559a1680b1d, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4105362945620786471, guid: dba762f8b7ef17948accd559a1680b1d, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -13032,7 +13036,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 0.627532, g: 0, b: 1, a: 1}
   m_FlipX: 0
@@ -13212,6 +13216,22 @@ PrefabInstance:
     - target: {fileID: 1562694519351948023, guid: 0fd98696e04891d41a0cdea362791453, type: 3}
       propertyPath: m_Name
       value: Enemy_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656941727645220538, guid: 0fd98696e04891d41a0cdea362791453, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300114, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
+    - target: {fileID: 4656941727645220538, guid: 0fd98696e04891d41a0cdea362791453, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656941727645220538, guid: 0fd98696e04891d41a0cdea362791453, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656941727645220538, guid: 0fd98696e04891d41a0cdea362791453, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4792964616501579805, guid: 0fd98696e04891d41a0cdea362791453, type: 3}
       propertyPath: m_RootOrder
