@@ -124,8 +124,8 @@ public class MapGeneration : MonoBehaviour
         string roomType = Layout[RoomNo][1];
         GameObject floorObj = GameObject.Find(roomType);
         floorObj.SetActive(true);
-        floorObj.transform.position = camPos;
-
+        floorObj.transform.position = new Vector3(camPos.x,camPos.y,floorObj.transform.position.z);
+        
         return true;
     }
 
