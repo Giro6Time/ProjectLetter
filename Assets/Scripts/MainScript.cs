@@ -8,7 +8,7 @@ using System;
 public class MainScript : MonoBehaviour
 {
     public static MainScript S;
-    public Protangonist hero;
+    public Protagonist hero;
     public bool couldChooseDoor;  //这个变量决定此时鼠标点击出口是否有效
     public bool couldChooseEvent;  //这个变量决定此时鼠标点击事件房内的事件是否有效
     public BetrayType whetherBetray;  //选择路线时角色是否违背,-1是违背，0是没得选，1是遵循
@@ -157,7 +157,7 @@ public static class ActionInRoom//所有事情都只能有一个string参数，这个参数总是Ro
     public static void Move(string xy)
     {
         string[] tmp = xy.Split("|");
-        Protangonist.Instance.moveTriggerer.MoveTo(new Vector3(float.Parse(tmp[0]), float.Parse(tmp[1]), 0));
+        Protagonist.Instance.moveTriggerer.MoveTo(new Vector3(float.Parse(tmp[0]), float.Parse(tmp[1]), 0));
     }
     public static void Animation(string inputStr)
     {

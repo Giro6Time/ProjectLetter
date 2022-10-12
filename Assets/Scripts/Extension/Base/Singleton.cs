@@ -8,15 +8,11 @@ using UnityEngine;
 /// </summary>
 abstract public class Singleton<T> :MonoBehaviour where T: class ,new()
 {
-    public static T instance ;
+    private static T instance ;
     public static T Instance
     {
         get
         {
-            if (instance == null)
-            {
-                instance = new T();
-            }
             return instance;
         }
     }

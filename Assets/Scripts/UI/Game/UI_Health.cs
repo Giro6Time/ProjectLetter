@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UI_Health : UI_Property<UI_Health>//是个单例
 {
-    Protangonist hero;
+    Protagonist hero;
 
     public void UpdateHPValue()
     {
@@ -18,6 +18,6 @@ public class UI_Health : UI_Property<UI_Health>//是个单例
     }
     private void Start()
     {
-        hero = Protangonist.Instance;
+        hero = Protagonist.Instance;
     }
 }

@@ -56,7 +56,7 @@ public class DialogueManager : Singleton<DialogueManager>
     //当前行
     string[] line;
     //所有事件名称集
-    List<string> eventsName = new List<string>();
+    List<string> eventsName;
     
 
     /// <summary>
@@ -122,6 +122,7 @@ public class DialogueManager : Singleton<DialogueManager>
     protected override void Awake()
     {
         base.Awake();
+        eventsName = new List<string>();
         csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Dialogue", "Dialogue_Lib.csv");
         textTable = new List<string[]>(csvController.GetInstance().arrayData);
         GetEventsName();

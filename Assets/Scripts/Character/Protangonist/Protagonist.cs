@@ -8,7 +8,7 @@ public enum ConfidenceType
     timid = 0,
     confident = 1
 }
-public class Protangonist : Singleton<Protangonist>,ISpeecher
+public class Protagonist : Singleton<Protagonist>,ISpeecher
 {
     
     /// <summary>
@@ -51,7 +51,7 @@ public class Protangonist : Singleton<Protangonist>,ISpeecher
     public float AttackAnimation()
     {
         ResetAnim();
-        anim.SetTrigger("attack");
+        anim.SetTrigger("Attack");
 
         return Attack;
     }
@@ -80,11 +80,11 @@ public class Protangonist : Singleton<Protangonist>,ISpeecher
     {
         base.Awake();
         anim = GetComponent<Animator>();
-        speechBubble.Init(this);
     }
     
     private void Start()
     {
+        speechBubble.Init(this);
     }
     private void Update()
     {

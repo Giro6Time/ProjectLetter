@@ -9,14 +9,14 @@ public class CombatSystem : Singleton<CombatSystem>
 
     public GameObject EnemyObject;
     public GameObject ProtangonistObject;
-    public Protangonist protangonist;
+    public Protagonist protangonist;
     public Enemy enemy;
 
     AnimationClip q;
     private void Start()
     {
         ProtangonistObject = GameObject.FindGameObjectWithTag("Player");
-        protangonist = ProtangonistObject.GetComponent<Protangonist>();
+        protangonist = ProtangonistObject.GetComponent<Protagonist>();
     }
 
     public void SetEnemyByName(string EnemyName)

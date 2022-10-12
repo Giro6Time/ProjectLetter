@@ -24,10 +24,10 @@ public class Door : MonoBehaviour
     private void OnMouseDown()
     {
         ActionInRoom.SetDoorClickable(false);
-        Protangonist.Instance.moveTriggerer.ClearArriveListener();
+        Protagonist.Instance.moveTriggerer.ClearArriveListener();
         Debug.Log("ToFloor" + ToFloor + " ToRoom:" + ToRoom + " ToRoomNo:" + ToRoomNo);
-        Protangonist.Instance.moveTriggerer.AddArriveListener(GenerateNewRoom);
-        Protangonist.Instance.moveTriggerer.MoveTo(this.transform.position);
+        Protagonist.Instance.moveTriggerer.AddArriveListener(GenerateNewRoom);
+        Protagonist.Instance.moveTriggerer.MoveTo(this.transform.position);
     }
     private void GenerateNewRoom()
     {

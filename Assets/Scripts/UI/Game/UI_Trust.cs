@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 public class UI_Trust : UI_Property<UI_Trust>//是个单例
 {
-    Protangonist hero;
+    Protagonist hero;
     
     public void UpdateTrustValue()
     {
@@ -19,6 +19,6 @@ public class UI_Trust : UI_Property<UI_Trust>//是个单例
     }
     private void Start()
     {
-        hero = Protangonist.Instance;
+        hero = Protagonist.Instance;
     }
 }
