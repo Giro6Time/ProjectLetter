@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 /// <summary>
 /// 演讲者接口，使用方式可以参考主角中的代码
 /// </summary>
