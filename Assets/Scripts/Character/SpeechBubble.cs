@@ -1,21 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
 
 /// <summary>
-/// 所有需要使用对话框的物体需要使用这个接口
-/// 注意在Speecher身上调用SpeechBubble的Init！！！
+/// 所有需要使用对话话框的物体需要使用这个接口
+/// 注意在Speecher的Start里调用SpeechBubble的Init！！
 /// </summary>
 public class SpeechBubble : MonoBehaviour
 {
-    // 对话框的携带者
+    // 对话框的携带者?
     [SerializeField]    ISpeecher parent;
     //气泡背景图片
     [SerializeField]    Image bubble;
-    //气泡中的文本
+    //气泡框的文本
     public              TMP_Text text;
 
     LayoutElement bubbleLayoutEle;

@@ -11,29 +11,29 @@ public enum ConfidenceType
 public class Protagonist : Singleton<Protagonist>,ISpeecher
 {
     
-    // 最大生命值
+    // 鏈€澶х敓鍛藉€�
     public float maxHealth;
-    // 最大信任值
+    // 鏈€澶т俊浠诲€�
     public float maxTrust;
-    /// 当前生命值，供外部使用的属性已添加在角色属性region
+    /// 褰撳墠鐢熷懡鍊硷紝渚涘�栭儴浣跨敤鐨勫睘鎬у凡娣诲姞鍦ㄨ�掕壊灞炴€�region
     private float health;
-    /// 当前信任值，供外部使用的属性已添加在角色属性region
+    /// 褰撳墠淇′换鍊硷紝渚涘�栭儴浣跨敤鐨勫睘鎬у凡娣诲姞鍦ㄨ�掕壊灞炴€�region
     private float trust;
     public ConfidenceType confident;
     public float Attack;
-    // 升级总共需要的经验值
+    // 鍗囩骇鎬诲叡闇€瑕佺殑缁忛獙鍊�
     public float ExpInNeed;
-    // 当前经验值（每升一级重置为0）
+    // 褰撳墠缁忛獙鍊硷紙姣忓崌涓€绾ч噸缃�涓�0锛�
     float Experience;
 
-    // 主角携带的Animator组件
+    // 涓昏�掓惡甯︾殑Animator缁勪欢
     Animator anim;
-    // 主角携带的移动组件
+    // 涓昏�掓惡甯︾殑绉诲姩缁勪欢
     public  MoveTriggerer moveTriggerer;
-    // 当主角死亡的时候触发的Action
+    // 褰撲富瑙掓�讳骸鐨勬椂鍊欒Е鍙戠殑Action
     public Action OnProtangonistDie;
-    #region 对话气泡接口使用
-    // 对话框气泡
+    #region 瀵硅瘽姘旀场鎺ュ彛浣跨敤
+    // 瀵硅瘽妗嗘皵娉�
     [SerializeField]    SpeechBubble speechBubble;
     [SerializeField]    string speecherName;
     public SpeechBubble Bubble { get => speechBubble;
@@ -42,10 +42,10 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
                                  set => speecherName = value;
     }
     #endregion
-    #region 角色属性
+    #region 瑙掕壊灞炴€�
     /// <summary>
-    /// 主角当前生命值
-    /// 修改此值会同步修改UI中生命条的显示
+    /// 涓昏�掑綋鍓嶇敓鍛藉€�
+    /// 淇�鏀规�ゅ€间細鍚屾�ヤ慨鏀筓I涓�鐢熷懡鏉＄殑鏄剧ず
     /// </summary>
     public float Health
     {
@@ -68,9 +68,9 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
         }
     }
     #endregion
-    #region 角色行为
+    #region 瑙掕壊琛屼负
     /// <summary>
-    /// 角色攻击目标
+    /// 瑙掕壊鏀诲嚮鐩�鏍�
     /// </summary>
     /// <returns></returns>
     public float AttackAnimation()
@@ -81,9 +81,9 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
         return Attack;
     }
     /// <summary>
-    /// 角色死亡
+    /// 瑙掕壊姝讳骸
     /// </summary>
-    public void ProtagonistDefeated()//TODO:触发死亡事件，或者由死亡事件来触发Die函数播放动画，总之需要一个事件
+    public void ProtagonistDefeated()//TODO:瑙﹀彂姝讳骸浜嬩欢锛屾垨鑰呯敱姝讳骸浜嬩欢鏉ヨЕ鍙慏ie鍑芥暟鎾�鏀惧姩鐢伙紝鎬讳箣闇€瑕佷竴涓�浜嬩欢
     {
         ResetAnim();
         anim.SetTrigger("die");
@@ -94,14 +94,14 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
         ResetAnim();
         anim.SetTrigger("recover");
     }
-    void ResetAnim()//重置主角状态为初始状态（站立）
+    void ResetAnim()//閲嶇疆涓昏�掔姸鎬佷负鍒濆�嬬姸鎬侊紙绔欑珛锛�
     {
         anim.SetBool("moving", false);
         //anim.SetBool("Talking", false);
     }
     #endregion
 
-    protected override void Awake()//把Unity界面中预先配置的数值更新到游戏内
+    protected override void Awake()//鎶奤nity鐣岄潰涓�棰勫厛閰嶇疆鐨勬暟鍊兼洿鏂板埌娓告垙鍐�
     {
         base.Awake();
         anim = GetComponent<Animator>();

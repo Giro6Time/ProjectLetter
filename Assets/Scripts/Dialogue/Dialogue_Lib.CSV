@@ -1,5 +1,5 @@
 name,speaker,word,speaker,word,speaker,word
-Fight_follow,Protagonist,我就不该听你的！,Me,一时的危难不代表这条道路是错误的。,,
+Fight_follow,Protagonist,我就不该听你的！,Me,一时的危难不代表这条道路是错误的�?,,
 Fight_betray,,,,,,
 Fight_oneway,,,,,,
 RecoverRoom_follow,,,,,,
@@ -13,5 +13,5 @@ Choose_betray,,,,,,
 Choose_oneway,,,,,,
 Dead,,,,,,
 Event1_1,Jack,朋友请你帮助我！,Protagonist,我要帮助他吗？,,
-Event1_2,Protagonist,我来救你！,,,,
-Start,Protagonist,let me check start dialogue,Protagonist,My God， it really work!!!,Protagonist,Now stop the dialogue
+Event1_2,Protagonist,我来救你了！,,,,
+Start,Protagonist,（心想）这是哪,Player,这就是你的目的地,Narrator,他明显被吓了一跳,Player,我即是你 你亦是我,Narrator,他恍惚了一下，曾经在他脑中反复出现的场景愈发清晰,Protagonist,喂？你到底是什么意思？

@@ -166,6 +166,10 @@ public static class ActionInRoom//所有事情都只能有一个string参数，�
         anim.SetTrigger(tmp[1]);
         
     }
+    public static void Choose(string inputStr)
+    {
+        
+    }
     public static void SetDoorClickable(bool clickable)
     {
         for (int i = 0; i < 5; i++)
