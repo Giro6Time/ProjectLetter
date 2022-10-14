@@ -11,29 +11,29 @@ public enum ConfidenceType
 public class Protagonist : Singleton<Protagonist>,ISpeecher
 {
     
-    /// <summary>
-    /// ×î´óÉúÃüÖµ
-    /// </summary>
-    public float MaxHealth;
-    /// <summary>
-    /// ×î´óĞÅÈÎÖµ
-    /// </summary>
+    // æœ€å¤§ç”Ÿå‘½å€¼
+    public float maxHealth;
+    // æœ€å¤§ä¿¡ä»»å€¼
     public float maxTrust;
-    public float Health;
-    public float Trust;
+    /// å½“å‰ç”Ÿå‘½å€¼ï¼Œä¾›å¤–éƒ¨ä½¿ç”¨çš„å±æ€§å·²æ·»åŠ åœ¨è§’è‰²å±æ€§region
+    private float health;
+    /// å½“å‰ä¿¡ä»»å€¼ï¼Œä¾›å¤–éƒ¨ä½¿ç”¨çš„å±æ€§å·²æ·»åŠ åœ¨è§’è‰²å±æ€§region
+    private float trust;
     public ConfidenceType confident;
     public float Attack;
-    /// Éı¼¶×Ü¹²ĞèÒªµÄ¾­ÑéÖµ
+    // å‡çº§æ€»å…±éœ€è¦çš„ç»éªŒå€¼
     public float ExpInNeed;
-    /// µ±Ç°¾­ÑéÖµ£¨Ã¿ÉıÒ»¼¶ÖØÖÃÎª0£©
+    // å½“å‰ç»éªŒå€¼ï¼ˆæ¯å‡ä¸€çº§é‡ç½®ä¸º0ï¼‰
     float Experience;
-    /// ½ÇÉ«ÒÆ¶¯ËÙ¶È
 
+    // ä¸»è§’æºå¸¦çš„Animatorç»„ä»¶
     Animator anim;
+    // ä¸»è§’æºå¸¦çš„ç§»åŠ¨ç»„ä»¶
     public  MoveTriggerer moveTriggerer;
+    // å½“ä¸»è§’æ­»äº¡çš„æ—¶å€™è§¦å‘çš„Action
     public Action OnProtangonistDie;
-    #region ¶Ô»°ÆøÅİ½Ó¿ÚÊ¹ÓÃ
-    // ¶Ô»°¿òÆøÅİ
+    #region å¯¹è¯æ°”æ³¡æ¥å£ä½¿ç”¨
+    // å¯¹è¯æ¡†æ°”æ³¡
     [SerializeField]    SpeechBubble speechBubble;
     [SerializeField]    string speecherName;
     public SpeechBubble Bubble { get => speechBubble;
@@ -42,10 +42,35 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
                                  set => speecherName = value;
     }
     #endregion
-
-    #region ½ÇÉ«ĞĞÎª
+    #region è§’è‰²å±æ€§
     /// <summary>
-    /// ½ÇÉ«¹¥»÷Ä¿±ê
+    /// ä¸»è§’å½“å‰ç”Ÿå‘½å€¼
+    /// ä¿®æ”¹æ­¤å€¼ä¼šåŒæ­¥ä¿®æ”¹UIä¸­ç”Ÿå‘½æ¡çš„æ˜¾ç¤º
+    /// </summary>
+    public float Health
+    {
+        get => health;
+        set
+        {
+            health = value;
+            Mathf.Clamp(health, 0, maxHealth);
+            UI_Health.Instance.UpdateHPValue();
+        }
+    }
+    public float Trust
+    {
+        get => trust;
+        set
+        {
+            trust = value;
+            Mathf.Clamp(trust, 0, maxTrust);
+            UI_Trust.Instance.UpdateTrustValue();
+        }
+    }
+    #endregion
+    #region è§’è‰²è¡Œä¸º
+    /// <summary>
+    /// è§’è‰²æ”»å‡»ç›®æ ‡
     /// </summary>
     /// <returns></returns>
     public float AttackAnimation()
@@ -56,9 +81,9 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
         return Attack;
     }
     /// <summary>
-    /// ½ÇÉ«ËÀÍö
+    /// è§’è‰²æ­»äº¡
     /// </summary>
-    public void ProtangonistDefeated()//TODO:´¥·¢ËÀÍöÊÂ¼ş£¬»òÕßÓÉËÀÍöÊÂ¼şÀ´´¥·¢Dieº¯Êı²¥·Å¶¯»­£¬×ÜÖ®ĞèÒªÒ»¸öÊÂ¼ş
+    public void ProtagonistDefeated()//TODO:è§¦å‘æ­»äº¡äº‹ä»¶ï¼Œæˆ–è€…ç”±æ­»äº¡äº‹ä»¶æ¥è§¦å‘Dieå‡½æ•°æ’­æ”¾åŠ¨ç”»ï¼Œæ€»ä¹‹éœ€è¦ä¸€ä¸ªäº‹ä»¶
     {
         ResetAnim();
         anim.SetTrigger("die");
@@ -69,14 +94,14 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
         ResetAnim();
         anim.SetTrigger("recover");
     }
-    void ResetAnim()//ÖØÖÃÖ÷½Ç×´Ì¬Îª³õÊ¼×´Ì¬£¨Õ¾Á¢£©
+    void ResetAnim()//é‡ç½®ä¸»è§’çŠ¶æ€ä¸ºåˆå§‹çŠ¶æ€ï¼ˆç«™ç«‹ï¼‰
     {
         anim.SetBool("moving", false);
         //anim.SetBool("Talking", false);
     }
     #endregion
 
-    protected override void Awake()//°ÑUnity½çÃæÖĞÔ¤ÏÈÅäÖÃµÄÊıÖµ¸üĞÂµ½ÓÎÏ·ÄÚ
+    protected override void Awake()//æŠŠUnityç•Œé¢ä¸­é¢„å…ˆé…ç½®çš„æ•°å€¼æ›´æ–°åˆ°æ¸¸æˆå†…
     {
         base.Awake();
         anim = GetComponent<Animator>();

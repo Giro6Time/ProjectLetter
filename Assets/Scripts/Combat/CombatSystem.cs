@@ -8,15 +8,16 @@ public class CombatSystem : Singleton<CombatSystem>
 {
 
     public GameObject EnemyObject;
-    public GameObject ProtangonistObject;
-    public Protagonist protangonist;
+    public GameObject Protagonist;
+    public Protagonist protagonist;
     public Enemy enemy;
 
-    AnimationClip q;
+    public AnimationClip protagonistAttack;
+    public AnimationClip enemyAttack;
     private void Start()
     {
-        ProtangonistObject = GameObject.FindGameObjectWithTag("Player");
-        protangonist = ProtangonistObject.GetComponent<Protagonist>();
+        Protagonist = GameObject.FindGameObjectWithTag("Player");
+        protagonist = Protagonist.GetComponent<Protagonist>();
     }
 
     public void SetEnemyByName(string EnemyName)
@@ -27,12 +28,12 @@ public class CombatSystem : Singleton<CombatSystem>
 
     public void StartCombat()
     {
-        EventManager.AddEventListener("OnProtangonistDefeated",ProtangonistDefeated);
+        EventManager.AddEventListener("OnProtagonistDefeated",ProtangonistDefeated);
         EventManager.AddEventListener("OnEnemyDefeated",EnemyDefeated);
-        StartCoroutine(DoProtangonistCombat());
+        StartCoroutine(DoProtagonistCombat());
        /*while(enemy.Health > 0 && protangonist.Health > 0)
         {
-            //进行血量扣减的结算
+            //杩涜琛�閲忔墸鍑忕殑缁撶畻
             protangonist.AttackAnimation();
             enemy.Health -= protangonist.Attack;
             if (enemy.Health <= 0) break;
@@ -41,12 +42,12 @@ public class CombatSystem : Singleton<CombatSystem>
         }*/
     }
 
-    IEnumerator DoProtangonistCombat()
+    IEnumerator DoProtagonistCombat()
     {
-        protangonist.AttackAnimation();
-        enemy.Health -= protangonist.Attack;
-        yield return new WaitForSeconds(q.length);
-        if (protangonist.Health <= 0)
+        protagonist.AttackAnimation();
+        enemy.Health -= protagonist.Attack;
+        yield return new WaitForSeconds(protagonistAttack.length);
+        if (protagonist.Health <= 0)
         {
             EventManager.EventTrigger("OnEnemyDefeated");
         }
@@ -58,11 +59,11 @@ public class CombatSystem : Singleton<CombatSystem>
     IEnumerator DoEnemyCombat()
     {
         enemy.PlayAttackAnimation();
-        protangonist.Health -= enemy.Attack;
-        yield return new WaitForSeconds(q.length);
-        if (protangonist.Health <= 0)
+        protagonist.Health -= enemy.Attack;
+        yield return new WaitForSeconds(enemyAttack.length);
+        if (protagonist.Health <= 0)
         {
-            EventManager.EventTrigger("OnProtangonistDefeated");
+            EventManager.EventTrigger("OnProtagonistDefeated");
         }
         else
         {
@@ -71,8 +72,8 @@ public class CombatSystem : Singleton<CombatSystem>
     }
     void ProtangonistDefeated()
     {
-        protangonist.ProtangonistDefeated();
-        protangonist.OnProtangonistDie?.Invoke();
+        protagonist.ProtagonistDefeated();
+        protagonist.OnProtangonistDie?.Invoke();
     }
     void EnemyDefeated()
     {

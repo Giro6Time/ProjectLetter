@@ -6,26 +6,26 @@ using TMPro;
 using System;
 
 /// <summary>
-/// ËùÓĞĞèÒªÊ¹ÓÃ¶Ô»°¿òµÄÎïÌåĞèÒªÊ¹ÓÃÕâ¸ö½Ó¿Ú
-/// ×¢ÒâÔÚSpeecherÉíÉÏµ÷ÓÃSpeechBubbleµÄInit£¡£¡£¡
+/// æ‰€æœ‰éœ€è¦ä½¿ç”¨å¯¹è¯æ¡†çš„ç‰©ä½“éœ€è¦ä½¿ç”¨è¿™ä¸ªæ¥å£
+/// æ³¨æ„åœ¨Speecherèº«ä¸Šè°ƒç”¨SpeechBubbleçš„Initï¼ï¼ï¼
 /// </summary>
 public class SpeechBubble : MonoBehaviour
 {
-    // ¶Ô»°¿òµÄĞ¯´øÕß
+    // å¯¹è¯æ¡†çš„æºå¸¦è€…
     [SerializeField]    ISpeecher parent;
-    //ÆøÅİ±³¾°Í¼Æ¬
+    //æ°”æ³¡èƒŒæ™¯å›¾ç‰‡
     [SerializeField]    Image bubble;
-    //ÆøÅİÖĞµÄÎÄ±¾
+    //æ°”æ³¡ä¸­çš„æ–‡æœ¬
     public              TMP_Text text;
 
     LayoutElement bubbleLayoutEle;
 
 
-    #region Íâ²¿µ÷ÓÃ
+    #region å¤–éƒ¨è°ƒç”¨
     /// <summary>
-    /// ÔÚ¶Ô»°ÆøÅİµÄĞ¯´øÕßÉíÉÏµ÷ÓÃInit
+    /// åœ¨å¯¹è¯æ°”æ³¡çš„æºå¸¦è€…èº«ä¸Šè°ƒç”¨Init
     /// </summary>
-    /// <param name="parent">Ñİ½²Õß×Ô¼º</param>
+    /// <param name="parent">æ¼”è®²è€…è‡ªå·±</param>
     public void Init(ISpeecher parent) 
     {
         this.parent = parent;
@@ -33,7 +33,7 @@ public class SpeechBubble : MonoBehaviour
         parent.RegisterDialogue();
     }
     /// <summary>
-    /// ÉèÖÃÎÄ±¾ÄÚÈİ£¬¸üĞÂÆøÅİ´óĞ¡
+    /// è®¾ç½®æ–‡æœ¬å†…å®¹ï¼Œæ›´æ–°æ°”æ³¡å¤§å°
     /// </summary>
     /// <param name="content"></param>
     public void SetContent(string content)

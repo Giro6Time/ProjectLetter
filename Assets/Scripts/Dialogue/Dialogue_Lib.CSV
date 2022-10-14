@@ -1,5 +1,5 @@
 name,speaker,word,speaker,word,speaker,word
-Fight_follow,Protagonist,ÎÒ¾Í²»¸ÃÌıÄãµÄ£¡,Me,Ò»Ê±µÄÎ£ÄÑ²»´ú±íÕâÌõµÀÂ·ÊÇ´íÎóµÄ¡£,,
+Fight_follow,Protagonist,æˆ‘å°±ä¸è¯¥å¬ä½ çš„ï¼,Me,ä¸€æ—¶çš„å±éš¾ä¸ä»£è¡¨è¿™æ¡é“è·¯æ˜¯é”™è¯¯çš„ã€‚,,
 Fight_betray,,,,,,
 Fight_oneway,,,,,,
 RecoverRoom_follow,,,,,,
@@ -12,6 +12,6 @@ Choose_follow,,,,,,
 Choose_betray,,,,,,
 Choose_oneway,,,,,,
 Dead,,,,,,
-Event1_1,Jack,ÅóÓÑÇëÄã°ïÖúÎÒ£¡,Protagonist,ÎÒÒª°ïÖúËûÂğ£¿,,
-Event1_2,Protagonist,ÎÒÀ´¾ÈÄã£¡,,,,
-Start,Protagonist,let me check start dialogue,Protagonist,My God£¬ it really work!!!,Protagonist,Now stop the dialogue
+Event1_1,Jack,æœ‹å‹è¯·ä½ å¸®åŠ©æˆ‘ï¼,Protagonist,æˆ‘è¦å¸®åŠ©ä»–å—ï¼Ÿ,,
+Event1_2,Protagonist,æˆ‘æ¥æ•‘ä½ ï¼,,,,
+Start,Protagonist,let me check start dialogue,Protagonist,My Godï¼Œ it really work!!!,Protagonist,Now stop the dialogue

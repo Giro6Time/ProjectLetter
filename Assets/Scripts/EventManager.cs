@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
     public static class EventManager
     {
-        #region ÄÚ²¿½Ó¿Ú¡¢ÄÚ²¿ÀàĞÍ
+        #region å†…éƒ¨æ¥å£ã€å†…éƒ¨ç±»å‹
         /// <summary>
-        /// ÊÂ¼şĞÅÏ¢½Ó¿Ú
+        /// äº‹ä»¶ä¿¡æ¯æ¥å£
         /// </summary>
         private interface IEventInfo
         {
             void Destroy();
         }
         /// <summary>
-        /// ÎŞ²ÎÀàĞÍ-ÊÂ¼şĞÅÏ¢
+        /// æ— å‚ç±»å‹-äº‹ä»¶ä¿¡æ¯
         /// </summary>
         private class EventInfo : IEventInfo
         {
@@ -26,7 +26,7 @@ using System.Collections.Generic;
             }
         }
         /// <summary>
-        /// 1²ÎÀàĞÍ-ÊÂ¼şĞÅÏ¢
+        /// 1å‚ç±»å‹-äº‹ä»¶ä¿¡æ¯
         /// </summary>
         private class EventInfo<T> : IEventInfo
         {
@@ -41,7 +41,7 @@ using System.Collections.Generic;
             }
         }
         /// <summary>
-        /// 2²ÎÀàĞÍ-ÊÂ¼şĞÅÏ¢
+        /// 2å‚ç±»å‹-äº‹ä»¶ä¿¡æ¯
         /// </summary>
         private class EventInfo<T, K> : IEventInfo
         {
@@ -56,7 +56,7 @@ using System.Collections.Generic;
             }
         }
         /// <summary>
-        /// 3²ÎÀàĞÍ-ÊÂ¼şĞÅÏ¢
+        /// 3å‚ç±»å‹-äº‹ä»¶ä¿¡æ¯
         /// </summary>
         private class EventInfo<T, K, L> : IEventInfo
         {
@@ -73,17 +73,17 @@ using System.Collections.Generic;
 
         #endregion
         private static Dictionary<string, IEventInfo> eventInfoDic = new Dictionary<string, IEventInfo>();
-        #region Ìí¼ÓÊÂ¼şµÄ¼àÌı
+        #region æ·»åŠ äº‹ä»¶çš„ç›‘å¬
         /// <summary>
-        /// Ìí¼ÓÎŞ²ÎÊÂ¼ş
+        /// æ·»åŠ æ— å‚äº‹ä»¶
         /// </summary>
         public static void AddEventListener(string eventName, Action action)
         {
-            if (eventInfoDic.ContainsKey(eventName))//ÓĞÃ»ÓĞ¶ÔÓ¦µÄÊÂ¼ş¿ÉÒÔ¼àÌı
+            if (eventInfoDic.ContainsKey(eventName))//æœ‰æ²¡æœ‰å¯¹åº”çš„äº‹ä»¶å¯ä»¥ç›‘å¬
             {
                 (eventInfoDic[eventName] as EventInfo).action += action;
             }
-            else//·ñÔò×ÖµäÖĞĞÂÔöÕâ¸öeventName²¢ÇÒĞÂÔö¶ÔÓ¦µÄAction
+            else//å¦åˆ™å­—å…¸ä¸­æ–°å¢è¿™ä¸ªeventNameå¹¶ä¸”æ–°å¢å¯¹åº”çš„Action
             {
                 EventInfo eventInfo = new EventInfo();
                 eventInfo.Init(action);
@@ -91,15 +91,15 @@ using System.Collections.Generic;
             }
         }
         /// <summary>
-        /// Ìí¼Ó1²ÎÊÂ¼ş
+        /// æ·»åŠ 1å‚äº‹ä»¶
         /// </summary>
         public static void AddEventListener<T>(string eventName, Action<T> action)
         {
-            if (eventInfoDic.ContainsKey(eventName))//ÓĞÃ»ÓĞ¶ÔÓ¦µÄÊÂ¼ş¿ÉÒÔ¼àÌı
+            if (eventInfoDic.ContainsKey(eventName))//æœ‰æ²¡æœ‰å¯¹åº”çš„äº‹ä»¶å¯ä»¥ç›‘å¬
             {
                 (eventInfoDic[eventName] as EventInfo<T>).action += action;
             }
-            else//·ñÔò×ÖµäÖĞĞÂÔöÕâ¸öeventName²¢ÇÒĞÂÔö¶ÔÓ¦µÄAction
+            else//å¦åˆ™å­—å…¸ä¸­æ–°å¢è¿™ä¸ªeventNameå¹¶ä¸”æ–°å¢å¯¹åº”çš„Action
             {
                 EventInfo<T> eventInfo = new EventInfo<T>();
                 eventInfo.Init(action);
@@ -107,15 +107,15 @@ using System.Collections.Generic;
             }
         }
         /// <summary>
-        /// Ìí¼Ó2²ÎÊÂ¼ş
+        /// æ·»åŠ 2å‚äº‹ä»¶
         /// </summary>
         public static void AddEventListener<T, K>(string eventName, Action<T, K> action)
         {
-            if (eventInfoDic.ContainsKey(eventName))//ÓĞÃ»ÓĞ¶ÔÓ¦µÄÊÂ¼ş¿ÉÒÔ¼àÌı
+            if (eventInfoDic.ContainsKey(eventName))//æœ‰æ²¡æœ‰å¯¹åº”çš„äº‹ä»¶å¯ä»¥ç›‘å¬
             {
                 (eventInfoDic[eventName] as EventInfo<T, K>).action += action;
             }
-            else//·ñÔò×ÖµäÖĞĞÂÔöÕâ¸öeventName²¢ÇÒĞÂÔö¶ÔÓ¦µÄAction
+            else//å¦åˆ™å­—å…¸ä¸­æ–°å¢è¿™ä¸ªeventNameå¹¶ä¸”æ–°å¢å¯¹åº”çš„Action
             {
                 EventInfo<T, K> eventInfo = new EventInfo<T,K>();
                 eventInfo.Init(action);
@@ -123,15 +123,15 @@ using System.Collections.Generic;
             }
         }
         /// <summary>
-        /// Ìí¼Ó3²ÎÊÂ¼ş
+        /// æ·»åŠ 3å‚äº‹ä»¶
         /// </summary>
         public static void AddEventListener<T, K, L>(string eventName, Action<T, K, L> action)
         {
-            if (eventInfoDic.ContainsKey(eventName))//ÓĞÃ»ÓĞ¶ÔÓ¦µÄÊÂ¼ş¿ÉÒÔ¼àÌı
+            if (eventInfoDic.ContainsKey(eventName))//æœ‰æ²¡æœ‰å¯¹åº”çš„äº‹ä»¶å¯ä»¥ç›‘å¬
             {
                 (eventInfoDic[eventName] as EventInfo<T, K, L>).action += action;
             }
-            else//·ñÔò×ÖµäÖĞĞÂÔöÕâ¸öeventName²¢ÇÒĞÂÔö¶ÔÓ¦µÄAction
+            else//å¦åˆ™å­—å…¸ä¸­æ–°å¢è¿™ä¸ªeventNameå¹¶ä¸”æ–°å¢å¯¹åº”çš„Action
             {
                 EventInfo<T, K, L> eventInfo = new EventInfo<T,K,L>();
                 eventInfo.Init(action);
@@ -139,9 +139,9 @@ using System.Collections.Generic;
             }
         }
         #endregion
-        #region ´¥·¢ÊÂ¼ş
+        #region è§¦å‘äº‹ä»¶
         /// <summary>
-        /// ´¥·¢Ò»¸öÎŞ²ÎÊÂ¼ş
+        /// è§¦å‘ä¸€ä¸ªæ— å‚äº‹ä»¶
         /// </summary>
         public static void EventTrigger(string eventName)
         {
@@ -151,7 +151,7 @@ using System.Collections.Generic;
             }
         }
         /// <summary>
-        /// ´¥·¢Ò»¸ö1²ÎÊÂ¼ş
+        /// è§¦å‘ä¸€ä¸ª1å‚äº‹ä»¶
         /// </summary>
         public static void EventTrigger<T>(string eventName, T arg)
         {
@@ -161,7 +161,7 @@ using System.Collections.Generic;
             }
         }
         /// <summary>
-        /// ´¥·¢Ò»¸ö2²ÎÊÂ¼ş
+        /// è§¦å‘ä¸€ä¸ª2å‚äº‹ä»¶
         /// </summary>
         public static void EventTrigger<T, K>(string eventName, T arg1, K arg2)
         {
@@ -171,7 +171,7 @@ using System.Collections.Generic;
             }
         }
         /// <summary>
-        /// ´¥·¢Ò»¸ö3²ÎÊÂ¼ş
+        /// è§¦å‘ä¸€ä¸ª3å‚äº‹ä»¶
         /// </summary>
         public static void EventTrigger<T, K, L>(string eventName, T arg1, K arg2, L arg3)
         {
@@ -181,9 +181,9 @@ using System.Collections.Generic;
             }
         }
         #endregion
-        #region È¡ÏûÊÂ¼şµÄ¼àÌı
+        #region å–æ¶ˆäº‹ä»¶çš„ç›‘å¬
         /// <summary>
-        /// È¡ÏûÒ»¸öÎŞ²ÎÊÂ¼şµÄ¼àÌı  
+        /// å–æ¶ˆä¸€ä¸ªæ— å‚äº‹ä»¶çš„ç›‘å¬  
         /// </summary>
         public static void RemoveEventListener(string eventName, Action action)
         {
@@ -193,7 +193,7 @@ using System.Collections.Generic;
             }
         }
         /// <summary>
-        /// È¡ÏûÒ»¸ö1²ÎÊÂ¼şµÄ¼àÌı  
+        /// å–æ¶ˆä¸€ä¸ª1å‚äº‹ä»¶çš„ç›‘å¬  
         /// </summary>
         public static void RemoveEventListener<T>(string eventName, Action<T> action)
         {
@@ -203,7 +203,7 @@ using System.Collections.Generic;
             }
         }
         /// <summary>
-        /// È¡ÏûÒ»¸ö2²ÎÊÂ¼şµÄ¼àÌı  
+        /// å–æ¶ˆä¸€ä¸ª2å‚äº‹ä»¶çš„ç›‘å¬  
         /// </summary>
         public static void RemoveEventListener<T, K>(string eventName, Action<T, K> action)
         {
@@ -213,7 +213,7 @@ using System.Collections.Generic;
             }
         }
         /// <summary>
-        /// È¡ÏûÒ»¸ö3²ÎÊÂ¼şµÄ¼àÌı  
+        /// å–æ¶ˆä¸€ä¸ª3å‚äº‹ä»¶çš„ç›‘å¬  
         /// </summary>
         public static void RemoveEventListener<T, K, L>(string eventName, Action<T, K, L> action)
         {
@@ -223,9 +223,9 @@ using System.Collections.Generic;
             }
         }
         #endregion
-        #region  ÒÆ³ıÊÂ¼ş
+        #region  ç§»é™¤äº‹ä»¶
         /// <summary>
-        /// ÒÆ³ı/É¾³ıÒ»¸öÊÂ¼ş
+        /// ç§»é™¤/åˆ é™¤ä¸€ä¸ªäº‹ä»¶
         /// </summary>
         public static void RemoveEventListener(string eventName)
         {
@@ -236,7 +236,7 @@ using System.Collections.Generic;
             }
         }
         /// <summary>
-        /// Çå¿ÕÄãµÄÊÂ¼şÖĞĞÄ
+        /// æ¸…ç©ºä½ çš„äº‹ä»¶ä¸­å¿ƒ
         /// </summary>
         public static void Clear()
         {

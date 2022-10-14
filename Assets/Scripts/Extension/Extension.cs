@@ -4,5 +4,5 @@ using UnityEngine;
 
 public static class Extension 
 {
-    //��дδд
+    //欲写未写
 }

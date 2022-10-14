@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
-/// Ñİ½²Õß½Ó¿Ú£¬Ê¹ÓÃ·½Ê½¿ÉÒÔ²Î¿¼Ö÷½ÇÖĞµÄ´úÂë
+/// æ¼”è®²è€…æ¥å£ï¼Œä½¿ç”¨æ–¹å¼å¯ä»¥å‚è€ƒä¸»è§’ä¸­çš„ä»£ç 
 /// </summary>
 public interface ISpeecher
 {
     /// <summary>
-    /// ËùÓĞspeecherĞèÒªÓµÓĞÒ»¸ö¶Ô»°ÆøÅİµÄÊôĞÔ
+    /// æ‰€æœ‰speecheréœ€è¦æ‹¥æœ‰ä¸€ä¸ªå¯¹è¯æ°”æ³¡çš„å±æ€§
     /// </summary>
     SpeechBubble Bubble
     {
@@ -25,25 +25,25 @@ public interface ISpeecher
     }
 }
 /// <summary>
-/// ¶Ô»°ÏµÍ³¿ØÖÆÆ÷
-/// ¹ØÓÚÕâ¸öÆ÷ÔõÃ´ÓÃ£¬ÎÒÔÚcharacterÀïÃæÌí¼ÓÁËÒ»¸ötestÓÃµÄÔ¤Éè£¬¿ÉÒÔ²Î¿¼£¬²¢ÇÒÕâ¸öÏµÍ³ÒÑ¾­ÓÃÔÚÖ÷½ÇÉíÉÏÁË
+/// å¯¹è¯ç³»ç»Ÿæ§åˆ¶å™¨
+/// å…³äºè¿™ä¸ªå™¨æ€ä¹ˆç”¨ï¼Œæˆ‘åœ¨characteré‡Œé¢æ·»åŠ äº†ä¸€ä¸ªtestç”¨çš„é¢„è®¾ï¼Œå¯ä»¥å‚è€ƒï¼Œå¹¶ä¸”è¿™ä¸ªç³»ç»Ÿå·²ç»ç”¨åœ¨ä¸»è§’èº«ä¸Šäº†
 /// </summary>
 public class DialogueManager : Singleton<DialogueManager>
 {
-    //¶Ô»°µã»÷ÊÂ¼ş´¥·¢ÓÃµÄmask
+    //å¯¹è¯ç‚¹å‡»äº‹ä»¶è§¦å‘ç”¨çš„mask
     [SerializeField]    DialogueMask dialogueMask;
 
 
     /// <summary>
-    /// ËùÓĞspeecher±£´æÓÚ´Ë
+    /// æ‰€æœ‰speecherä¿å­˜äºæ­¤
     /// </summary>
     public Dictionary<string,ISpeecher> SpeecherDic;
 
-    //ÊÇ·ñÓĞÈËÕıÔÚËµ»°
+    //æ˜¯å¦æœ‰äººæ­£åœ¨è¯´è¯
     public bool isSpeeching;
-    //ÕâÒ»¾ä¶Ô»°½øĞĞµ½ÁË±í¸ñÖĞÄÄÒ»ÁĞ£¨×ÜÊÇÖ¸Ïò½ÓÏÂÀ´·¢ÉúµÄÓï¾äµÄ·¢ÑÔÕß£©
+    //è¿™ä¸€å¥å¯¹è¯è¿›è¡Œåˆ°äº†è¡¨æ ¼ä¸­å“ªä¸€åˆ—ï¼ˆæ€»æ˜¯æŒ‡å‘æ¥ä¸‹æ¥å‘ç”Ÿçš„è¯­å¥çš„å‘è¨€è€…ï¼‰
     int currSpeechIndex;
-    //ÕâÒ»¾ä¶Ô»°½øĞĞµ½ÁËÄÄÒ»¾ä
+    //è¿™ä¸€å¥å¯¹è¯è¿›è¡Œåˆ°äº†å“ªä¸€å¥
     public int CurrSpeechIndex
     {
         get => (currSpeechIndex + 1) / 2;
@@ -51,41 +51,41 @@ public class DialogueManager : Singleton<DialogueManager>
     }
 
 
-    //±£´æÕû¸ö¶Ô»°ÎÄ±¾¿â
+    //ä¿å­˜æ•´ä¸ªå¯¹è¯æ–‡æœ¬åº“
     List<string[]> textTable;
-    //µ±Ç°ĞĞ
+    //å½“å‰è¡Œ
     string[] line;
-    //ËùÓĞÊÂ¼şÃû³Æ¼¯
+    //æ‰€æœ‰äº‹ä»¶åç§°é›†
     List<string> eventsName;
     
 
     /// <summary>
-    /// ÉèÖÃµ±Ç°ÕıÔÚ¶ÁµÄ¶Ô»°
-    /// ÔÚ´¥·¢¶Ô»°Ç°µ÷ÓÃ£¬È·±£¶ÁĞĞ²»»á¶ÁÍá
+    /// è®¾ç½®å½“å‰æ­£åœ¨è¯»çš„å¯¹è¯
+    /// åœ¨è§¦å‘å¯¹è¯å‰è°ƒç”¨ï¼Œç¡®ä¿è¯»è¡Œä¸ä¼šè¯»æ­ª
     /// </summary>
-    /// <param name="contentIndex">Õâ¶Î¶Ô»°ÔÚ±í¸ñÖĞµÄĞĞÊı£¨excelÉÏĞ´¶àÉÙ¾ÍÊÇ¶àÉÙ£©</param>
+    /// <param name="contentIndex">è¿™æ®µå¯¹è¯åœ¨è¡¨æ ¼ä¸­çš„è¡Œæ•°ï¼ˆexcelä¸Šå†™å¤šå°‘å°±æ˜¯å¤šå°‘ï¼‰</param>
     public void SetLine(int contentIndex)
     {
         line = textTable[contentIndex-1];
     }
     /// <summary>
-    /// ÉèÖÃµ±Ç°ÕıÔÚ¶ÁµÄ¶Ô»°
-    /// ÔÚ´¥·¢¶Ô»°Ç°µ÷ÓÃ£¬È·±£¶ÁĞĞ²»»á¶ÁÍá
+    /// è®¾ç½®å½“å‰æ­£åœ¨è¯»çš„å¯¹è¯
+    /// åœ¨è§¦å‘å¯¹è¯å‰è°ƒç”¨ï¼Œç¡®ä¿è¯»è¡Œä¸ä¼šè¯»æ­ª
     /// </summary>
     /// <param name="eventName"></param>
     public void SetLine(string eventName)
     {
         int index = eventsName.IndexOf(eventName);
-        SetLine(index+1);//index±ÈĞĞºÅÉÙ1
+        SetLine(index+1);//indexæ¯”è¡Œå·å°‘1
     }
     /// <summary>
-    /// ²¥·Å¶Ô»°
+    /// æ’­æ”¾å¯¹è¯
     /// </summary>
     public void PlayDialogue()
         {
-        if (!isSpeeching)//Èç¹ûµ±Ç°»¹Ã»ÓĞ¿ªÊ¼¶Ô»°£¬Ôò½øÈë¶Ô»°£¬¿ªÆômask½ûÖ¹ÆäËû¶¯×÷
+        if (!isSpeeching)//å¦‚æœå½“å‰è¿˜æ²¡æœ‰å¼€å§‹å¯¹è¯ï¼Œåˆ™è¿›å…¥å¯¹è¯ï¼Œå¼€å¯maskç¦æ­¢å…¶ä»–åŠ¨ä½œ
         {
-            if (checkSpeechIndex())//ÀñÃ²ĞÔµÄ¼ì²éÒ»ÏÂÔ½½ç
+            if (CheckSpeechIndex())//ç¤¼è²Œæ€§çš„æ£€æŸ¥ä¸€ä¸‹è¶Šç•Œ
             {
                 SpeecherDic[line[currSpeechIndex]].Speak(line[currSpeechIndex + 1]);
                 dialogueMask.gameObject.SetActive(true);
@@ -96,17 +96,17 @@ public class DialogueManager : Singleton<DialogueManager>
         else
         {
             currSpeechIndex += 2;
-            if(checkSpeechIndex())//Èç¹û¶Ô»°Ã»ÓĞ½áÊø
+            if(CheckSpeechIndex())//å¦‚æœå¯¹è¯æ²¡æœ‰ç»“æŸ
             {
-                if (SpeecherDic[line[currSpeechIndex]] != SpeecherDic[line[currSpeechIndex - 2]]) //Èç¹ûÏÂÒ»¸ö·¢ÑÔÕßºÍÕâÒ»¸ö²»Ò»Ñù
-                    SpeecherDic[line[currSpeechIndex - 2]].ShutUp();//¾ÍÈÃÕâÒ»¸ö±Õ×ì
-                SpeecherDic[line[currSpeechIndex]].Speak(line[currSpeechIndex + 1]);//ÏÂÒ»¸öÈË½²»°
+                if (SpeecherDic[line[currSpeechIndex]] != SpeecherDic[line[currSpeechIndex - 2]]) //å¦‚æœä¸‹ä¸€ä¸ªå‘è¨€è€…å’Œè¿™ä¸€ä¸ªä¸ä¸€æ ·
+                    SpeecherDic[line[currSpeechIndex - 2]].ShutUp();//å°±è®©è¿™ä¸€ä¸ªé—­å˜´
+                SpeecherDic[line[currSpeechIndex]].Speak(line[currSpeechIndex + 1]);//ä¸‹ä¸€ä¸ªäººè®²è¯
             }
-            else//Õâ¶Î¶Ô»°½áÊøÁË
+            else//è¿™æ®µå¯¹è¯ç»“æŸäº†
             {
-                SpeecherDic[line[currSpeechIndex - 2]].ShutUp();//ÈÃ×îºóÒ»¸öÈË±Õ×ì
-                dialogueMask.gameObject.SetActive(false);//È¡Ïûmask
-                currSpeechIndex = 1;//×¼±¸ÏÂÒ»´Î¶Ô»°   
+                SpeecherDic[line[currSpeechIndex - 2]].ShutUp();//è®©æœ€åä¸€ä¸ªäººé—­å˜´
+                dialogueMask.gameObject.SetActive(false);//å–æ¶ˆmask
+                currSpeechIndex = 1;//å‡†å¤‡ä¸‹ä¸€æ¬¡å¯¹è¯   
                 isSpeeching = false;
                 EventManager.EventTrigger("DialogueEnd");
             }
@@ -114,7 +114,7 @@ public class DialogueManager : Singleton<DialogueManager>
     }
     
 
-    bool checkSpeechIndex()
+    bool CheckSpeechIndex()
     {
         //if (line[currSpeechIndex] == "\r") return false;
         return currSpeechIndex < line.Length && line[currSpeechIndex] != "";
@@ -129,7 +129,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
         SpeecherDic = new Dictionary<string, ISpeecher>();
         dialogueMask.transform.SetParent(GameObject.Find("UI").transform);
-        dialogueMask.transform.SetSiblingIndex(GameObject.Find("Data").transform.GetSiblingIndex() - 1);//ÔÚÏÔÊ¾ÊôĞÔµÄ¿òÏÂÒ»²ãÕÚµ²£¬Õâ¾ä¿ÉÄÜÔÚºóÆÚ×öUIµÄÊ±ºòĞèÒª¸ü¸Ä
+        dialogueMask.transform.SetSiblingIndex(GameObject.Find("Data").transform.GetSiblingIndex() - 1);//åœ¨æ˜¾ç¤ºå±æ€§çš„æ¡†ä¸‹ä¸€å±‚é®æŒ¡ï¼Œè¿™å¥å¯èƒ½åœ¨åæœŸåšUIçš„æ—¶å€™éœ€è¦æ›´æ”¹
         dialogueMask.gameObject.SetActive(false);
         isSpeeching = false;
         currSpeechIndex = 1;
@@ -143,12 +143,12 @@ public class DialogueManager : Singleton<DialogueManager>
     }
 }
 /// <summary>
-/// Ñİ½²ÕßµÄĞĞÎª
+/// æ¼”è®²è€…çš„è¡Œä¸º
 /// </summary>
 public static class SpeecherBehavior
 {
     /// <summary>
-    /// Ê¹ÓÃ¶Ô»°ÆøÅİÈÃ½ÇÉ«ËµÒ»´Î»°
+    /// ä½¿ç”¨å¯¹è¯æ°”æ³¡è®©è§’è‰²è¯´ä¸€æ¬¡è¯
     /// </summary>
     /// <param name="content"></param>
     public static void Speak(this ISpeecher speecher, string content)
@@ -157,9 +157,9 @@ public static class SpeecherBehavior
         speecher.Bubble.SetContent(content);
     }
     /// <summary>
-    /// ½áÊø·¢ÑÔ
+    /// ç»“æŸå‘è¨€
     /// </summary>
-    public static void ShutUp(this ISpeecher speecher)//º¯ÊıÃûÓĞ´ıÉÌÈ¶£¨
+    public static void ShutUp(this ISpeecher speecher)//å‡½æ•°åæœ‰å¾…å•†æ¦·ï¼ˆ
     {
         if (speecher.Bubble.isActiveAndEnabled)
             speecher.Bubble.gameObject.SetActive(false);

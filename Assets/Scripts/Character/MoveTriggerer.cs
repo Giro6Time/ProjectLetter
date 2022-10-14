@@ -2,19 +2,19 @@ using System.Collections;
 using UnityEngine;
 using System;
 /// <summary>
-/// ¿ØÖÆ½ÇÉ«ÒÆ¶¯µÄÍ¬Ê±²¥·ÅÒÆ¶¯¶¯»­
-/// ĞèÒªĞ¯´øÕßÓµÓĞAnimator×é¼ş
+/// æ§åˆ¶è§’è‰²ç§»åŠ¨çš„åŒæ—¶æ’­æ”¾ç§»åŠ¨åŠ¨ç”»
+/// éœ€è¦æºå¸¦è€…æ‹¥æœ‰Animatorç»„ä»¶
 /// </summary>
 public class MoveTriggerer : MonoBehaviour
 {
-    //ÒÆ¶¯ËÙ¶È
+    //ç§»åŠ¨é€Ÿåº¦
     public float movingSpeed;
     public string movingParameter;
     Animator anim;
     Action ArriveTarget;
     /// <summary>
-    /// ÒÆ¶¯µ½Ä¿±êÎ»ÖÃ
-    /// ×¢ÒâÔÚÒÆ¶¯Ç°ĞèÒªÖØÖÃ¶¯»­×´Ì¬
+    /// ç§»åŠ¨åˆ°ç›®æ ‡ä½ç½®
+    /// æ³¨æ„åœ¨ç§»åŠ¨å‰éœ€è¦é‡ç½®åŠ¨ç”»çŠ¶æ€
     /// </summary>
     /// <param name="target"></param>
     public void MoveTo(Vector3 target)
@@ -53,7 +53,7 @@ public class MoveTriggerer : MonoBehaviour
     }
     
     /// <summary>
-    /// Ìí¼ÓÒÆ¶¯½áÊøÊ±´¥·¢µÄÊÂ¼ş
+    /// æ·»åŠ ç§»åŠ¨ç»“æŸæ—¶è§¦å‘çš„äº‹ä»¶
     /// </summary>
     /// <param name="action"></param>
     public void AddArriveListener(Action action)
@@ -61,14 +61,14 @@ public class MoveTriggerer : MonoBehaviour
         ArriveTarget += action;
     }
     /// <summary>
-    /// Ç¿ÖÆ´¥·¢ÒÆ¶¯½áÊøÊ±µÄÊÂ¼ş£¬ÒÆ¶¯»¹»á¼ÌĞø
+    /// å¼ºåˆ¶è§¦å‘ç§»åŠ¨ç»“æŸæ—¶çš„äº‹ä»¶ï¼Œç§»åŠ¨è¿˜ä¼šç»§ç»­
     /// </summary>
     public void TriggerArrive()
     {
         ArriveTarget?.Invoke();
     }
     /// <summary>
-    /// É¾³ıÒ»¸öÒÆ¶¯½áÊøÊ±´¥·¢µÄÊÂ¼ş
+    /// åˆ é™¤ä¸€ä¸ªç§»åŠ¨ç»“æŸæ—¶è§¦å‘çš„äº‹ä»¶
     /// </summary>
     /// <param name="action"></param>
     public void RemoveArriveListener(Action action)
@@ -76,7 +76,7 @@ public class MoveTriggerer : MonoBehaviour
         ArriveTarget -= action;
     }
     /// <summary>
-    /// Çå¿ÕÒÆ¶¯½áÊøÊ±µÄËùÓĞÊÂ¼ş
+    /// æ¸…ç©ºç§»åŠ¨ç»“æŸæ—¶çš„æ‰€æœ‰äº‹ä»¶
     /// </summary>
     public void ClearArriveListener()
     {

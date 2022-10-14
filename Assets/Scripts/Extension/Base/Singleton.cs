@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// µ¥Àı
-/// ÔÚÓÎÏ·ÖĞÓĞÇÒ½öÓĞÒ»¸öµÄµ¥Î»µÄ»ùÀà
+/// å•ä¾‹
+/// åœ¨æ¸¸æˆä¸­æœ‰ä¸”ä»…æœ‰ä¸€ä¸ªçš„å•ä½çš„åŸºç±»
 /// </summary>
 abstract public class Singleton<T> :MonoBehaviour where T: class ,new()
 {

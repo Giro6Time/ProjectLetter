@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class MapGeneration : MonoBehaviour
 {
-    List<string[]> ToRoomNo;//¸Ã½Å±¾¸ºÔğ×ª»»(Floor,Room)µ½RoomNo
-    List<string[]> ToDoors;//¸Ã½Å±¾¸ºÔğ¼ÇÂ¼ÃÅÍ¨ÍùµÄ·¿¼ä
-    public List<string[]> Layout;//¸Ã½Å±¾¸ºÔğ¼ÇÂ¼Ã¿¸ö·¿¼äÄÚ²¿µÄÎïÌå
+    List<string[]> ToRoomNo;//è¯¥è„šæœ¬è´Ÿè´£è½¬æ¢(Floor,Room)åˆ°RoomNo
+    List<string[]> ToDoors;//è¯¥è„šæœ¬è´Ÿè´£è®°å½•é—¨é€šå¾€çš„æˆ¿é—´
+    public List<string[]> Layout;//è¯¥è„šæœ¬è´Ÿè´£è®°å½•æ¯ä¸ªæˆ¿é—´å†…éƒ¨çš„ç‰©ä½“
     public List<GameObject> SceneDoorsObjects;
 
     private static volatile MapGeneration instance;
@@ -52,11 +52,11 @@ public class MapGeneration : MonoBehaviour
     }
 
     /// <summary>
-    /// µ÷ÓÃº¯Êı»áÉú³É·¿¼äÄÚµÄÎïÆ·
+    /// è°ƒç”¨å‡½æ•°ä¼šç”Ÿæˆæˆ¿é—´å†…çš„ç‰©å“
     /// </summary>
-    /// <param name="Floor">·¿¼äµÄ²ãÊı</param>
-    /// <param name="Room">·¿¼äµÄºÅÂëÊı</param>
-    /// <returns>ÊÇ·ñÉú³É³É¹¦</returns>
+    /// <param name="Floor">æˆ¿é—´çš„å±‚æ•°</param>
+    /// <param name="Room">æˆ¿é—´çš„å·ç æ•°</param>
+    /// <returns>æ˜¯å¦ç”ŸæˆæˆåŠŸ</returns>
     public bool GenerateRoom(int Floor, int Room)
     {
         if (ToRoomNo[Floor][Room - 1] == "") return false;
@@ -71,10 +71,10 @@ public class MapGeneration : MonoBehaviour
     }
 
     /// <summary>
-    /// Éú³É·¿¼äÄÚµÄÃÅ
+    /// ç”Ÿæˆæˆ¿é—´å†…çš„é—¨
     /// </summary>
-    /// <param name="RoomNo">·¿¼äµÄ±àºÅ</param>
-    /// <returns>ÊÇ·ñÉú³É³É¹¦</returns>
+    /// <param name="RoomNo">æˆ¿é—´çš„ç¼–å·</param>
+    /// <returns>æ˜¯å¦ç”ŸæˆæˆåŠŸ</returns>
     bool GenerateDoors(int RoomNo)
     {
         if(RoomNo <= 0) return false;
@@ -130,11 +130,11 @@ public class MapGeneration : MonoBehaviour
     }
 
     /// <summary>
-    /// µ÷ÓÃº¯Êı»á´İ»Ù·¿¼äÄÚµÄÎïÆ·
+    /// è°ƒç”¨å‡½æ•°ä¼šæ‘§æ¯æˆ¿é—´å†…çš„ç‰©å“
     /// </summary>
-    /// <param name="Floor">·¿¼äµÄ²ãÊı</param>
-    /// <param name="Room">·¿¼äµÄºÅÂëÊı</param>
-    /// <returns>ÊÇ·ñ´İ»Ù³É¹¦</returns>
+    /// <param name="Floor">æˆ¿é—´çš„å±‚æ•°</param>
+    /// <param name="Room">æˆ¿é—´çš„å·ç æ•°</param>
+    /// <returns>æ˜¯å¦æ‘§æ¯æˆåŠŸ</returns>
     public bool DestoryRoom(int Floor, int Room)
     {
         if (ToRoomNo[Floor][Room] == "") return false;

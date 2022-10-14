@@ -4,13 +4,13 @@ using UnityEngine;
 
 public static class CSVReader 
 {
-    // ÎÄ¼şÂ·¾¶xxx/ÏîÄ¿Ãû×Ö/Asset
+    // æ–‡ä»¶è·¯å¾„xxx/é¡¹ç›®åå­—/Asset
     public static string AssetPath { get => Application.dataPath; }
     /// <summary>
-    /// ¶ÁÈ¡Ò»Õû¸ö±í¸ñ£¬×¢ÒâcsvÎÄ¼şµÄÎ²²¿²»ÒªÓĞ¿ÕĞĞ£¬·ñÔò»á¶à¶ÁÒ»ĞĞ
+    /// è¯»å–ä¸€æ•´ä¸ªè¡¨æ ¼ï¼Œæ³¨æ„csvæ–‡ä»¶çš„å°¾éƒ¨ä¸è¦æœ‰ç©ºè¡Œï¼Œå¦åˆ™ä¼šå¤šè¯»ä¸€è¡Œ
     /// </summary>
-    /// <param name="localPath">AssetÖ®ºóµÄÂ·¾¶</param>
-    /// <returns>stringµÄ¶şÎ¬Êı×é</returns>
+    /// <param name="localPath">Assetä¹‹åçš„è·¯å¾„</param>
+    /// <returns>stringçš„äºŒç»´æ•°ç»„</returns>
     public static string[][] ReadTable(string localPath)
     {
         string path = AssetPath + localPath;
@@ -26,10 +26,10 @@ public static class CSVReader
         return ret;
     }
     /// <summary>
-    /// ¶ÁÈ¡Ò»ĞĞÎÄ±¾£¬²¢ÇÒsplit(',')
+    /// è¯»å–ä¸€è¡Œæ–‡æœ¬ï¼Œå¹¶ä¸”split(',')
     /// </summary>
-    /// <param name="localPath">AssetÖ®ºóµÄÂ·¾¶</param>
-    /// <returns>splitºóµÄ×Ö·û´®Êı×é</returns>
+    /// <param name="localPath">Assetä¹‹åçš„è·¯å¾„</param>
+    /// <returns>splitåçš„å­—ç¬¦ä¸²æ•°ç»„</returns>
     public static string[] ReadLine(string localPath)
     {
         string path = AssetPath + localPath;

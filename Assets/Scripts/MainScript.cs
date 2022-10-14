@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 /// <summary>
-/// ¿ØÖÆÕû¸öÓÎÏ·½ø³Ì
+/// æ§åˆ¶æ•´ä¸ªæ¸¸æˆè¿›ç¨‹
 /// </summary>
 public class MainScript : MonoBehaviour
 {
     public static MainScript S;
     public Protagonist hero;
-    public bool couldChooseDoor;  //Õâ¸ö±äÁ¿¾ö¶¨´ËÊ±Êó±êµã»÷³ö¿ÚÊÇ·ñÓĞĞ§
-    public bool couldChooseEvent;  //Õâ¸ö±äÁ¿¾ö¶¨´ËÊ±Êó±êµã»÷ÊÂ¼ş·¿ÄÚµÄÊÂ¼şÊÇ·ñÓĞĞ§
-    public BetrayType whetherBetray;  //Ñ¡ÔñÂ·ÏßÊ±½ÇÉ«ÊÇ·ñÎ¥±³,-1ÊÇÎ¥±³£¬0ÊÇÃ»µÃÑ¡£¬1ÊÇ×ñÑ­
-    public bool sameFloorMove;  //ÊÇ·ñÊÇÍ¬²ãÒÆ¶¯
+    public bool couldChooseDoor;  //è¿™ä¸ªå˜é‡å†³å®šæ­¤æ—¶é¼ æ ‡ç‚¹å‡»å‡ºå£æ˜¯å¦æœ‰æ•ˆ
+    public bool couldChooseEvent;  //è¿™ä¸ªå˜é‡å†³å®šæ­¤æ—¶é¼ æ ‡ç‚¹å‡»äº‹ä»¶æˆ¿å†…çš„äº‹ä»¶æ˜¯å¦æœ‰æ•ˆ
+    public BetrayType whetherBetray;  //é€‰æ‹©è·¯çº¿æ—¶è§’è‰²æ˜¯å¦è¿èƒŒ,-1æ˜¯è¿èƒŒï¼Œ0æ˜¯æ²¡å¾—é€‰ï¼Œ1æ˜¯éµå¾ª
+    public bool sameFloorMove;  //æ˜¯å¦æ˜¯åŒå±‚ç§»åŠ¨
 
     public int floor;
     public int room;
     public int roomNo;
-    //ÊÂ¼ş¹ÜÀí
+    //äº‹ä»¶ç®¡ç†
     List<string[]> ToEvents;
-    int eventIndex;//ÏÖÔÚÕıÔÚ½øĞĞµÄÊÂ¼şÊÇÕâ¸ö·¿¼äµÄµÚ¼¸¸öÊÂ¼ş
+    int eventIndex;//ç°åœ¨æ­£åœ¨è¿›è¡Œçš„äº‹ä»¶æ˜¯è¿™ä¸ªæˆ¿é—´çš„ç¬¬å‡ ä¸ªäº‹ä»¶
     string[] eventsNow;
 
     void Awake()
@@ -30,13 +30,13 @@ public class MainScript : MonoBehaviour
         room = 1;
         roomNo = 1;
 
-        //ÔØÈëÊÂ¼ş
+        //è½½å…¥äº‹ä»¶
         csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Maps", "RoomNoToEvents.csv");
         ToEvents = new List<string[]>(csvController.GetInstance().arrayData);
     }
     private void Start()
     {
-        MapGeneration.Instance.GenerateRoom(1, 1);  //Éú³É³õÊ¼·¿¼ä
+        MapGeneration.Instance.GenerateRoom(1, 1);  //ç”Ÿæˆåˆå§‹æˆ¿é—´
         ActionInRoom.SetDoorClickable(false);
         StartPlayAction();
     }
@@ -88,11 +88,11 @@ public class MainScript : MonoBehaviour
     {
         return ToEvents[roomNo];
     }
-    ///ĞÅÈÎ¶ÈÅĞ¶¨
+    ///ä¿¡ä»»åº¦åˆ¤å®š
     public bool TrustJudge()
     {
         bool judge = true;
-        ///¸ù¾İ²ß»®°¸ÉèÖÃÅĞ¶¨
+        ///æ ¹æ®ç­–åˆ’æ¡ˆè®¾ç½®åˆ¤å®š
 
         return judge;
     }
@@ -107,13 +107,13 @@ public class MainScript : MonoBehaviour
 
 public enum BetrayType
 {
-    betray = -1,//Î¥±³
+    betray = -1,//è¿èƒŒ
     oneway = 0,
     follow = 1
 
 }
 
-public static class ActionInRoom//ËùÓĞÊÂÇé¶¼Ö»ÄÜÓĞÒ»¸östring²ÎÊı£¬Õâ¸ö²ÎÊı×ÜÊÇRoomNoToEventÀïÃæ¶ÔÓ¦ÊÂ¼şµÄÏÂÒ»¸ö¸ñÀïµÄ×Ö·û´®
+public static class ActionInRoom//æ‰€æœ‰äº‹æƒ…éƒ½åªèƒ½æœ‰ä¸€ä¸ªstringå‚æ•°ï¼Œè¿™ä¸ªå‚æ•°æ€»æ˜¯RoomNoToEventé‡Œé¢å¯¹åº”äº‹ä»¶çš„ä¸‹ä¸€ä¸ªæ ¼é‡Œçš„å­—ç¬¦ä¸²
 {
     public static void Dialogue(string contentType)
     {
@@ -121,7 +121,7 @@ public static class ActionInRoom//ËùÓĞÊÂÇé¶¼Ö»ÄÜÓĞÒ»¸östring²ÎÊı£¬Õâ¸ö²ÎÊı×ÜÊÇRo
         DialogueManager.Instance.SetLine(contentType);
         DialogueManager.Instance.PlayDialogue();
     }
-    public static void React(string content)//Õâ¸öÊÇ·ñÒªÖ±½Ó¿ªÆô¶ÔÓ¦µÄ¶Ô»°£¿
+    public static void React(string content)//è¿™ä¸ªæ˜¯å¦è¦ç›´æ¥å¼€å¯å¯¹åº”çš„å¯¹è¯ï¼Ÿ
     {
         EventManager.AddEventListener("DialogueEnd", UpdateTrust);
         switch (MainScript.S.whetherBetray)
