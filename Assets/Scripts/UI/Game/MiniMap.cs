@@ -5,9 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 public class MiniMap : MonoBehaviour,IPointerClickHandler
 {
-    [SerializeField]    Image Minimap;
-    [SerializeField]    MapDetail MapDetail;//ÏÔÈ»ÏÖÔÚ»¹Ã»ÓĞ
-
+    public MapDetail MapDetail;//æ˜¾ç„¶ç°åœ¨è¿˜æ²¡æœ‰
     
     private void Awake()
     {
