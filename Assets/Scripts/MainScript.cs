@@ -59,7 +59,7 @@ public class MainScript : MonoBehaviour
         EventManager.AddEventListener(eventsNow[eventIndex] + "End", PlayNext);
         GetAction(eventsNow[eventIndex])?.Invoke(eventsNow[eventIndex+1]);
     }
-    void PlayNext()
+    public void PlayNext()
     {
         eventIndex += 2;
         if(eventIndex<eventsNow.Length && eventsNow[eventIndex]!="")
@@ -68,6 +68,8 @@ public class MainScript : MonoBehaviour
         }
         else
         {
+            EventManager.Clear();
+            EventManager.AddEventListener("DoorClicked",ActionInRoom.SelectDoor);
             ActionInRoom.SetDoorClickable(true);
         }
     }
@@ -79,6 +81,8 @@ public class MainScript : MonoBehaviour
             case "React": return ActionInRoom.React;
             case "Move": return ActionInRoom.Move;
             case "Combat": return ActionInRoom.Combat;
+            case "Choose": return ActionInRoom.Choose;
+            case "Animation": return ActionInRoom.Animation;
             default:Debug.Log("Fail to get action"); return null;
         }
     }
@@ -86,14 +90,6 @@ public class MainScript : MonoBehaviour
     string[] GetRoomEvent(int roomNo)
     {
         return ToEvents[roomNo];
-    }
-    ///信任度判定
-    public bool TrustJudge()
-    {
-        bool judge = true;
-        ///根据策划案设置判定
-
-        return judge;
     }
     void SetRoom(int floor,int room)
     {
@@ -114,6 +110,7 @@ public enum BetrayType
 
 public static class ActionInRoom//所有事情都只能有一个string参数，这个参数总是RoomNoToEvent里面对应事件的下一个格里的字符串
 {
+    static int reactNum = 0;
     public static void Dialogue(string contentType)
     {
         //DialogueManager.Instance.ClearEndListener();
@@ -122,17 +119,18 @@ public static class ActionInRoom//所有事情都只能有一个string参数，�
     }
     public static void React(string content)//这个是否要直接开启对应的对话？
     {
+        reactNum++;
         EventManager.AddEventListener("DialogueEnd", UpdateTrust);
         switch (MainScript.S.whetherBetray)
         {
             case BetrayType.betray:
-                DialogueManager.Instance.SetLine(RoomNoToRoomType(MainScript.S.roomNo) + "_betray");
+                DialogueManager.Instance.SetLine(RoomNoToRoomType(MainScript.S.roomNo) + "_betray_"+reactNum);
                 break;
             case BetrayType.oneway:
-                DialogueManager.Instance.SetLine(RoomNoToRoomType(MainScript.S.roomNo) + "_oneway");
+                DialogueManager.Instance.SetLine(RoomNoToRoomType(MainScript.S.roomNo) + "_oneway_"+reactNum);
                 break;
             case BetrayType.follow:
-                DialogueManager.Instance.SetLine(RoomNoToRoomType(MainScript.S.roomNo) + "_follow");
+                DialogueManager.Instance.SetLine(RoomNoToRoomType(MainScript.S.roomNo) + "_follow_"+reactNum);
                 break;
             default:
                 return;
@@ -156,18 +154,31 @@ public static class ActionInRoom//所有事情都只能有一个string参数，�
     public static void Move(string xy)
     {
         string[] tmp = xy.Split("|");
+        Protagonist.Instance.moveTriggerer.ClearArriveListener();
+        Protagonist.Instance.moveTriggerer.AddArriveListener(MainScript.S.PlayNext);
+
         Protagonist.Instance.moveTriggerer.MoveTo(new Vector3(float.Parse(tmp[0]), float.Parse(tmp[1]), 0));
     }
     public static void Animation(string inputStr)
     {
+        EventManager.EventTrigger("AnimationEnd");
+        return;
+        //当前的event表格中的动画尚未添加，如果直接运行下方的代码肯定会报错
+        //确保event表格中的所有动画都添加进入之后，即可删除上面两行代码
         string[] tmp = inputStr.Split("|");
         Animator anim = GameObject.Find(tmp[0]).GetComponent<Animator>();
         anim.SetTrigger(tmp[1]);
         
     }
+    public static void SelectDoor()
+    {
+        bool isTrust = Protagonist.Instance.isTrust;
+            EventManager.EventTrigger("DoorClickEventEnd");
+        //随机选门还没做，缺少一个获取当前Active的门的方法
+    }
     public static void Choose(string inputStr)
     {
-        
+        SpecialEventManager.Instance.StartSpecialEvent(SpecialEventType.Choose, inputStr);
     }
     public static void SetDoorClickable(bool clickable)
     {

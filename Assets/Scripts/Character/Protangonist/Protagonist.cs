@@ -12,13 +12,13 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
 {
     
     // 鏈€澶х敓鍛藉€�
-    public float maxHealth;
+    public float maxHealth = 100;
     // 鏈€澶т俊浠诲€�
-    public float maxTrust;
+    public float maxTrust = 10;
     /// 褰撳墠鐢熷懡鍊硷紝渚涘�栭儴浣跨敤鐨勫睘鎬у凡娣诲姞鍦ㄨ�掕壊灞炴€�region
-    private float health;
+    private float health = 100;
     /// 褰撳墠淇′换鍊硷紝渚涘�栭儴浣跨敤鐨勫睘鎬у凡娣诲姞鍦ㄨ�掕壊灞炴€�region
-    private float trust;
+    public float trust = 10;
     public ConfidenceType confident;
     public float Attack;
     // 鍗囩骇鎬诲叡闇€瑕佺殑缁忛獙鍊�
@@ -32,7 +32,7 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
     public  MoveTriggerer moveTriggerer;
     // 褰撲富瑙掓�讳骸鐨勬椂鍊欒Е鍙戠殑Action
     public Action OnProtangonistDie;
-    #region 瀵硅瘽姘旀场鎺ュ彛浣跨敤
+    #region 气泡框
     // 瀵硅瘽妗嗘皵娉�
     [SerializeField]    SpeechBubble speechBubble;
     [SerializeField]    string speecherName;
@@ -42,7 +42,7 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
                                  set => speecherName = value;
     }
     #endregion
-    #region 瑙掕壊灞炴€�
+    #region 属性
     /// <summary>
     /// 涓昏�掑綋鍓嶇敓鍛藉€�
     /// 淇�鏀规�ゅ€间細鍚屾�ヤ慨鏀筓I涓�鐢熷懡鏉＄殑鏄剧ず
@@ -68,7 +68,7 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
         }
     }
     #endregion
-    #region 瑙掕壊琛屼负
+    #region 主角行为
     /// <summary>
     /// 瑙掕壊鏀诲嚮鐩�鏍�
     /// </summary>
@@ -77,7 +77,6 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
     {
         ResetAnim();
         anim.SetTrigger("Attack");
-
         return Attack;
     }
     /// <summary>
@@ -93,6 +92,22 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
         Health += recoverNum;
         ResetAnim();
         anim.SetTrigger("recover");
+    }
+    public bool isTrust
+    {
+        get  {
+            float num = UnityEngine.Random.Range(0, maxTrust);
+            if (num < trust)
+            {
+                Debug.Log("Protagonist Trust Your Choice");
+                return true;
+            }
+            else
+            {
+                Debug.Log("Protagonist don't Trust Your Choice");
+                return false;
+            }
+        }
     }
     void ResetAnim()//閲嶇疆涓昏�掔姸鎬佷负鍒濆�嬬姸鎬侊紙绔欑珛锛�
     {

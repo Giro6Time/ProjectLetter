@@ -8,8 +8,7 @@ public class SpecialEventObject : MonoBehaviour
     {
         GetComponent<Collider2D>().enabled = isTrue;
     }
-    private void OnMouseDown()
+    protected virtual void OnMouseDown()
     {
-
     }
 }

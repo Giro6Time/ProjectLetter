@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    public int DoorNo;
     [Header("The room to go to:")]
     public int ToFloor;
     public int ToRoom;
@@ -21,7 +22,16 @@ public class Door : MonoBehaviour
 
     private void OnMouseDown()
     {
+        InitDoorClickEvent();
+        EventManager.EventTrigger("DoorClicked");
+    }
+    public void InitDoorClickEvent()
+    {
         ActionInRoom.SetDoorClickable(false);
+        EventManager.AddEventListener("DoorClickEventEnd", MoveToDoor);
+    }
+    void MoveToDoor()
+    {
         Protagonist.Instance.moveTriggerer.ClearArriveListener();
         Debug.Log("ToFloor" + ToFloor + " ToRoom:" + ToRoom + " ToRoomNo:" + ToRoomNo);
         Protagonist.Instance.moveTriggerer.AddArriveListener(GenerateNewRoom);
