@@ -91,6 +91,7 @@ public class MainScript : MonoBehaviour
             case "Combat": return ActionInRoom.Combat;
             case "Choose": return ActionInRoom.Choose;
             case "Animation": return ActionInRoom.Animation;
+            case "Recover": return ActionInRoom.Recover;
             default:Debug.Log("Fail to get action"); return null;
         }
     }
@@ -118,31 +119,36 @@ public enum BetrayType
 
 public static class ActionInRoom//所有事情都只能有一个string参数，这个参数总是RoomNoToEvent里面对应事件的下一个格里的字符串
 {
-    static int reactNum = 0;
+    static int reactNum = 0;//表示当前播放第几个事件
+    static int reactNumMax = 3;
+    static string roomType;
+    static csvController csvController = csvController.GetInstance();
     public static void Dialogue(string contentType)
     {
         //DialogueManager.Instance.ClearEndListener();
         DialogueManager.Instance.SetLine(contentType);
         DialogueManager.Instance.PlayDialogue();
     }
-    public static void React(string content)//这个是否要直接开启对应的对话？
+    public static void React(string content)//根据反应直接开启对应的对话
     {
         reactNum++;
+        roomType = RoomNoToRoomType(MainScript.S.roomNo);
         EventManager.AddEventListener("DialogueEnd", UpdateTrust);
         switch (MainScript.S.whetherBetray)
         {
             case BetrayType.betray:
-                DialogueManager.Instance.SetLine(RoomNoToRoomType(MainScript.S.roomNo) + "_betray_"+reactNum);
+                DialogueManager.Instance.SetLine( roomType+ "_betray_"+ reactNum);
                 break;
             case BetrayType.oneway:
-                DialogueManager.Instance.SetLine(RoomNoToRoomType(MainScript.S.roomNo) + "_oneway_"+reactNum);
+                DialogueManager.Instance.SetLine(roomType + "_oneway_"+reactNum);
                 break;
             case BetrayType.follow:
-                DialogueManager.Instance.SetLine(RoomNoToRoomType(MainScript.S.roomNo) + "_follow_"+reactNum);
+                DialogueManager.Instance.SetLine(roomType + "_follow_"+reactNum);
                 break;
             default:
                 return;
         }
+        if (reactNum == reactNumMax) reactNum = 0;//防止读取不到对话
         DialogueManager.Instance.PlayDialogue();
         
     }
@@ -154,11 +160,7 @@ public static class ActionInRoom//所有事情都只能有一个string参数，�
         CombatSystem.Instance.enemy.Health = float.Parse(tmp[2]);
         CombatSystem.Instance.StartCombat();
     }
-    public static string RoomNoToRoomType(int RoomNo)
-    {
-        csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Maps", "Layout.csv");
-        return csvController.GetInstance().getString(RoomNo , 1);
-    }
+    
     public static void Move(string xy)
     {
         string[] tmp = xy.Split("|");
@@ -178,11 +180,22 @@ public static class ActionInRoom//所有事情都只能有一个string参数，�
         anim.SetTrigger(tmp[1]);
         
     }
+    public static void Recover(string hp)
+    {
+        Protagonist.Instance.Health += int.Parse(hp);
+        EventManager.EventTrigger("RecoverEnd");
+    }
     public static void SelectDoor()
     {
         bool isTrust = Protagonist.Instance.isTrust;
+        if(!isTrust)//如果不信任，则随机换一个门
+        {
+            EventManager.Clear();
+            List<int> aval = MapGeneration.Instance.GetAvailableDoors(MainScript.S.roomNo);
+            int doorInd = UnityEngine.Random.Range(0, aval.Count);
+            MapGeneration.Instance.SceneDoorsObjects[aval[doorInd]].GetComponent<Door>().InitDoorClickEvent();
+        }
             EventManager.EventTrigger("DoorClickEventEnd");
-        //随机选门还没做，缺少一个获取当前Active的门的方法
     }
     public static void Choose(string inputStr)
     {
@@ -197,8 +210,27 @@ public static class ActionInRoom//所有事情都只能有一个string参数，�
     }
     static void UpdateTrust()
     {
+        switch (MainScript.S.whetherBetray)
+        {
+            case BetrayType.betray:
+                if (roomType == "Combat") Protagonist.Instance.Trust++;
+                else if (roomType == "Recover") Protagonist.Instance.Trust--;
+                break;
+            case BetrayType.oneway:
+                break;
+            case BetrayType.follow:
+                if (roomType == "Combat") Protagonist.Instance.Trust--;
+                else if (roomType == "Recover") Protagonist.Instance.Trust++;
+                break;
+            default:
+                return;
+        }
         EventManager.EventTrigger("ReactEnd");
     }
+    public static string RoomNoToRoomType(int RoomNo)
+    {
+        csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Maps", "Layout.csv");
+        return csvController.GetInstance().getString(RoomNo, 1);
+    }
 
-    
 }

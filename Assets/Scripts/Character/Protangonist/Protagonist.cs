@@ -53,7 +53,7 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
         set
         {
             health = value;
-            Mathf.Clamp(health, 0, maxHealth);
+            health = Mathf.Clamp(health, 0, maxHealth);
             UI_Health.Instance.UpdateHPValue();
         }
     }

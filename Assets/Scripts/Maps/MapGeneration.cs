@@ -179,7 +179,7 @@ public class MapGeneration : MonoBehaviour
         return int.Parse(ToRoomNo[Floor][Room-1]);
     }
 
-    List<int> GetAvailableDoors(int RoomNo)
+    public List<int> GetAvailableDoors(int RoomNo)
     {
         if (RoomNo <= 0) return null;
 

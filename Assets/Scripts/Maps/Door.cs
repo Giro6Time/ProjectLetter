@@ -40,6 +40,7 @@ public class Door : MonoBehaviour
     private void GenerateNewRoom()
     {
         MapGeneration mapGeneration = MapGeneration.Instance;
+        mapGeneration.DestoryRoom(MainScript.S.floor,MainScript.S.room);
         MainScript.S.roomNo = mapGeneration.FromFloorToRoomNo(ToFloor, ToRoom);
         MainScript.S.room = ToRoom;
         MainScript.S.floor = ToFloor;
