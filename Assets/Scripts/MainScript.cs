@@ -51,6 +51,14 @@ public class MainScript : MonoBehaviour
         EventManager.Clear();
         eventIndex = 2;
         eventsNow = GetRoomEvent(roomNo);
+
+        /*string debugOutput = "";
+        for(int i=0; i < eventsNow.Length; i++)
+        {
+            debugOutput += eventsNow[i];
+        }
+        Debug.Log(debugOutput);*/
+        
         PlayActionOnce();
     }
     void PlayActionOnce()

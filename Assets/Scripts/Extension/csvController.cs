@@ -30,7 +30,7 @@ public class csvController
         {
             string file_url = path + "/" + fileName;  //根据路径打开文件
             sr = File.OpenText(file_url);
-            Debug.Log("File Find in " + file_url);
+            //Debug.Log("File Find in " + file_url);
         }
         catch
         {

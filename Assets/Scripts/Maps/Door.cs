@@ -33,20 +33,21 @@ public class Door : MonoBehaviour
     void MoveToDoor()
     {
         Protagonist.Instance.moveTriggerer.ClearArriveListener();
-        Debug.Log("ToFloor" + ToFloor + " ToRoom:" + ToRoom + " ToRoomNo:" + ToRoomNo);
+        //Debug.Log("ToFloor" + ToFloor + " ToRoom:" + ToRoom + " ToRoomNo:" + ToRoomNo);
         Protagonist.Instance.moveTriggerer.AddArriveListener(GenerateNewRoom);
         Protagonist.Instance.moveTriggerer.MoveTo(this.transform.position);
     }
     private void GenerateNewRoom()
     {
         MapGeneration mapGeneration = MapGeneration.Instance;
-        if(mapGeneration.GenerateRoom(ToFloor, ToRoom) == false)
+        MainScript.S.roomNo = mapGeneration.FromFloorToRoomNo(ToFloor, ToRoom);
+        MainScript.S.room = ToRoom;
+        MainScript.S.floor = ToFloor;
+        if (mapGeneration.GenerateRoom(ToFloor, ToRoom) == false)
         {
             Debug.Log("Generation Failed!");
         }
-        MainScript.S.room = ToRoom;
-        MainScript.S.floor = ToFloor;
-        MainScript.S.roomNo = mapGeneration.FromFloorToRoomNo(ToFloor,ToRoom);
+        
         MainScript.S.StartPlayAction();
         //MainScript.S.Layout(ToRoomNo);
     }

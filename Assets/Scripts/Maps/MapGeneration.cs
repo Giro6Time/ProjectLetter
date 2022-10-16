@@ -14,10 +14,13 @@ public class MapGeneration : MonoBehaviour
     private MapGeneration() { }
     public static MapGeneration Instance { get { return instance; } }
 
+    GameObject FloorParentsObj;
+
     // Start is called before the first frame update
     void Awake()
     {
         instance = GetComponent<MapGeneration>();
+        FloorParentsObj = GameObject.Find("Floors");
         string AssetPath;
         string[] path = AssetDatabase.FindAssets("MapGeneration");
         if (path.Length > 1) return;
@@ -42,12 +45,6 @@ public class MapGeneration : MonoBehaviour
             SceneDoorsObjects[i].SetActive(false);
         }
         GenerateLayoutObjects(1);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     /// <summary>
@@ -93,9 +90,10 @@ public class MapGeneration : MonoBehaviour
                 SceneDoorsObjects[i].SetActive(true);
                 Door thisDoorScript = SceneDoorsObjects[i].GetComponent<Door>();
                 thisDoorScript.SetDoorPatameter(tempToFloor, tempToRoom);
+                //Debug.Log("DoorObj" + i + ": " + tempToFloor + " " + tempToRoom);
             }
         }
-
+        
         return true;
     }
 
@@ -116,12 +114,13 @@ public class MapGeneration : MonoBehaviour
             Vector3 objPos = new Vector3(xPos, yPos, 0);
             tempObj.transform.position = objPos;
 
-            Debug.Log(objName + " " + xPos + " " + yPos + "Initialized");
+            //Debug.Log(objName + " " + xPos + " " + yPos + "Initialized");
         }
 
         Vector3 camPos = Camera.main.transform.position;
         string roomType = Layout[RoomNo][1];
-        GameObject floorObj = GameObject.Find(roomType);
+        Debug.Log(roomType);
+        GameObject floorObj = FloorParentsObj.transform.Find(roomType).gameObject;
         floorObj.SetActive(true);
         floorObj.transform.position = new Vector3(camPos.x,camPos.y,floorObj.transform.position.z);
         
@@ -165,11 +164,11 @@ public class MapGeneration : MonoBehaviour
             if (objName == "") continue;
             GameObject tempObj = GameObject.Find(objName);
             tempObj.SetActive(false);
-            Debug.Log(objName +"Disabled");
+            //Debug.Log(objName +"Disabled");
         }
 
         string roomType = Layout[RoomNo][1];
-        GameObject floorObj = GameObject.Find(roomType);
+        GameObject floorObj = FloorParentsObj.transform.Find(roomType).gameObject;
         floorObj.SetActive(false);
 
         return true;
@@ -178,5 +177,25 @@ public class MapGeneration : MonoBehaviour
     public int FromFloorToRoomNo(int Floor, int Room)
     {
         return int.Parse(ToRoomNo[Floor][Room-1]);
+    }
+
+    List<int> GetAvailableDoors(int RoomNo)
+    {
+        if (RoomNo <= 0) return null;
+
+        List<int> ret = new List<int>();
+
+        for (int i = 0; i < 5; i++)
+        {
+            int tempToFloor = int.Parse(ToDoors[RoomNo][2 * i + 1]);
+            int tempToRoom = int.Parse(ToDoors[RoomNo][2 * i + 2]);
+            //int tempToRoomNo = FromFloorToRoomNo(tempToFloor, tempToRoom);
+
+            if (tempToRoom > 0 && tempToFloor > 0)
+                ret.Add(i);
+          
+        }
+
+        return null;
     }
 }
