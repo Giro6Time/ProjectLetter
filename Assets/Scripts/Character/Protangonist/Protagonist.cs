@@ -75,7 +75,6 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
     /// <returns></returns>
     public float AttackAnimation()
     {
-        ResetAnim();
         anim.SetTrigger("Attack");
         return Attack;
     }
@@ -111,7 +110,6 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
     }
     void ResetAnim()//閲嶇疆涓昏�掔姸鎬佷负鍒濆�嬬姸鎬侊紙绔欑珛锛�
     {
-        anim.SetBool("moving", false);
         //anim.SetBool("Talking", false);
     }
     #endregion

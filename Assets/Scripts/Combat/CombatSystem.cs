@@ -46,7 +46,7 @@ public class CombatSystem : Singleton<CombatSystem>
         protagonist.AttackAnimation();
         enemy.Health -= protagonist.Attack;
         yield return new WaitForSeconds(protagonistAttack.length);
-        if (protagonist.Health <= 0)
+        if (enemy.Health <= 0)
         {
             EventManager.EventTrigger("OnEnemyDefeated");
         }
@@ -66,7 +66,7 @@ public class CombatSystem : Singleton<CombatSystem>
         }
         else
         {
-            StartCoroutine(DoEnemyCombat());
+            StartCoroutine(DoProtagonistCombat());
         }
     }
     void ProtangonistDefeated()
