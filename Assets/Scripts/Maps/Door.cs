@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public int DoorNo;
     [Header("The room to go to:")]
     public int ToFloor;
     public int ToRoom;

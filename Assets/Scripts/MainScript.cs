@@ -185,7 +185,7 @@ public static class ActionInRoom//所有事情都只能有一个string参数，�
         Protagonist.Instance.Health += int.Parse(hp);
         EventManager.EventTrigger("RecoverEnd");
     }
-    public static void SelectDoor()
+    public static void SelectDoor()//如果有必要这里可以插入一个对话事件
     {
         bool isTrust = Protagonist.Instance.isTrust;
         if(!isTrust)//如果不信任，则随机换一个门

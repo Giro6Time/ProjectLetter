@@ -1,5 +1,5 @@
 RoomNo,RoomType,Object1,x,y,Object2,x,y,Object3,x,y
-1,StartRoom,StartRoom,0,0,Protagonist,-7,-1.5,,,
+1,StartRoom,Protagonist,-7,-1.5,,,
 2,StartRoom,Protagonist,-7,-1.5,,,,,,
 3,CombatRoom,Protagonist,-7,-1.5,Enemy_1,-9,2,,,
 4,RecoverRoom,Protagonist,-7,-1.5,,,,,,

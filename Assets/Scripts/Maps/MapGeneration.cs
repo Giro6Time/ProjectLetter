@@ -15,12 +15,14 @@ public class MapGeneration : MonoBehaviour
     public static MapGeneration Instance { get { return instance; } }
 
     GameObject FloorParentsObj;
+    GameObject PoolObj;
 
     // Start is called before the first frame update
     void Awake()
     {
         instance = GetComponent<MapGeneration>();
         FloorParentsObj = GameObject.Find("Floors");
+        PoolObj = GameObject.Find("ObjectPool");
         string AssetPath;
         string[] path = AssetDatabase.FindAssets("MapGeneration");
         if (path.Length > 1) return;
@@ -109,8 +111,8 @@ public class MapGeneration : MonoBehaviour
             float xPos = float.Parse(Layout[RoomNo][3 * i + 3]);
             float yPos = float.Parse(Layout[RoomNo][3 * i + 4]);
 
-            GameObject tempObj = GameObject.Find(objName);
-            tempObj.SetActive(true);
+            Transform tempObj = PoolObj.transform.Find(objName);
+            tempObj.gameObject.SetActive(true);
             Vector3 objPos = new Vector3(xPos, yPos, 0);
             tempObj.transform.position = objPos;
 
@@ -135,7 +137,7 @@ public class MapGeneration : MonoBehaviour
     /// <returns>是否摧毁成功</returns>
     public bool DestoryRoom(int Floor, int Room)
     {
-        if (ToRoomNo[Floor][Room] == "") return false;
+        if (ToRoomNo[Floor][Room-1] == "") return false;
         int thisRoomNo = FromFloorToRoomNo(Floor, Room);
         if (DestroyDoors() == false)
             return false;
