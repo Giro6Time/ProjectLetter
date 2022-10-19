@@ -32,6 +32,8 @@ public class MainScript : MonoBehaviour
         //载入事件
         csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Maps", "RoomNoToEvents.csv");
         ToEvents = new List<string[]>(csvController.GetInstance().arrayData);
+
+        
     }
     private void Start()
     {

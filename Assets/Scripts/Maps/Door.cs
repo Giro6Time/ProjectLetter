@@ -35,6 +35,7 @@ public class Door : MonoBehaviour
         //Debug.Log("ToFloor" + ToFloor + " ToRoom:" + ToRoom + " ToRoomNo:" + ToRoomNo);
         Protagonist.Instance.moveTriggerer.AddArriveListener(GenerateNewRoom);
         Protagonist.Instance.moveTriggerer.MoveTo(this.transform.position);
+        TransitionMask.Instance.PlayFadeOutAnimation();
     }
     private void GenerateNewRoom()
     {
@@ -47,7 +48,7 @@ public class Door : MonoBehaviour
         {
             Debug.Log("Generation Failed!");
         }
-        
+        TransitionMask.Instance.PlayFadeInAnimation();
         MainScript.S.StartPlayAction();
         //MainScript.S.Layout(ToRoomNo);
     }
