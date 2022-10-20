@@ -195,9 +195,8 @@ public class MapGeneration : MonoBehaviour
 
             if (tempToRoom > 0 && tempToFloor > 0)
                 ret.Add(i);
-          
         }
 
-        return null;
+        return ret;
     }
 }

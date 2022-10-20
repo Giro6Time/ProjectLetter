@@ -19,7 +19,7 @@ public class Door : MonoBehaviour
         
     }
 
-    private void OnMouseDown()
+    private void OnMouseUp()
     {
         InitDoorClickEvent();
         EventManager.EventTrigger("DoorClicked");
@@ -27,6 +27,7 @@ public class Door : MonoBehaviour
     public void InitDoorClickEvent()
     {
         ActionInRoom.SetDoorClickable(false);
+        EventManager.RemoveEventListener("DoorClickEventEnd");
         EventManager.AddEventListener("DoorClickEventEnd", MoveToDoor);
     }
     void MoveToDoor()
