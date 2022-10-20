@@ -96,6 +96,8 @@ public static class ActionInRoom//所有事情都只能有一个string参数，�
         if (MapGeneration.Instance.GetAvailableDoors(MainScript.S.roomNo).Count == 1)
         { 
             MainScript.S.whetherBetray = BetrayType.oneway;
+            EventManager.RemoveEventListener("DialogueEnd");
+            SelectDoorEnd();
             return;
         }
         bool isTrust = Protagonist.Instance.isTrust;
