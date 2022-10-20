@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ActionInRoom//ËùÓĞÊÂÇé¶¼Ö»ÄÜÓĞÒ»¸östring²ÎÊı£¬Õâ¸ö²ÎÊı×ÜÊÇRoomNoToEventÀïÃæ¶ÔÓ¦ÊÂ¼şµÄÏÂÒ»¸ö¸ñÀïµÄ×Ö·û´®
+public static class ActionInRoom//æ‰€æœ‰äº‹æƒ…éƒ½åªèƒ½æœ‰ä¸€ä¸ªstringå‚æ•°ï¼Œè¿™ä¸ªå‚æ•°æ€»æ˜¯RoomNoToEventé‡Œé¢å¯¹åº”äº‹ä»¶çš„ä¸‹ä¸€ä¸ªæ ¼é‡Œçš„å­—ç¬¦ä¸²
 {
-    static int reactNum = 0;//±íÊ¾µ±Ç°²¥·ÅµÚ¼¸¸öÊÂ¼ş
+    static int reactNum = 0;//è¡¨ç¤ºå½“å‰æ’­æ”¾ç¬¬å‡ ä¸ªäº‹ä»¶
     static readonly int combatFollowNum = 4;
     static readonly int combatBetrayNum = 3;
     static readonly int combatOnewayNum = 1;
@@ -22,7 +22,7 @@ public static class ActionInRoom//ËùÓĞÊÂÇé¶¼Ö»ÄÜÓĞÒ»¸östring²ÎÊı£¬Õâ¸ö²ÎÊı×ÜÊÇRo
         DialogueManager.Instance.SetLine(contentType);
         DialogueManager.Instance.PlayDialogue();
     }
-    public static void React(string content)//¸ù¾İ·´Ó¦Ö±½Ó¿ªÆô¶ÔÓ¦µÄ¶Ô»°
+    public static void React(string content)//æ ¹æ®ååº”ç›´æ¥å¼€å¯å¯¹åº”çš„å¯¹è¯
     {
         reactNum++;
         roomType = RoomNoToRoomType(MainScript.S.roomNo);
@@ -56,7 +56,7 @@ public static class ActionInRoom//ËùÓĞÊÂÇé¶¼Ö»ÄÜÓĞÒ»¸östring²ÎÊı£¬Õâ¸ö²ÎÊı×ÜÊÇRo
             default:
                 return;
         }
-        reactNum++;//·ÀÖ¹¶ÁÈ¡²»µ½¶Ô»°
+        reactNum++;//é˜²æ­¢è¯»å–ä¸åˆ°å¯¹è¯
         DialogueManager.Instance.PlayDialogue();
 
     }
@@ -79,37 +79,31 @@ public static class ActionInRoom//ËùÓĞÊÂÇé¶¼Ö»ÄÜÓĞÒ»¸östring²ÎÊı£¬Õâ¸ö²ÎÊı×ÜÊÇRo
     }
     public static void Animation(string inputStr)
     {
-        EventManager.EventTrigger("AnimationEnd");
-        return;
-        //µ±Ç°µÄevent±í¸ñÖĞµÄ¶¯»­ÉĞÎ´Ìí¼Ó£¬Èç¹ûÖ±½ÓÔËĞĞÏÂ·½µÄ´úÂë¿Ï¶¨»á±¨´í
-        //È·±£event±í¸ñÖĞµÄËùÓĞ¶¯»­¶¼Ìí¼Ó½øÈëÖ®ºó£¬¼´¿ÉÉ¾³ıÉÏÃæÁ½ĞĞ´úÂë
+        //å½“å‰çš„eventè¡¨æ ¼ä¸­çš„åŠ¨ç”»å°šæœªæ·»åŠ ï¼Œå¦‚æœç›´æ¥è¿è¡Œä¸‹æ–¹çš„ä»£ç è‚¯å®šä¼šæŠ¥é”™
+        //ç¡®ä¿eventè¡¨æ ¼ä¸­çš„æ‰€æœ‰åŠ¨ç”»éƒ½æ·»åŠ è¿›å…¥ä¹‹åï¼Œå³å¯åˆ é™¤ä¸Šé¢ä¸¤è¡Œä»£ç 
         string[] tmp = inputStr.Split("|");
         Animator anim = GameObject.Find(tmp[0]).GetComponent<Animator>();
         anim.SetTrigger(tmp[1]);
-
     }
     public static void Recover(string hp)
     {
         Protagonist.Instance.Health += int.Parse(hp);
         EventManager.EventTrigger("RecoverEnd");
     }
-    public static void SelectDoor()//Èç¹ûÓĞ±ØÒªÕâÀï¿ÉÒÔ²åÈëÒ»¸ö¶Ô»°ÊÂ¼ş
+    public static void SelectDoor()//å¦‚æœæœ‰å¿…è¦è¿™é‡Œå¯ä»¥æ’å…¥ä¸€ä¸ªå¯¹è¯äº‹ä»¶
     {
-        bool isTrust = Protagonist.Instance.isTrust;
-        if (MapGeneration.Instance.GetAvailableDoors(MainScript.S.roomNo).Count == 1)
-        {
-            MainScript.S.whetherBetray = BetrayType.oneway;
-        }
-        else if (isTrust)
-        {
-            MainScript.S.whetherBetray = BetrayType.follow;
-        }
-        else
-        {
-            MainScript.S.whetherBetray = BetrayType.betray;
-        }
         EventManager.AddEventListener("DialogueEnd", SelectDoorEnd);
-        if (!isTrust)//Èç¹û²»ĞÅÈÎ£¬ÔòËæ»ú»»Ò»¸öÃÅ
+        if (MapGeneration.Instance.GetAvailableDoors(MainScript.S.roomNo).Count == 1)
+        { 
+            MainScript.S.whetherBetray = BetrayType.oneway;
+            return;
+        }
+        bool isTrust = Protagonist.Instance.isTrust;
+        if (isTrust)
+            MainScript.S.whetherBetray = BetrayType.follow;
+        else
+            MainScript.S.whetherBetray = BetrayType.betray;
+        if (!isTrust)//å¦‚æœä¸ä¿¡ä»»ï¼Œåˆ™éšæœºæ¢ä¸€ä¸ªé—¨
         {
             DialogueManager.Instance.SetLine("Choose_Betray_" + (reactNum % ChooseBetray + 1));
             List<int> aval = MapGeneration.Instance.GetAvailableDoors(MainScript.S.roomNo);
