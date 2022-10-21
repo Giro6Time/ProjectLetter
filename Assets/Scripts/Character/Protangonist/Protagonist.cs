@@ -78,6 +78,15 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
         anim.SetTrigger("Attack");
         return Attack;
     }
+    public void MoveToDoor()
+    {
+        moveTriggerer.ClearArriveListener();
+        //Debug.Log("ToFloor" + ToFloor + " ToRoom:" + ToRoom + " ToRoomNo:" + ToRoomNo);
+        Door door = ActionInRoom.DoorChosen;
+        moveTriggerer.AddArriveListener(door.GenerateNewRoom);
+        moveTriggerer.MoveTo(door.transform.position);
+        TransitionMask.Instance.PlayFadeOutAnimation();
+    }
     /// <summary>
     /// 瑙掕壊姝讳骸
     /// </summary>

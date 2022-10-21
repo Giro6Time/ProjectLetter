@@ -28,17 +28,11 @@ public class Door : MonoBehaviour
     {
         ActionInRoom.SetDoorClickable(false);
         EventManager.RemoveEventListener("DoorClickEventEnd");
-        EventManager.AddEventListener("DoorClickEventEnd", MoveToDoor);
+        ActionInRoom.DoorChosen = this;
+        EventManager.AddEventListener("DoorClickEventEnd", Protagonist.Instance.MoveToDoor);
     }
-    void MoveToDoor()
-    {
-        Protagonist.Instance.moveTriggerer.ClearArriveListener();
-        //Debug.Log("ToFloor" + ToFloor + " ToRoom:" + ToRoom + " ToRoomNo:" + ToRoomNo);
-        Protagonist.Instance.moveTriggerer.AddArriveListener(GenerateNewRoom);
-        Protagonist.Instance.moveTriggerer.MoveTo(this.transform.position);
-        TransitionMask.Instance.PlayFadeOutAnimation();
-    }
-    private void GenerateNewRoom()
+    
+    public void GenerateNewRoom()
     {
         MapGeneration mapGeneration = MapGeneration.Instance;
         mapGeneration.DestoryRoom(MainScript.S.floor,MainScript.S.room);
