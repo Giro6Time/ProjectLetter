@@ -20,7 +20,7 @@ public class UI_Indicator : MonoBehaviour
         indicatorRectTransform = GetComponent<RectTransform>();
     }
 
-    Vector3 SetIndicatorPosition(int RoomNo)
+    public Vector3 SetIndicatorPosition(int RoomNo)
     {
         Vector3 indicatorPos = Vector3.zero;
         if(IndicatorPosition[RoomNo][1]!=""&& IndicatorPosition[RoomNo][2] != "")
@@ -29,8 +29,8 @@ public class UI_Indicator : MonoBehaviour
             indicatorPos.y = float.Parse(IndicatorPosition[RoomNo][2]);
             indicatorPos.z = 0;
         }
-
-        indicatorRectTransform.SetPositionAndRotation(indicatorPos, Quaternion.Euler(Vector3.zero));
+        indicatorRectTransform.localPosition = indicatorPos;
+        //indicatorRectTransform.SetPositionAndRotation(indicatorPos, Quaternion.Euler(Vector3.zero));
         return indicatorPos;
     }
 
