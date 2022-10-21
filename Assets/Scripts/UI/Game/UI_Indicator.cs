@@ -29,8 +29,8 @@ public class UI_Indicator : MonoBehaviour
             indicatorPos.y = float.Parse(IndicatorPosition[RoomNo][2]);
             indicatorPos.z = 0;
         }
-
-        indicatorRectTransform.SetPositionAndRotation(indicatorPos, Quaternion.Euler(Vector3.zero));
+        indicatorRectTransform.localPosition = indicatorPos;
+        //indicatorRectTransform.SetPositionAndRotation(indicatorPos, Quaternion.Euler(Vector3.zero));
         return indicatorPos;
     }
 
