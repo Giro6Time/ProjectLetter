@@ -93,8 +93,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
+    m_Left: 1
+    m_Right: 1
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
@@ -135,8 +135,8 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: 1.5
   m_MinHeight: 1
-  m_PreferredWidth: 3.263
-  m_PreferredHeight: 0.5
+  m_PreferredWidth: 3
+  m_PreferredHeight: 1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
@@ -256,6 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubble: {fileID: 1656639944837609034}
   text: {fileID: 1656639945495129114}
+  VerticalBoundaryDistance: 0.5
 --- !u!1 &1656639945495129112
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,8 +350,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.4
-  m_fontSizeBase: 0.4
+  m_fontSize: 1
+  m_fontSizeBase: 1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

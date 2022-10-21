@@ -9,12 +9,12 @@ using TMPro;
 public class SpeechBubble : MonoBehaviour
 {
     // 对话框的携带者?
-    [SerializeField]    ISpeecher parent;
+    public ISpeecher parent;
     //气泡背景图片
-    [SerializeField]    Image bubble;
+    public Image bubble;
     //气泡框的文本
-    public              TMP_Text text;
-
+    public TMP_Text text;
+    public float VerticalBoundaryDistance = 0.5f;
     LayoutElement bubbleLayoutEle;
 
 
@@ -42,7 +42,7 @@ public class SpeechBubble : MonoBehaviour
 
     void UpdateBubbleSize()
     {
-        bubbleLayoutEle.preferredHeight = text.preferredHeight+0.5f;
+        bubbleLayoutEle.preferredHeight = text.preferredHeight+VerticalBoundaryDistance;
     }
    
 }

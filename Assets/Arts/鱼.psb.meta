@@ -99,8 +99,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 2492
-      y: 1380
+      x: 715
+      y: 4
       width: 678
       height: 1400
     spriteID: ab4fe26b5c99af4459c46cca2bd95d19
@@ -112,7 +112,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 1834, y: 324}
+    uvTransform: {x: 57, y: -1052}
   - name: "\u56FE\u5C421"
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -120,7 +120,7 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 2492
+      x: 4
       y: 4
       width: 703
       height: 1368
@@ -133,28 +133,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 1372, y: -1052}
-  - name: "\u80CC\u666F"
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 4
-      width: 2480
-      height: 3508
-    spriteID: 10e645981b7461c46a612e824a0fe72d
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    parentGroupIndex: -1
-    uvTransform: {x: 4, y: 4}
+    uvTransform: {x: -1116, y: -1052}
   characterData:
     bones: []
     parts: []
@@ -191,7 +170,7 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: ab4fe26b5c99af4459c46cca2bd95d19
     layerID: 4
-    mosaicPosition: {x: 2492, y: 1380}
+    mosaicPosition: {x: 715, y: 4}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -201,16 +180,6 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: 9851cd33c2a3fde48bb3c23561d79ba5
     layerID: 2
-    mosaicPosition: {x: 2492, y: 4}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: "\u80CC\u666F"
-    spriteName: "\u80CC\u666F"
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 10e645981b7461c46a612e824a0fe72d
-    layerID: 1
     mosaicPosition: {x: 4, y: 4}
     flatten: 0
     isImported: 1
