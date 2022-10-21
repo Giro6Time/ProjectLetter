@@ -20,7 +20,7 @@ public class UI_Indicator : MonoBehaviour
         indicatorRectTransform = GetComponent<RectTransform>();
     }
 
-    Vector3 SetIndicatorPosition(int RoomNo)
+    public Vector3 SetIndicatorPosition(int RoomNo)
     {
         Vector3 indicatorPos = Vector3.zero;
         if(IndicatorPosition[RoomNo][1]!=""&& IndicatorPosition[RoomNo][2] != "")
