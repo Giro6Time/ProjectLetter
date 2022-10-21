@@ -8,6 +8,7 @@ public class MapGeneration : MonoBehaviour
     List<string[]> ToRoomNo;//该脚本负责转换(Floor,Room)到RoomNo
     List<string[]> ToDoors;//该脚本负责记录门通往的房间
     public List<string[]> Layout;//该脚本负责记录每个房间内部的物体
+    List<string[]> DoorLayout;//该脚本负责记录每种房间内门的分布
     public List<GameObject> SceneDoorsObjects;
 
     private static volatile MapGeneration instance;
@@ -35,6 +36,9 @@ public class MapGeneration : MonoBehaviour
 
         csvController.GetInstance().loadFile(AssetPath, "Layout.csv");
         Layout = new List<string[]>(csvController.GetInstance().arrayData);
+
+        csvController.GetInstance().loadFile(AssetPath, "DoorLayout.csv");
+        DoorLayout = new List<string[]>(csvController.GetInstance().arrayData);
 
         SceneDoorsObjects = new List<GameObject>();
         SceneDoorsObjects.Add(GameObject.Find("DoorToSameFloor1"));
@@ -118,13 +122,18 @@ public class MapGeneration : MonoBehaviour
 
             //Debug.Log(objName + " " + xPos + " " + yPos + "Initialized");
         }
-
+        int doorCount = GetAvailableDoors(RoomNo).Count;
+        GameObject floorObj = FloorParentsObj.transform.Find(doorCount + "DoorRoom").gameObject;
         Vector3 camPos = Camera.main.transform.position;
-        string roomType = Layout[RoomNo][1];
-        Debug.Log(roomType);
-        GameObject floorObj = FloorParentsObj.transform.Find(roomType).gameObject;
         floorObj.SetActive(true);
         floorObj.transform.position = new Vector3(camPos.x,camPos.y,floorObj.transform.position.z);
+        for(int i = 0; i < doorCount; i++)
+        {
+            SceneDoorsObjects[i + 2].transform.position = new Vector3(int.Parse(DoorLayout[i][2 * i + 1]), int.Parse(DoorLayout[i][2 * i + 2]), 0);
+        }
+        //string roomType = Layout[RoomNo][1];//原先通过房间类型生成房间的代码
+        //Debug.Log(roomType);
+        //GameObject floorObj = FloorParentsObj.transform.Find(roomType).gameObject;
         
         return true;
     }

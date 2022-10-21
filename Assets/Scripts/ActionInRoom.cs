@@ -16,6 +16,7 @@ public static class ActionInRoom//所有事情都只能有一个string参数，�
     static readonly int ChooseFollow = 3;
     static readonly int ChooseBetray = 3;
     static string roomType;
+    static public Door DoorChosen;
     public static void Dialogue(string contentType)
     {
         //DialogueManager.Instance.ClearEndListener();
@@ -109,6 +110,13 @@ public static class ActionInRoom//所有事情都只能有一个string参数，�
         {
             DialogueManager.Instance.SetLine("Choose_Betray_" + (reactNum % ChooseBetray + 1));
             List<int> aval = MapGeneration.Instance.GetAvailableDoors(MainScript.S.roomNo);
+            for(int i = 0; i < aval.Count; i++)
+            {
+                if(MapGeneration.Instance.SceneDoorsObjects[aval[i]].GetComponent<Door>()== DoorChosen)
+                {
+                    aval.Remove(aval[i]);
+                }
+            }
             int doorInd = UnityEngine.Random.Range(0, aval.Count);
             MapGeneration.Instance.SceneDoorsObjects[aval[doorInd]].GetComponent<Door>().InitDoorClickEvent();
         }
@@ -138,16 +146,16 @@ public static class ActionInRoom//所有事情都只能有一个string参数，�
         switch (MainScript.S.whetherBetray)
         {
             case BetrayType.betray:
-                if (roomType == "Combat") Protagonist.Instance.Trust += 2;
-                else if (roomType == "Recover") Protagonist.Instance.Trust -= 3;
-                else if (roomType == "Event") Protagonist.Instance.Trust -= 1;
+                if (roomType == "CombatRoom") Protagonist.Instance.Trust += 2;
+                else if (roomType == "RecoverRoom") Protagonist.Instance.Trust -= 3;
+                else if (roomType == "EventRoom") Protagonist.Instance.Trust -= 1;
                 break;
             case BetrayType.oneway:
                 break;
             case BetrayType.follow:
-                if (roomType == "Combat") Protagonist.Instance.Trust -= 2;
-                else if (roomType == "Recover") Protagonist.Instance.Trust += 3;
-                else if (roomType == "Event") Protagonist.Instance.Trust += 1;
+                if (roomType == "CombatRoom") Protagonist.Instance.Trust -= 2;
+                else if (roomType == "RecoverRoom") Protagonist.Instance.Trust += 3;
+                else if (roomType == "EventRoom") Protagonist.Instance.Trust += 1;
                 break;
             default:
                 return;
