@@ -35,6 +35,7 @@ public class Door : MonoBehaviour
     public void GenerateNewRoom()
     {
         MapGeneration mapGeneration = MapGeneration.Instance;
+        //UI_MiniMap.Instance.UpdateMapTo(ToRoomNo);
         mapGeneration.DestoryRoom(MainScript.S.floor,MainScript.S.room);
         MainScript.S.roomNo = mapGeneration.FromFloorToRoomNo(ToFloor, ToRoom);
         MainScript.S.room = ToRoom;

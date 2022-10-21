@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class UI_MiniMap : MonoBehaviour, IPointerDownHandler
+public class UI_MiniMap : Singleton<UI_MiniMap>, IPointerDownHandler
 {
     public GameObject ScrollMapObj;
     public GameObject IndicatorObj;

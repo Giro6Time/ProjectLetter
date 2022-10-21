@@ -95,7 +95,7 @@ public class MapGeneration : MonoBehaviour
             {
                 SceneDoorsObjects[i].SetActive(true);
                 Door thisDoorScript = SceneDoorsObjects[i].GetComponent<Door>();
-                thisDoorScript.SetDoorPatameter(tempToFloor, tempToRoom);
+                thisDoorScript.SetDoorPatameter(tempToFloor, tempToRoom,FromFloorToRoomNo(tempToFloor,tempToRoom));
                 //Debug.Log("DoorObj" + i + ": " + tempToFloor + " " + tempToRoom);
             }
         }
