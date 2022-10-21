@@ -9,11 +9,13 @@ public class UI_MiniMap : Singleton<UI_MiniMap>, IPointerDownHandler
     public GameObject ScrollMapObj;
     public GameObject IndicatorObj;
     public GameObject ScrollMapBarObj;
+    public GameObject ThisMapObj;
     ScrollMap scrollMap;
     ScrollMapBar scrollMapBar;
     UI_Indicator uI_Indicator;
-    RectTransform thisRectTransform;
     UI_ScrollMap uI_ScrollMap;
+    RectTransform thisRectTransform;
+    public GameObject uI_ScrollMapObj;
 
     void Start()
     {
@@ -30,8 +32,8 @@ public class UI_MiniMap : Singleton<UI_MiniMap>, IPointerDownHandler
             uI_Indicator = IndicatorObj.GetComponent<UI_Indicator>();
         }
         
-        thisRectTransform = GetComponent<RectTransform>();
-        uI_ScrollMap = scrollMap.GetComponent<UI_ScrollMap>();
+        thisRectTransform = ThisMapObj.GetComponent<RectTransform>();
+        uI_ScrollMap = uI_ScrollMapObj.GetComponent<UI_ScrollMap>();
     }
 
     public void OnPointerDown(PointerEventData data)
@@ -43,14 +45,16 @@ public class UI_MiniMap : Singleton<UI_MiniMap>, IPointerDownHandler
 
     public void UpdateMapTo(int RoomNo)
     {
-        Vector3 idicatorPos = uI_Indicator.SetIndicatorPosition(RoomNo);
+        Vector3 indicatorPos = uI_Indicator.SetIndicatorPosition(RoomNo);
 
-        Vector3 thisRectTransformPos = thisRectTransform.position;
-        thisRectTransformPos.y = Mathf.Clamp(-idicatorPos.y, -1550, 1550);
+        Vector3 thisRectTransformPos = thisRectTransform.localPosition;
+        thisRectTransformPos.y = Mathf.Clamp(-indicatorPos.y, -1550, 1550);
         thisRectTransform.localPosition = thisRectTransformPos;
 
+        float ScrollX = (float)((31.0 / 11.0) * indicatorPos.x + (100.0 / 11.0));
         float ScrollY = (float)((9775.0 / 3293.0) * thisRectTransformPos.y + (11144.0 / 3293.0));
-        uI_ScrollMap.SetYPos(ScrollY);
-
+        //uI_ScrollMap.SetYPos(ScrollY);
+        Vector2 ScPos = new Vector2(ScrollX, ScrollY);
+        uI_ScrollMap.SetPos(ScPos);
     }
 }
