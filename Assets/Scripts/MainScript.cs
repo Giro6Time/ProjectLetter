@@ -37,6 +37,7 @@ public class MainScript : MonoBehaviour
         StartPlayAction();
         Protagonist.Instance.Health = 100;
         Protagonist.Instance.Trust = 4;
+        UI_Trust.Instance.gameObject.SetActive(false);
     }
     public void StartPlayAction()
     {

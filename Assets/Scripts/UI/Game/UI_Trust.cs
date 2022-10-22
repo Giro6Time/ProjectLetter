@@ -9,13 +9,20 @@ public class UI_Trust : UI_Property<UI_Trust>//是个单例
     
     public void UpdateTrustValue()
     {
-        Value.text = hero.Trust.ToString();
-        UpdateBar(); 
+        if(!gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);
+        }
+        float trust = hero.Trust;
+        if (trust <= 2) Value.text = "否定";
+        else if (trust <= 4) Value.text = "怀疑";
+        else if (trust <= 6) Value.text = "半信半疑";
+        else if (trust <= 8) Value.text = "相信";
+        else Value.text = "服从";
     }
     protected override void UpdateBar()//更新bar的长度(目前)
     {
-        //虽然我认为这个信任条仅仅是一个条的话会很单调，但是现在就先这么写吧-，-
-        Bar.fillAmount = (int)(((float)hero.Trust / hero.maxTrust)*10)/(float)10;
+        
     }
     private void Start()
     {
