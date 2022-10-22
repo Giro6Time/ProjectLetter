@@ -15063,6 +15063,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3824015250202004834, guid: ff100a70613b85b459c1f70ec181ee70, type: 3}
+      propertyPath: m_AutoRebind
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4285945761428206526, guid: ff100a70613b85b459c1f70ec181ee70, type: 3}
       propertyPath: m_Chain.m_TransformCount
       value: 3
@@ -15206,6 +15210,10 @@ PrefabInstance:
     - target: {fileID: 8140368726221993733, guid: ff100a70613b85b459c1f70ec181ee70, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.056818724
+      objectReference: {fileID: 0}
+    - target: {fileID: 8599708223120908464, guid: ff100a70613b85b459c1f70ec181ee70, type: 3}
+      propertyPath: m_SortingOrder
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 8686636268283213959, guid: ff100a70613b85b459c1f70ec181ee70, type: 3}
       propertyPath: m_LocalPosition.x
