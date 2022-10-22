@@ -124,12 +124,12 @@ public class MapGeneration : MonoBehaviour
         }
         int doorCount = GetAvailableDoors(RoomNo).Count;
         GameObject floorObj = FloorParentsObj.transform.Find(doorCount + "DoorRoom").gameObject;
-        Vector3 camPos = Camera.main.transform.position;
         floorObj.SetActive(true);
+        Vector3 camPos = Camera.main.transform.position;
         floorObj.transform.position = new Vector3(camPos.x,camPos.y,floorObj.transform.position.z);
         for(int i = 0; i < doorCount; i++)
         {
-            SceneDoorsObjects[i + 2].transform.position = new Vector3(int.Parse(DoorLayout[i][2 * i + 1]), int.Parse(DoorLayout[i][2 * i + 2]), 0);
+            SceneDoorsObjects[i + 2].transform.position = new Vector3(float.Parse(DoorLayout[doorCount-1][2 * i + 1]), float.Parse(DoorLayout[doorCount-1][2 * i + 2]), 0);
         }
         //string roomType = Layout[RoomNo][1];//原先通过房间类型生成房间的代码
         //Debug.Log(roomType);
@@ -178,10 +178,12 @@ public class MapGeneration : MonoBehaviour
             //Debug.Log(objName +"Disabled");
         }
 
-        string roomType = Layout[RoomNo][1];
-        GameObject floorObj = FloorParentsObj.transform.Find(roomType).gameObject;
+        //string roomType = Layout[RoomNo][1];
+        //GameObject floorObj = FloorParentsObj.transform.Find(roomType).gameObject;
+        //floorObj.SetActive(false);
+        int doorCount = GetAvailableDoors(RoomNo).Count;
+        GameObject floorObj = FloorParentsObj.transform.Find(doorCount + "DoorRoom").gameObject;
         floorObj.SetActive(false);
-
         return true;
     }
 
