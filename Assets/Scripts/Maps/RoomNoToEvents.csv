@@ -9,7 +9,7 @@ RoomNo,Events,Action1,Location,action2,Location,Action3,Location,Action4,Locatio
 8,CombatRoom,React,0,Move,6.49|-11.21,Combat,Enemy_1|1|1,,,,,,
 9,EventRoom,React,0,Dialogue,Pillar,,,,,,,,
 10,CombatRoom,React,0,Move,6.49|-11.21,Combat,Enemy_1|1|1,,,,,,
-11,CombatRoom,React,0,Dialogue,Fruit_1,Move,6.49|-11.21,Combat,Enemy_1|1|1,Dialogue,Fruit_2,,
+11,CombatRoom,Dialogue,Fruit_1,Move,6.49|-11.21,Combat,Enemy_1|1|1,Dialogue,Fruit_2,,,,
 12,RecoverRoom,React,0,Move,2.83|-11.16,Animation,Protagonist|Recover,Recover,100,Dialogue,RecoverChat_1,,
 13,EventRoom,React,0,Dialogue,SkeletonWithScrip_1,Move,7.4|-10.35,Animation,Protagonist|Pick,Dialogue,SkeletonWithScrip_1,,
 14,CombatRoom,React,0,Move,6.49|-11.21,Combat,Enemy_1|1|1,,,,,,
