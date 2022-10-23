@@ -1,6 +1,6 @@
 RoomNo,Events,Action1,Location,action2,Location,Action3,Location,Action4,Location,Action4,Location,Action4,Location
 1,StartRoom,Dialogue,Start_1,,,,,,,,,,
-2,StartRoom,Dialogue,Start_2,,,,,,,,,,
+2,StartRoom,Dialogue,Start_2,TrustUp,2,,,,,,,,
 3,CombatRoom,Dialogue,MirrorOrgans_1,Move,6.49|-11.21,Combat,Enemy_1|1|1,Dialogue,MirrorOrgans_2,,,,
 4,EventRoom,React,0,Dialogue,ManFindRelative,,,,,,,,
 5,CombatRoom,React,0,Move,6.49|-11.21,Combat,Enemy_1|1|1,,,,,,
