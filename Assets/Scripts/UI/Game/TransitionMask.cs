@@ -20,8 +20,7 @@ public class TransitionMask : Singleton<TransitionMask>
         //StartCoroutine(WaitOneSecond());
         //this.gameObject.SetActive(false);
     }
-
-    IEnumerator WaitOneSecond()
+    public IEnumerator WaitOneSecond()
     {
         yield return new WaitForSeconds(1);
     }
