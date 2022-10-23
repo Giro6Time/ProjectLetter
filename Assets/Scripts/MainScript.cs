@@ -77,6 +77,7 @@ public class MainScript : MonoBehaviour
             case "Choose": return ActionInRoom.Choose;
             case "Animation": return ActionInRoom.Animation;
             case "Recover": return ActionInRoom.Recover;
+            case "TrustUp": return ActionInRoom.TrustUp;
             default:Debug.Log("Fail to get action"); return null;
         }
     }
