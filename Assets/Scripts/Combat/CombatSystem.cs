@@ -1,6 +1,4 @@
 using System.Collections;
-using System;
-using UnityEditor.U2D.Common;
 using UnityEngine;
 
 public class CombatSystem : Singleton<CombatSystem>
