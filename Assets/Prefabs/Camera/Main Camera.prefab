@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6099240288163229364}
   - component: {fileID: 6099240288163229365}
   - component: {fileID: 6099240288163229363}
+  - component: {fileID: 1877261774}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -130,8 +131,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  couldChooseDoor: 0
-  couldChooseEvent: 0
   whetherBetray: 0
   sameFloorMove: 0
   floor: 0
@@ -151,3 +150,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueMask: {fileID: 0}
   isSpeeching: 0
+--- !u!114 &1877261774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6099240288163229259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb47d82784fd1834fb65eb7465e629a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyObject: {fileID: 0}
+  Protagonist: {fileID: 0}
+  protagonist: {fileID: 0}
+  enemy: {fileID: 0}
+  protagonistAttack: {fileID: 7400000, guid: d19d62e10f1082a4db923a21d1cd5c99, type: 2}
+  enemyAttack: {fileID: 7400000, guid: 5a51e808731f6e94c850757ae264300b, type: 2}
