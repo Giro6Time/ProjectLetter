@@ -29,7 +29,7 @@ public interface ISpeecher
 public class DialogueManager : Singleton<DialogueManager>
 {
     //对话点击事件触发用的mask
-    [SerializeField]    DialogueMask dialogueMask;
+    public DialogueMask dialogueMask;
 
 
     /// <summary>
