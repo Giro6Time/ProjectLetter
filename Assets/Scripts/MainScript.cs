@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Collections;
+using UnityEngine.SceneManagement;
 /// <summary>
 /// 控制整个游戏进程
 /// </summary>
@@ -78,6 +80,8 @@ public class MainScript : MonoBehaviour
             case "Animation": return ActionInRoom.Animation;
             case "Recover": return ActionInRoom.Recover;
             case "TrustUp": return ActionInRoom.TrustUp;
+            case "End": return End;
+            
             default:Debug.Log("Fail to get action"); return null;
         }
     }
@@ -86,7 +90,17 @@ public class MainScript : MonoBehaviour
     {
         return ToEvents[roomNo];
     }
-
+    public void End(string qwq)
+    {
+        EventManager.Clear();
+        TransitionMask.Instance.PlayFadeOutAnimation();
+        StartCoroutine(LoadEndScene());
+    }
+    public IEnumerator LoadEndScene()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("EndScene");
+    }
 }
 
 public enum BetrayType

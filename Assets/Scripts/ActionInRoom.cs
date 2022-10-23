@@ -1,7 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public static class ActionInRoom//所有事情都只能有一个string参数，这个参数总是RoomNoToEvent里面对应事件的下一个格里的字符串
+using UnityEngine.SceneManagement;
+public  class ActionInRoom : MonoBehaviour//所有事情都只能有一个string参数，这个参数总是RoomNoToEvent里面对应事件的下一个格里的字符串
 {
     static int reactNum = 0;//表示当前播放第几个事件
     static readonly int combatFollowNum = 4;
@@ -17,6 +18,7 @@ public static class ActionInRoom//所有事情都只能有一个string参数，�
     static readonly int ChooseBetray = 3;
     static string roomType;
     static public Door DoorChosen;
+    
     public static void TrustUp(string num)
     {
         int n = int.Parse(num);
