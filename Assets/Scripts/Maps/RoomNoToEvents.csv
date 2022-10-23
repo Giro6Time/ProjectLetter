@@ -1,6 +1,6 @@
 RoomNo,Events,Action1,Location,action2,Location,Action3,Location,Action4,Location,Action4,Location,Action4,Location
 1,StartRoom,Dialogue,Start_1,,,,,,,,,,
-2,StartRoom,Dialogue,Start_2,TrustUp,2,,,,,,,,
+2,StartRoom,Dialogue,Start_2,,,,,,,,,,
 3,CombatRoom,Dialogue,MirrorOrgans_1,Move,6.49|-11.21,Combat,Enemy_1|1|1,Dialogue,MirrorOrgans_2,,,,
 4,EventRoom,React,0,Dialogue,ManFindRelative,,,,,,,,
 5,CombatRoom,React,0,Move,6.49|-11.21,Combat,Enemy_1|1|1,,,,,,
@@ -52,4 +52,4 @@ RoomNo,Events,Action1,Location,action2,Location,Action3,Location,Action4,Locatio
 51,EventRoom,React,0,Dialogue,ParentsSkeletons_1,Move,7.4|-10.35,Animation,Protagonist|Pick,Dialogue,ParentsSkeletons_2,,
 52,EventRoom,Dialogue,CopyFatherSkeleton_1,Move,7.4|-10.35,Animation,Protagonist|Pick,Dialogue,CopyFatherSkeleton_2,,,,
 53,CombatRoom,Dialogue,CopyMotherCombat_1,Move,6.49|-11.21,Combat,Enemy_1|1|1,Dialogue,CopyMotherCombat_2,,,,
-54,EndRoom,Dialogue,End_1_1,Move,6.49|-11.21,Animation,Protagonist|Attack,Dialogue,End_1_2,TrustUp,3,,
+54,EndRoom,Dialogue,End_1_1,Move,6.49|-11.21,Animation,Protagonist|Attack,Dialogue,End_1_2,,,,
