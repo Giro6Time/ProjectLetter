@@ -20,7 +20,7 @@ public class MainScript : MonoBehaviour
     List<string[]> ToEvents;
     int eventIndex;//现在正在进行的事件是这个房间的第几个事件
     string[] eventsNow;
-
+    public static bool isTrust;
     void Awake()
     {
         if (S == null)
@@ -93,6 +93,7 @@ public class MainScript : MonoBehaviour
     public void End(string qwq)
     {
         EventManager.Clear();
+        isTrust = Protagonist.Instance.isTrust;
         TransitionMask.Instance.PlayFadeOutAnimation();
         StartCoroutine(LoadEndScene());
     }

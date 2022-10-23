@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public  class ActionInRoom : MonoBehaviour//所有事情都只能有一个string参数，这个参数总是RoomNoToEvent里面对应事件的下一个格里的字符串
 {
     static int reactNum = 0;//表示当前播放第几个事件
-    static readonly int combatFollowNum = 4;
+    static readonly int combatFollowNum = 3;
     static readonly int combatBetrayNum = 3;
     static readonly int combatOnewayNum = 1;
     static readonly int eventFollowNum = 1;
@@ -150,6 +150,7 @@ public  class ActionInRoom : MonoBehaviour//所有事情都只能有一个string
     }
     public static void SetDoorClickable(bool clickable)
     {
+        if (MainScript.S == null) return;
         List<int> doorNum = MapGeneration.Instance.GetAvailableDoors(MainScript.S.roomNo);
 
         for (int i = 0; i < doorNum.Count; i++)

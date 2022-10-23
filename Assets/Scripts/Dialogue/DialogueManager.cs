@@ -127,7 +127,6 @@ public class DialogueManager : Singleton<DialogueManager>
 
         SpeecherDic = new Dictionary<string, ISpeecher>();
         dialogueMask.transform.SetParent(GameObject.Find("UI").transform);
-        dialogueMask.transform.SetSiblingIndex(GameObject.Find("Data").transform.GetSiblingIndex() - 1);//在显示属性的框下一层遮挡，这句可能在后期做UI的时候需要更改
         dialogueMask.gameObject.SetActive(false);
         isSpeeching = false;
         currSpeechIndex = 1;

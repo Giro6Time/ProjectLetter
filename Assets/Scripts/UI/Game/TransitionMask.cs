@@ -32,4 +32,8 @@ public class TransitionMask : Singleton<TransitionMask>
         animator.SetBool("isFadeOut", true);
         //StartCoroutine(WaitOneSecond());
     }
+    void ReturnToStart()
+    {
+        transform.Find("ReturnStartButton").gameObject.SetActive(true);
+    }
 }
