@@ -25,7 +25,7 @@ RoomNo,RoomType,Object1,x,y,Object2,x,y,Object3,x,y,,,,,,
 24,EventRoom,Protagonist,-8.46,-11.08,Skeleton,11,-9.04,,,,,,,,,
 25,EventRoom,Protagonist,-8.46,-11.08,Skeleton,11,-9.04,,,,,,,,,
 26,CombatRoom,Protagonist,-8.46,-11.08,Enemy_1,11.4,-10.94,,,,,,,,,
-27,EventRoom,Protagonist,-8.46,-11.08,HalfCrazyAdventurer,15.63,-6.5,,,,,,,,,
+27,EventRoom,Protagonist,-8.46,-11.08,HalfCrazyAdventurer,12.33,-7.58,,,,,,,,,
 28,RecoverRoom,Protagonist,-8.46,-11.08,RecoverPoint_1,9.3,-6.5,,,,,,,,,
 29,EventRoom,Protagonist,-8.46,-11.08,OldManInjured,8.38,-6.4,,,,,,,,,
 30,EventRoom,Protagonist,-8.46,-11.08,Skeleton,11,-9.04,Skeleton_1,16.97,-9.93,Skeleton_2,5.92,-9.97,Skeleton_3,15.15,-5.88
