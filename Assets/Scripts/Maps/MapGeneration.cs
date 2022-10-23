@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -25,9 +24,10 @@ public class MapGeneration : MonoBehaviour
         FloorParentsObj = GameObject.Find("Floors");
         PoolObj = GameObject.Find("ObjectPool");
         string AssetPath;
-        string[] path = AssetDatabase.FindAssets("MapGeneration");
-        if (path.Length > 1) return;
-        AssetPath = AssetDatabase.GUIDToAssetPath(path[0]).Replace((@"/"+ "MapGeneration"+".cs"),"");
+        //string[] path = AssetDatabase.FindAssets("MapGeneration");
+        //if (path.Length > 1) return;
+        //AssetPath = AssetDatabase.GUIDToAssetPath(path[0]).Replace((@"/"+ "MapGeneration"+".cs"),"");
+        AssetPath = Application.dataPath + "/Scripts/Maps";
         csvController.GetInstance().loadFile(AssetPath , "ToRoomNo.csv");
         ToRoomNo = new List<string[]>(csvController.GetInstance().arrayData);
         

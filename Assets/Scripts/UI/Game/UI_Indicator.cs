@@ -11,9 +11,10 @@ public class UI_Indicator : MonoBehaviour
     private void Start()
     {
         string AssetPath;
-        string[] path = AssetDatabase.FindAssets("MapGeneration");
-        if (path.Length > 1) return;
-        AssetPath = AssetDatabase.GUIDToAssetPath(path[0]).Replace((@"/" + "MapGeneration" + ".cs"), "");
+        //string[] path = AssetDatabase.FindAssets("MapGeneration");
+        //if (path.Length > 1) return;
+        //AssetPath = AssetDatabase.GUIDToAssetPath(path[0]).Replace((@"/" + "MapGeneration" + ".cs"), "");
+        AssetPath = Application.dataPath + "/Scripts/Maps";
         csvController.GetInstance().loadFile(AssetPath, "ToIndicatorPosition.csv");
         IndicatorPosition = new List<string[]>(csvController.GetInstance().arrayData);
 
