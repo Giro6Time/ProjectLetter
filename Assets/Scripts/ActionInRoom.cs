@@ -17,6 +17,18 @@ public static class ActionInRoom//所有事情都只能有一个string参数，�
     static readonly int ChooseBetray = 3;
     static string roomType;
     static public Door DoorChosen;
+    public static void TrustUp(string num)
+    {
+        int n = int.Parse(num);
+        Protagonist.Instance.Trust += n;
+        DialogueManager.Instance.SetLine("TrustUp");
+        EventManager.AddEventListener("DialogueEnd", TrustUpEnd);
+        DialogueManager.Instance.PlayDialogue();
+    }
+    static void TrustUpEnd()
+    {
+        EventManager.EventTrigger("TrustUpEnd");
+    }
     public static void Dialogue(string contentType)
     {
         //DialogueManager.Instance.ClearEndListener();
