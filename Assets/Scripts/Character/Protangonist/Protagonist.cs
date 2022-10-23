@@ -93,7 +93,7 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
     public void ProtagonistDefeated()//TODO:瑙﹀彂姝讳骸浜嬩欢锛屾垨鑰呯敱姝讳骸浜嬩欢鏉ヨЕ鍙慏ie鍑芥暟鎾�鏀惧姩鐢伙紝鎬讳箣闇€瑕佷竴涓�浜嬩欢
     {
         ResetAnim();
-        anim.SetTrigger("die");
+        anim.SetTrigger("Death");
     }
     public void Recover(float recoverNum)
     {

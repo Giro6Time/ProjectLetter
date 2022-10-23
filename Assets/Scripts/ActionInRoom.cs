@@ -80,8 +80,6 @@ public static class ActionInRoom//所有事情都只能有一个string参数，�
     }
     public static void Animation(string inputStr)
     {
-        EventManager.EventTrigger("AnimationEnd");
-        return;
         //当前的event表格中的动画尚未添加，如果直接运行下方的代码肯定会报错
         //确保event表格中的所有动画都添加进入之后，即可删除上面两行代码
         string[] tmp = inputStr.Split("|");

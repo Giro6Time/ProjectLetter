@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour, ISpeecher
     public float Attack;
     public float Health;
 
+    public Animator anim;
+
     public SpeechBubble Bubble
     {
         get => speechBubble;
@@ -26,15 +28,15 @@ public class Enemy : MonoBehaviour, ISpeecher
 
     public void PlayAttackAnimation()
     {
-
+        anim.SetTrigger("Attack");
     }
     public void PlayDieAnimation()
     {
-
+        anim.SetTrigger("Death");
     }
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
