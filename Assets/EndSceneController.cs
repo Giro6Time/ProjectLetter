@@ -5,9 +5,12 @@ using UnityEngine;
 public class EndSceneController : MonoBehaviour
 {
     public AnimationClip CameraSizeUp;
+    public DialogueMask newMask;
+    public TransitionMask newTranMask;
     // Start is called before the first frame update
     void Start()
     {
+        DialogueManager.Instance.dialogueMask = newMask; 
         StartCoroutine(StartPlayAnimation());
     }
     IEnumerator StartPlayAnimation()
@@ -27,7 +30,7 @@ public class EndSceneController : MonoBehaviour
     }
     void ShowThanks()
     {
-        TransitionMask.Instance.PlayFadeOutAnimation();
+        newTranMask.PlayFadeOutAnimation();
     }
     // Update is called once per frame
     void Update()

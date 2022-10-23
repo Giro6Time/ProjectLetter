@@ -12,6 +12,8 @@ public class MainScript : MonoBehaviour
     public Protagonist hero;
     public BetrayType whetherBetray;  //选择路线时角色是否违背,-1是违背，0是没得选，1是遵循
     public bool sameFloorMove;  //是否是同层移动
+    public TransitionMask tranMask;
+    public DialogueMask dialMask;
 
     public int floor;
     public int room;
@@ -34,6 +36,8 @@ public class MainScript : MonoBehaviour
     }
     private void Start()
     {
+        TransitionMask.Instance = tranMask;
+        DialogueManager.Instance.dialogueMask = dialMask;
         MapGeneration.Instance.GenerateRoom(1, 1);  //生成初始房间
         ActionInRoom.SetDoorClickable(false);
         StartPlayAction();

@@ -13,6 +13,7 @@ abstract public class Singleton<T> :MonoBehaviour where T: class ,new()
         {
             return instance;
         }
+        set => instance = value;
     }
     protected virtual void Init()
     {
