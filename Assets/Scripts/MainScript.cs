@@ -23,6 +23,15 @@ public class MainScript : MonoBehaviour
     int eventIndex;//现在正在进行的事件是这个房间的第几个事件
     string[] eventsNow;
     public static bool isTrust;
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
+
     void Awake()
     {
         if (S == null)
@@ -31,7 +40,7 @@ public class MainScript : MonoBehaviour
         room = 1;
         roomNo = 1;
         //载入事件
-        csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Maps", "RoomNoToEvents.csv");
+        csvController.GetInstance().loadFile(Application.streamingAssetsPath, "RoomNoToEvents.csv");
         ToEvents = new List<string[]>(csvController.GetInstance().arrayData);
     }
     private void Start()
@@ -54,6 +63,7 @@ public class MainScript : MonoBehaviour
     }
     void PlayActionOnce()
     {
+        Debug.Log("eventIndex:"+eventIndex+"roomNo:"+roomNo);
         EventManager.Clear();
         EventManager.AddEventListener(eventsNow[eventIndex] + "End", PlayNext);
         GetAction(eventsNow[eventIndex])?.Invoke(eventsNow[eventIndex+1]);
