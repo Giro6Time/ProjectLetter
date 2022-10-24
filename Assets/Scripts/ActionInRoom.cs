@@ -182,7 +182,7 @@ public  class ActionInRoom : MonoBehaviour//所有事情都只能有一个string
     }
     public static string RoomNoToRoomType(int RoomNo)
     {
-        csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Maps", "Layout.csv");
+        csvController.GetInstance().loadFile(Application.streamingAssetsPath, "Layout.csv");
         return csvController.GetInstance().getString(RoomNo, 1);
     }
 

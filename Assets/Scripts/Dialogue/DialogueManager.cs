@@ -121,7 +121,7 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         base.Awake();
         eventsName = new List<string>();
-        csvController.GetInstance().loadFile(Application.dataPath + "/Scripts/Dialogue", "Dialogue_Lib.csv");
+        csvController.GetInstance().loadFile(Application.streamingAssetsPath, "Dialogue_Lib.csv");
         textTable = new List<string[]>(csvController.GetInstance().arrayData);
         GetEventsName();
 
