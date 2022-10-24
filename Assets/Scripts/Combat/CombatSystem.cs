@@ -42,28 +42,30 @@ public class CombatSystem : Singleton<CombatSystem>
     IEnumerator DoProtagonistCombat()
     {
         protagonist.AttackAnimation();
+        yield return new WaitForSeconds(protagonistAttack.length/2);
         enemy.Health -= protagonist.Attack;
-        yield return new WaitForSeconds(protagonistAttack.length);
         if (enemy.Health <= 0)
         {
             EventManager.EventTrigger("OnEnemyDefeated");
         }
         else
         {
+        yield return new WaitForSeconds(protagonistAttack.length/2-0.3f);
             StartCoroutine(DoEnemyCombat());
         }
     }
     IEnumerator DoEnemyCombat()
     {
         enemy.PlayAttackAnimation();
+        yield return new WaitForSeconds(enemyAttack.length/2);
         protagonist.Health -= enemy.Attack;
-        yield return new WaitForSeconds(enemyAttack.length);
         if (protagonist.Health <= 0)
         {
             EventManager.EventTrigger("OnProtagonistDefeated");
         }
         else
         {
+        yield return new WaitForSeconds(enemyAttack.length/2-0.1f);
             StartCoroutine(DoProtagonistCombat());
         }
     }

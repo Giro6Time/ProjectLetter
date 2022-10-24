@@ -1,10 +1,11 @@
 using UnityEngine;
-public class ProtagonistDeath : StateMachineBehaviour
+using UnityEngine.SceneManagement;
+
+public class DeathHintEnd : StateMachineBehaviour
 {
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        GameObject DeathMask = GameObject.Find("DeathMask");
-        DeathMask.GetComponent<Animator>().SetTrigger("DeathHint");
+        SceneManager.LoadScene("StartScene");
     }
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

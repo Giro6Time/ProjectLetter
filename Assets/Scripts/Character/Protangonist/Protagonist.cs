@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Mathematics;
+using UnityEngine.UI;
 using System;
 public enum ConfidenceType
 {
@@ -25,6 +25,8 @@ public class Protagonist : Singleton<Protagonist>,ISpeecher
     public float ExpInNeed;
     // 褰撳墠缁忛獙鍊硷紙姣忓崌涓€绾ч噸缃�涓�0锛�
     float Experience;
+
+    public Image DeathMask;
 
     // 涓昏�掓惡甯︾殑Animator缁勪欢
     Animator anim;

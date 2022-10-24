@@ -297,15 +297,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 1.8333334
         value: {x: 7.9, y: 9.4, z: 0}
-        inSlope: {x: 11.12, y: -14.2, z: 0}
-        outSlope: {x: 11.12, y: -14.2, z: 0}
+        inSlope: {x: 11.64, y: -10.44, z: 0}
+        outSlope: {x: 11.64, y: -10.44, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 2
-        value: {x: 9.96, y: 4.9, z: 0}
+        value: {x: 10.22, y: 6.78, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -706,15 +706,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 1.8333334
         value: 7.9
-        inSlope: 11.12
-        outSlope: 11.12
+        inSlope: 11.64
+        outSlope: 11.64
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 2
-        value: 9.96
+        value: 10.22
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -770,15 +770,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 1.8333334
         value: 9.4
-        inSlope: -14.2
-        outSlope: -14.2
+        inSlope: -10.44
+        outSlope: -10.44
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 2
-        value: 4.9
+        value: 6.78
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -2314,36 +2314,6 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Protangonist_new/bone_1/bone_7
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Protangonist_new/bone_1/bone_7
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Protangonist_new/bone_1/bone_7
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
     path: Protangonist_new/bone_1
     classID: 4
     script: {fileID: 0}
@@ -2395,6 +2365,36 @@ AnimationClip:
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
     path: Protangonist_new/bone_1/bone_7/bone_8
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Protangonist_new/bone_1/bone_7
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Protangonist_new/bone_1/bone_7
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Protangonist_new/bone_1/bone_7
     classID: 4
     script: {fileID: 0}
   - curve:
