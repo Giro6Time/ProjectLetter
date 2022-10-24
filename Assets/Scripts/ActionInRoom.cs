@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public  class ActionInRoom : MonoBehaviour//所有事情都只能有一个string参数，这个参数总是RoomNoToEvent里面对应事件的下一个格里的字符串
+public static class ActionInRoom //所有事情都只能有一个string参数，这个参数总是RoomNoToEvent里面对应事件的下一个格里的字符串
 {
     static int reactNum = 0;//表示当前播放第几个事件
     static readonly int combatFollowNum = 3;
