@@ -31,7 +31,7 @@ RoomNo,RoomType,Object1,x,y,Object2,x,y,Object3,x,y,,,,,,
 30,EventRoom,Protagonist,-8.46,-11.08,Skeleton,11,-9.04,Skeleton_1,16.97,-9.93,Skeleton_2,5.92,-9.97,Skeleton_3,15.15,-5.88
 31,CombatRoom,Protagonist,-8.46,-11.08,Enemy_1,11.4,-10.94,,,,,,,,,
 32,CombatRoom,Protagonist,-8.46,-11.08,Enemy_1,11.4,-10.94,,,,,,,,,
-33,EventRoom,Protagonist,-8.46,-11.08,Enemy_1,11.4,-10.94,,,,,,,,,
+33,EventRoom,Protagonist,-8.46,-11.08,Enemy_1,7,-10.94,,,,,,,,,
 34,CombatRoom,Protagonist,-8.46,-11.08,Enemy_1,11.4,-10.94,,,,,,,,,
 35,EventRoom,Protagonist,-8.46,-11.08,Enemy_1,11.4,-10.94,,,,,,,,,
 36,CombatRoom,Protagonist,-8.46,-11.08,Enemy_1,11.4,-10.94,,,,,,,,,
